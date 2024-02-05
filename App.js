@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import {
-  Button,
-  FlatList,
   Keyboard,
-  Modal,
-  ScrollView,
   StyleSheet,
-  Text,
-  TextInput,
   View,
 } from 'react-native'
 import uuid from 'react-native-uuid'
+
+import AddTaxEvent from './src/components/AddTaxEvent'
+import CalendarContainer from './src/components/CalendarContainer'
+import MenuContainer from './src/components/MenuContainer'
+import TaxEventListContainer from './src/components/TaxEventListContainer'
 
 export default function App() {
 
@@ -25,7 +24,8 @@ export default function App() {
   })
   const [taxEventList, setTaxEventList] = useState([])
   const [modalVisible, setModalVisible] = useState(false)
-  const [taxEventSelected, setTaxEventSelected] = useState('')
+  const [taxEventSelected, setTaxEventSelected] = useState({})
+  const [updateTaxEvent, setUpdateTaxEvent] = useState({})
 
   const addTaxEvent = () => {
     setTaxEventList([...taxEventList, newTaxEvent])
@@ -57,88 +57,65 @@ export default function App() {
     setNewTaxEvent({...newTaxEvent, amount: input})
   }
 
-  const onHandleDeleteModal = (id) => {
-    setModalVisible(true)
-    setTaxEventSelected(id)
+  const onHandleModal = (item) => {
+    setTaxEventSelected(item)
+    setModalVisible(!modalVisible)
   }
 
   const deleteTaxEvent = () => {
-    setTaxEventList(taxEventList.filter(taxEvent => taxEvent.id != taxEventSelected))
-    setModalVisible(false)
+    setTaxEventList(taxEventList.filter(item => item.id != taxEventSelected.id))
+    setModalVisible(!modalVisible)
+  }
 
+  const saveUpdateTaxEvent = (taxEventSelected) => {
+    setTaxEventList(taxEventList.map(event => {
+      if(event.id === taxEventSelected.id) {
+        return ({...taxEventSelected})
+      }
+    }))
+    setModalVisible(!modalVisible)
+  }
+
+  const onHandleUpdateName = (input) => {
+    setTaxEventSelected({...taxEventSelected, name: input})
+  }
+
+  const onHandleUpdateAmount = (input) => {
+    setTaxEventSelected({...taxEventSelected, amount: input})
+  }
+
+  const updatePaidStatus = (id) => {
+    setTaxEventList(taxEventList.map(item => {
+      if(item.id === id) {
+        return ({
+          ...item,...{paid: !item.paid}
+        })}
+        return item
+    }))
   }
 
   return (
     <View style={styles.appContainer}>
+      <CalendarContainer />
+      <AddTaxEvent
+        onHandleAddName={onHandleAddName}
+        onHandleAddAmount={onHandleAddAmount}
+        newTaxEvent={newTaxEvent}
+        addTaxEvent={addTaxEvent}
+      />
+      <TaxEventListContainer
+        taxEventList={taxEventList}
+        onHandleModal={onHandleModal}
 
-      <View style={styles.calendarContainer}>
-      </View>
-
-      <View style={styles.taxEventHandleContainer}>
-        <TextInput 
-          style={styles.textInput}
-          maxLength={25}
-          placeholder='GLOSA'
-          placeholderTextColor='white'
-          onChangeText={onHandleAddName}
-          value={newTaxEvent.name}
-        />
-        <TextInput
-          style={styles.textInput}
-          maxLength={100}
-          placeholder='MONTO'
-          placeholderTextColor='white'
-          onChangeText={onHandleAddAmount}
-          value={newTaxEvent.amount}
-        />
-        <Button title='AGREGAR' onPress={addTaxEvent} />
-      </View>
-
-      {/* <ScrollView style={styles.taxEventListContainer}>
-        {
-          taxEventList.map(item => (
-            <View key={item.id} style={styles.taxEventCard}>
-              <Text>Glosa: {item.name}</Text>
-              <Text>Monto: {item.amount}</Text>
-              <Text>Fecha: {item.date}</Text>
-              <View style={styles.taxEventButtons}>
-                <Button title='EDITAR'/>
-                <Button title='BORRAR'/>
-              </View>
-            </View>
-          ))
-        }
-      </ScrollView> */}
-
-      <View style={styles.taxEventListContainer}>
-        <FlatList
-          data={taxEventList}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => (
-            <View style={styles.taxEventCard}>
-                <Text>Glosa: {item.name}</Text>
-                <Text>Monto: {item.amount}</Text>
-                <Text>Fecha: {item.date}</Text>
-                <Button title='BORRAR' onPress={() => onHandleDeleteModal(item.id)}/>
-              </View>
-          )}
-        />
-        <Modal visible={modalVisible}>
-            <View>
-              <Text>Confirmar</Text>
-              <Button title='SI' onPress={deleteTaxEvent} />
-              <Button title='NO' onPress={() => setModalVisible(false)} />
-            </View>
-        </Modal>
-      </View>
-
-      <View style={styles.menuContainer}>
-        <Button title='INICIO' />
-        <Button title='BALANCE' />
-        <Button title='DETALLE' />
-        <Button title='PERFIL' />
-      </View>
-      
+        modalVisible={modalVisible}
+        taxEventSelected={taxEventSelected}
+        deleteTaxEvent={deleteTaxEvent}
+        saveUpdateTaxEvent={saveUpdateTaxEvent}
+        updatePaidStatus={updatePaidStatus}
+        onHandleUpdateName={onHandleUpdateName}
+        onHandleUpdateAmount={onHandleUpdateAmount}
+      />
+      <MenuContainer />
     </View>
   )
 }
@@ -147,59 +124,11 @@ const styles = StyleSheet.create({
 
   appContainer: {
     alignItems: 'center',
-    backgroundColor: '#6DA5C0',
+    backgroundColor: '#000000',
     flex: 10,
     flexDirection: 'column',
     flexWrap: 'nowrap',
-    fontFamily: 'Roboto',
     justifyContent: 'center',
-  },
-
-  calendarContainer: {
-    flex: 1,
-  },
-
-  taxEventHandleContainer: {
-    flexDirection: 'column',
-    paddingVertical: 30,
-    width: '90%'
-  },
-
-  textInput: {
-    backgroundColor: '#294D61',
-    borderColor: '#294D61',
-    borderRadius: 10,
-    borderWidth: 1,
-    color: '#05161A',
-    marginBottom: 5,
-    padding: 10,
-    width: '100%',
-  },
-
-  taxEventListContainer: {
-    flex: 9,
-    flexDirection: 'column',
-    flexWrap: 'nowrap',
-    width: '90%'
-  },
-
-  taxEventCard: {
-    borderColor: '#294D61',
-    borderRadius: 10,
-    borderWidth: 2,
-    color: '#05161A',
-    gap: 5,
-    height: 'auto',
-    marginBottom: 5,
-    padding: 10,
-    width: '100%',
-  },
-
-  menuContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingTop: 30,
-    width: '95%'
   },
 
 })
