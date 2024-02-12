@@ -1,91 +1,107 @@
 import { useState } from 'react'
 import {
+  Dimensions,
   Keyboard,
   StyleSheet,
   View,
 } from 'react-native'
 import uuid from 'react-native-uuid'
+import { useFonts } from 'expo-font'
 
-import AddTaxEvent from './src/components/AddTaxEvent'
 import CalendarContainer from './src/components/CalendarContainer'
+import EventContainer from './src/components/EventContainer'
+import ItemContainer from './src/components/ItemContainer'
 import MenuContainer from './src/components/MenuContainer'
-import TaxEventListContainer from './src/components/TaxEventListContainer'
+
+import Home from './src/screens/Home'
+import ItemListContainer from './src/screens/ItemListContainer'
+import ItemDetailContainer from './src/screens/ItemDetailContainer'
+
+import colors from './src/utils/globals/colors'
+import fontCollection from './src/utils/globals/fonts'
 
 export default function App() {
-
-  const [newTaxEvent, setNewTaxEvent] = useState({
+  
+  const [categorySelected, setCategorySelected] = useState('')
+  const [itemList, setItemList] = useState([])
+  const [itemSelected, setItemSelected] = useState({})
+  const [itemUpdate, setItemUpdate] = useState({})
+  const [modalVisible, setModalVisible] = useState(false)
+  const [newItem, setNewItem] = useState({
     id: '',
-    type: '',
+    category: '',
     name: '',
     amount: '',
-    currency: '',
     date: '',
     paid: '',
   })
-  const [taxEventList, setTaxEventList] = useState([])
-  const [modalVisible, setModalVisible] = useState(false)
-  const [taxEventSelected, setTaxEventSelected] = useState({})
-  const [updateTaxEvent, setUpdateTaxEvent] = useState({})
 
-  const addTaxEvent = () => {
-    setTaxEventList([...taxEventList, newTaxEvent])
-    setNewTaxEvent({
+  const [fontsLoaded] = useFonts(fontCollection)
+  if (!fontsLoaded) {
+    return null
+  }
+
+  const addItem = () => {
+    setItemList([...itemList, newItem])
+    setNewItem({
       id: '',
-      type: '',
+      category: '',
       name: '',
       amount: '',
-      currency: '',
       date: '',
       paid: '',
     })
     Keyboard.dismiss()
   }
 
+  const deleteItem = () => {
+    setItemList(itemList.filter(item => item.id != itemSelected.id))
+    setModalVisible(!modalVisible)
+  }
+
+  const onHandleAddAmount = (input) => {
+    setNewItem({...newItem, amount: input})
+  }
+
   const onHandleAddName = (input) => {
-    setNewTaxEvent({
-      ...newTaxEvent,
-      name: input,
+    setNewItem({
+      ...newItem,
       id: uuid.v4(),
-      type: 'factura',
-      currency: 'clp',
+      category: 'IVA',
+      name: input,
       date: new Date().toLocaleString(),
       paid: false,
     })
   }
 
-  const onHandleAddAmount = (input) => {
-    setNewTaxEvent({...newTaxEvent, amount: input})
-  }
-
   const onHandleModal = (item) => {
-    setTaxEventSelected(item)
+    setItemSelected(item)
     setModalVisible(!modalVisible)
   }
 
-  const deleteTaxEvent = () => {
-    setTaxEventList(taxEventList.filter(item => item.id != taxEventSelected.id))
-    setModalVisible(!modalVisible)
+  const onHandleUpdateAmount = (input) => {
+    setItemSelected({...itemSelected, amount: input})
   }
 
-  const saveUpdateTaxEvent = (taxEventSelected) => {
-    setTaxEventList(taxEventList.map(event => {
-      if(event.id === taxEventSelected.id) {
-        return ({...taxEventSelected})
+  const onHandleUpdateName = (input) => {
+    setItemSelected({...itemSelected, name: input})
+  }
+
+  const saveItemUpdate = (itemSelected) => {
+    setItemList(itemList.map(item => {
+      if(item.id === itemSelected.id) {
+        return ({...itemSelected})
       }
     }))
     setModalVisible(!modalVisible)
   }
 
-  const onHandleUpdateName = (input) => {
-    setTaxEventSelected({...taxEventSelected, name: input})
-  }
-
-  const onHandleUpdateAmount = (input) => {
-    setTaxEventSelected({...taxEventSelected, amount: input})
+  const selectedCategoryState = (category) => {
+    setCategorySelected(category)
   }
 
   const updatePaidStatus = (id) => {
-    setTaxEventList(taxEventList.map(item => {
+    setItemList(itemList.map(item => {
       if(item.id === id) {
         return ({
           ...item,...{paid: !item.paid}
@@ -94,28 +110,48 @@ export default function App() {
     }))
   }
 
+  const screenWidth = Dimensions.get('window').width
+
   return (
     <View style={styles.appContainer}>
-      <CalendarContainer />
-      <AddTaxEvent
-        onHandleAddName={onHandleAddName}
-        onHandleAddAmount={onHandleAddAmount}
-        newTaxEvent={newTaxEvent}
-        addTaxEvent={addTaxEvent}
-      />
-      <TaxEventListContainer
-        taxEventList={taxEventList}
-        onHandleModal={onHandleModal}
+      <>
+        {
+          categorySelected
+            ? <ItemListContainer 
+                categorySelected={categorySelected}
+                screenWidth={screenWidth}
+            />
+            : <Home
+                screenWidth={screenWidth}
+                selectedCategoryState={selectedCategoryState}
+            />
+        }
+      </>
 
-        modalVisible={modalVisible}
-        taxEventSelected={taxEventSelected}
-        deleteTaxEvent={deleteTaxEvent}
-        saveUpdateTaxEvent={saveUpdateTaxEvent}
-        updatePaidStatus={updatePaidStatus}
-        onHandleUpdateName={onHandleUpdateName}
-        onHandleUpdateAmount={onHandleUpdateAmount}
+      {/* <CalendarContainer />
+      <EventContainer
+        addItem={addItem}
+        newItem={newItem}
+        onHandleAddAmount={onHandleAddAmount}
+        onHandleAddName={onHandleAddName}
+        screenWidth={screenWidth}
       />
-      <MenuContainer />
+      <ItemContainer
+        itemList={itemList}
+        onHandleModal={onHandleModal}
+        screenWidth={screenWidth}
+
+        deleteItem={deleteItem}
+        itemSelected={itemSelected}
+        modalVisible={modalVisible}
+        onHandleUpdateAmount={onHandleUpdateAmount}
+        onHandleUpdateName={onHandleUpdateName}
+        saveItemUpdate={saveItemUpdate}
+        updatePaidStatus={updatePaidStatus}
+      />
+      <MenuContainer
+        screenWidth={screenWidth}
+      /> */}
     </View>
   )
 }
@@ -123,12 +159,10 @@ export default function App() {
 const styles = StyleSheet.create({
 
   appContainer: {
-    alignItems: 'center',
-    backgroundColor: '#000000',
+    backgroundColor: colors.background,
     flex: 10,
     flexDirection: 'column',
     flexWrap: 'nowrap',
-    justifyContent: 'center',
   },
 
 })

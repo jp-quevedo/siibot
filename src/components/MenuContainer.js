@@ -5,9 +5,11 @@ import {
 
 import MenuButton from './MenuButton'
 
-const MenuContainer = () => {
+import colors from '../utils/globals/colors'
+
+const MenuContainer = ({screenWidth}) => {
     return (
-        <View style={styles.menuContainer}>
+        <View style={[styles.menuContainer, {width: screenWidth}]}>
             <MenuButton title='INICIO' />
             <MenuButton title='BALANCE' />
             <MenuButton title='DETALLE' />
@@ -21,13 +23,10 @@ export default MenuContainer
 const styles = StyleSheet.create({
 
     menuContainer: {
-        backgroundColor: '#202020',
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
+        backgroundColor: colors.container,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        paddingTop: 15,
-        width: '95%'
+        paddingTop: 10,
     },
 
 })

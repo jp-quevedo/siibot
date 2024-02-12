@@ -4,11 +4,14 @@ import {
     Text,
 } from 'react-native'
 
-const EventButton = ({onPress, title}) => {
+import colors from '../utils/globals/colors'
+import fonts from '../utils/globals/fonts'
+
+const EventButton = ({onPress, screenWidth, title}) => {
     return (
         <Pressable
             onPress={onPress}
-            style={styles.buttonContainer}
+            style={[styles.buttonContainer, {width: screenWidth - 60}]}
         >
             <Text style={styles.buttonTitle}>{title}</Text>
         </Pressable>
@@ -22,17 +25,17 @@ const styles = StyleSheet.create({
     buttonContainer: {
         alignContent: 'center',
         alignSelf: 'center',
-        backgroundColor: '#0C7075',
-        borderColor: '#0C7075',
-        borderRadius: 10,
-        padding: 15,
-        width: '90%',
+        backgroundColor: colors.button,
+        borderColor: colors.button,
+        borderRadius: 8,
+        padding: 10,
     },
 
     buttonTitle: {
-        color: '#E1E1E1',
-        fontSize: 15,
-        fontWeight: '800',
+        color: colors.text,
+        fontFamily: fonts.regular,
+        fontSize: 16,
+        fontWeight: '500',
         textAlign: 'center',
     }
 })

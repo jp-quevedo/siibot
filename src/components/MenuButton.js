@@ -4,6 +4,8 @@ import {
     Text,
 } from 'react-native'
 
+import colors from '../utils/globals/colors'
+
 const MenuButton = ({onPress, title}) => {
     return (
         <Pressable
@@ -22,18 +24,15 @@ const styles = StyleSheet.create({
     buttonContainer: {
         alignContent: 'center',
         alignSelf: 'center',
-        backgroundColor: '#0C7075',
-        borderColor: '#0C7075',
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
+        backgroundColor: colors.button,
         flexDirection: 'row',
         padding: 10,
     },
 
     buttonTitle: {
-        color: '#E1E1E1',
-        fontSize: 15,
-        fontWeight: '800',
+        color: colors.text,
+        fontSize: 16,
+        fontWeight: '500',
         textAlign: 'center',
     },
     
