@@ -20,7 +20,7 @@ const EventContainer = ({
             <TextInput 
                 maxLength={20}
                 onChangeText={onHandleAddName}
-                placeholder='GLOSA'
+                placeholder='Glosa'
                 placeholderTextColor={colors.text}
                 style={[styles.textInput, {width: screenWidth - 60}]}
                 value={newItem.name}
@@ -28,7 +28,7 @@ const EventContainer = ({
             <TextInput
                 maxLength={10}
                 onChangeText={onHandleAddAmount}
-                placeholder='MONTO'
+                placeholder='Monto'
                 placeholderTextColor={colors.text}
                 style={[styles.textInput, {width: screenWidth - 60}]}
                 value={newItem.amount}
@@ -36,7 +36,7 @@ const EventContainer = ({
             <EventButton
                 onPress={addItem}
                 screenWidth={screenWidth}
-                title='AGREGAR'
+                title='Agregar'
             />
         </View>
     )

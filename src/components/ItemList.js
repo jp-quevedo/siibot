@@ -15,7 +15,7 @@ const ItemList = ({item, itemIdSelected, screenWidth}) => {
             onPress={() => itemIdSelected(item.id)}
             screenWidth={screenWidth}
             style={[styles.itemListContainer, {width: screenWidth - 20}]}
-            title='DETALLE'
+            title='Detalle'
         >
             <Image
                 source={{uri: 'https://cdn-icons-png.freepik.com/512/929/929446.png?ga=GA1.1.1433597810.1707753757&'}}

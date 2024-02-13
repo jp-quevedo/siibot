@@ -8,6 +8,7 @@ import {
 import EventButton from './EventButton'
 
 import colors from '../utils/globals/colors'
+import fonts from '../utils/globals/fonts'
 
 const Item = ({
     item,
@@ -17,10 +18,10 @@ const Item = ({
 }) => {
     return (
         <View style={[styles.itemCard, {width: screenWidth - 20}]}>
-            <Text style={styles.itemText}>GLOSA :    {item.name}</Text>
-            <Text style={styles.itemText}>MONTO :    {item.amount}</Text>
+            <Text style={styles.itemText}>Glosa :    {item.name}</Text>
+            <Text style={styles.itemText}>Monto :    {item.amount}</Text>
             <View style={styles.switchContainer}>
-                <Text style={styles.itemText}>ESTADO DE PAGO: </Text>
+                <Text style={styles.itemText}>Estado de Pago: </Text>
                 <Switch
                     value={item.paid}
                     onValueChange={() => updatePaidStatus(item.id)}
@@ -29,7 +30,7 @@ const Item = ({
             <EventButton
                 onPress={() => onHandleModal(item)}
                 screenWidth={screenWidth}
-                title='EDITAR'
+                title='Editar'
             />
         </View>
     )
@@ -51,8 +52,8 @@ const styles = StyleSheet.create({
 
     itemText: {
         color: colors.text,
+        fontFamily: fonts.bold,
         fontSize: 16,
-        fontWeight: '500',
         paddingHorizontal: 20,
     },
 

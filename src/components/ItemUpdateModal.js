@@ -8,6 +8,7 @@ import {
 import EventButton from './EventButton'
 
 import colors from '../utils/globals/colors'
+import fonts from '../utils/globals/fonts'
 
 const ItemUpdateModal = ({
     deleteItem,
@@ -29,7 +30,7 @@ const ItemUpdateModal = ({
                 <TextInput 
                     maxLength={20}
                     onChangeText={onHandleUpdateName}
-                    placeholder='GLOSA'
+                    placeholder='Glosa'
                     placeholderTextColor={colors.text}
                     style={[styles.textInput, {width: screenWidth - 60}]}
                     value={itemSelected.name}
@@ -37,7 +38,7 @@ const ItemUpdateModal = ({
                 <TextInput
                     maxLength={10}
                     onChangeText={onHandleUpdateAmount}
-                    placeholder='MONTO'
+                    placeholder='Monto'
                     placeholderTextColor={colors.text}
                     style={[styles.textInput, {width: screenWidth - 60}]}
                     value={itemSelected.amount}
@@ -45,17 +46,17 @@ const ItemUpdateModal = ({
                 <EventButton
                     onPress={() => saveItemUpdate(itemSelected)}
                     screenWidth={screenWidth}
-                    title='GUARDAR'
+                    title='Guardar'
                 />
                 <EventButton
                     onPress={deleteItem}
                     screenWidth={screenWidth}
-                    title='BORRAR'
+                    title='Borrar'
                 />
                 <EventButton
                     onPress={() => onHandleModal({})}
                     screenWidth={screenWidth}
-                    title='CANCELAR'
+                    title='Cancelar'
                 />
             </View>
         </Modal>
@@ -81,8 +82,8 @@ const styles = StyleSheet.create({
 
     itemText: {
         color: colors.text,
+        fontFamily: fonts.regular,
         fontSize: 16,
-        fontWeight: '500',
         paddingHorizontal: 20,
     },
 
