@@ -21,16 +21,16 @@ const styles = StyleSheet.create({
     shadowContainer:{
 
         /*Android*/
-        elevation: 10,
+        elevation: 12,
 
         /*IOS*/
         shadowColor: colors.text,
         shadowOffset: {
-            width: 0,
-            height: 6,
+            width: 8,
+            height: 3,
         },
-        shadowOpacity: 0.39,
-        shadowRadius: 8.30,
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
 
     },
 

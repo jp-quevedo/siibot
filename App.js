@@ -18,7 +18,7 @@ import ItemListContainer from './src/screens/ItemListContainer'
 import ItemDetailContainer from './src/screens/ItemDetailContainer'
 
 import colors from './src/utils/globals/colors'
-import fontCollection from './src/utils/globals/fonts'
+import { fontCollection } from './src/utils/globals/fonts'
 
 export default function App() {
   
