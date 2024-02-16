@@ -2,29 +2,28 @@ import { useState } from 'react'
 import {
   Dimensions,
   Keyboard,
+  StatusBar,
   StyleSheet,
   View,
 } from 'react-native'
-import uuid from 'react-native-uuid'
 import { useFonts } from 'expo-font'
+import uuid from 'react-native-uuid'
 
-import CalendarContainer from './src/components/CalendarContainer'
 import EventContainer from './src/components/EventContainer'
-import ItemContainer from './src/components/ItemContainer'
 import MenuContainer from './src/components/MenuContainer'
 
 import Home from './src/screens/Home'
+import ItemContainer from './src/screens/ItemContainer'
 import ItemListContainer from './src/screens/ItemListContainer'
-import ItemDetailContainer from './src/screens/ItemDetailContainer'
 
 import colors from './src/utils/globals/colors'
 import { fontCollection } from './src/utils/globals/fonts'
 
 export default function App() {
-  
+
   const [categorySelected, setCategorySelected] = useState('')
   const [itemList, setItemList] = useState([])
-  const [itemSelected, setItemSelected] = useState({})
+  const [itemSelected, setItemSelected] = useState('')
   const [itemUpdate, setItemUpdate] = useState({})
   const [modalVisible, setModalVisible] = useState(false)
   const [newItem, setNewItem] = useState({
@@ -35,6 +34,8 @@ export default function App() {
     date: '',
     paid: '',
   })
+
+  const windowWidth = Dimensions.get('window').width
 
   const [fontsLoaded] = useFonts(fontCollection)
   if (!fontsLoaded) {
@@ -100,6 +101,10 @@ export default function App() {
     setCategorySelected(category)
   }
 
+  const selectedItemState = (id) => {
+    setItemSelected(id)
+  }
+
   const updatePaidStatus = (id) => {
     setItemList(itemList.map(item => {
       if(item.id === id) {
@@ -110,59 +115,62 @@ export default function App() {
     }))
   }
 
-  const screenWidth = Dimensions.get('window').width
-
   return (
-    <View style={styles.appContainer}>
-      <>
-        {
-          categorySelected
-            ? <ItemListContainer 
-                categorySelected={categorySelected}
-                screenWidth={screenWidth}
-            />
-            : <Home
-                screenWidth={screenWidth}
-                selectedCategoryState={selectedCategoryState}
-            />
-        }
-      </>
+    <>
+      <StatusBar backgroundColor={colors.container}/>
+      <View style={styles.appContainer}>
+          {
+            categorySelected
+              ? itemSelected
+                ? <ItemContainer 
+                  itemSelected={itemSelected}
+                  windowWidth={windowWidth}
+                />
+                  :<ItemListContainer 
+                      categorySelected={categorySelected}
+                      windowWidth={windowWidth}
+                      selectedItemState={selectedItemState}
+                  />
+                : <Home
+                    windowWidth={windowWidth}
+                    selectedCategoryState={selectedCategoryState}
+                />
+          }
 
-      {/* <CalendarContainer />
-      <EventContainer
-        addItem={addItem}
-        newItem={newItem}
-        onHandleAddAmount={onHandleAddAmount}
-        onHandleAddName={onHandleAddName}
-        screenWidth={screenWidth}
-      />
-      <ItemContainer
-        itemList={itemList}
-        onHandleModal={onHandleModal}
-        screenWidth={screenWidth}
+        {/* <CalendarContainer />
+        <EventContainer
+          addItem={addItem}
+          newItem={newItem}
+          onHandleAddAmount={onHandleAddAmount}
+          onHandleAddName={onHandleAddName}
+          windowWidth={windowWidth}
+        />
+        <ItemContainer
+          itemList={itemList}
+          onHandleModal={onHandleModal}
+          windowWidth={windowWidth}
 
-        deleteItem={deleteItem}
-        itemSelected={itemSelected}
-        modalVisible={modalVisible}
-        onHandleUpdateAmount={onHandleUpdateAmount}
-        onHandleUpdateName={onHandleUpdateName}
-        saveItemUpdate={saveItemUpdate}
-        updatePaidStatus={updatePaidStatus}
-      />
-      <MenuContainer
-        screenWidth={screenWidth}
-      /> */}
-    </View>
+          deleteItem={deleteItem}
+          itemSelected={itemSelected}
+          modalVisible={modalVisible}
+          onHandleUpdateAmount={onHandleUpdateAmount}
+          onHandleUpdateName={onHandleUpdateName}
+          saveItemUpdate={saveItemUpdate}
+          updatePaidStatus={updatePaidStatus}
+        />
+        <MenuContainer
+          windowWidth={windowWidth}
+        /> */}
+      </View>
+    </>
   )
 }
 
 const styles = StyleSheet.create({
-
-  appContainer: {
+  appContainer:{
     backgroundColor: colors.background,
-    flex: 10,
+    flex: 1,
     flexDirection: 'column',
     flexWrap: 'nowrap',
   },
-
 })

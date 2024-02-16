@@ -7,11 +7,11 @@ import {
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const EventButton = ({onPress, screenWidth, title}) => {
+const EventButton = ({onPress, title, windowWidth}) => {
     return (
         <Pressable
             onPress={onPress}
-            style={[styles.buttonContainer, {width: screenWidth - 60}]}
+            style={[styles.buttonContainer, {width: windowWidth - 60}]}
         >
             <Text style={styles.buttonTitle}>{title}</Text>
         </Pressable>
@@ -21,8 +21,7 @@ const EventButton = ({onPress, screenWidth, title}) => {
 export default EventButton
 
 const styles = StyleSheet.create({
-
-    buttonContainer: {
+    buttonContainer:{
         alignContent: 'center',
         alignSelf: 'center',
         backgroundColor: colors.button,
@@ -30,11 +29,10 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 10,
     },
-
-    buttonTitle: {
+    buttonTitle:{
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 16,
         textAlign: 'center',
-    }
+    },
 })

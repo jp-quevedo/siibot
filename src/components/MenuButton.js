@@ -20,20 +20,17 @@ const MenuButton = ({onPress, title}) => {
 export default MenuButton
 
 const styles = StyleSheet.create({
-
-    buttonContainer: {
+    buttonContainer:{
         alignContent: 'center',
         alignSelf: 'center',
         backgroundColor: colors.button,
         flexDirection: 'row',
         padding: 10,
     },
-
-    buttonTitle: {
+    buttonTitle:{
         color: colors.text,
         fontSize: 16,
         fontWeight: '500',
         textAlign: 'center',
     },
-    
 })

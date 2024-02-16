@@ -11,7 +11,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 import colors from '../utils/globals/colors'
 
-const SearchBar = ({keyWordHandler, screenWidth}) => {
+const SearchBar = ({keyWordHandler, windowWidth}) => {
 
     const [error, setError] = useState('')
     const [input, setInput] = useState('')
@@ -38,16 +38,16 @@ const SearchBar = ({keyWordHandler, screenWidth}) => {
 
     return (
         <View>
-            <View style={[styles.searchBarContainer, {width: screenWidth - 20}]}>
+            <View style={[styles.searchBarContainer, {width: windowWidth - 20}]}>
                 <TextInput
                     maxLength={20}
                     onChangeText={inputHandler}
                     placeholder='Buscar'
                     placeholderTextColor={colors.text}
-                    style={[styles.textInput, {width: screenWidth - 60}]}
+                    style={[styles.textInput, {width: windowWidth - 140}]}
                     value={input}
                 />
-                <Pressable onPress={search}>
+                <Pressable onPress={search} style={styles.button}>
                     <MaterialIcons name='search' size={30} color='white' />
                 </Pressable>
                 <Pressable onPress={reset}>
@@ -62,28 +62,31 @@ const SearchBar = ({keyWordHandler, screenWidth}) => {
 export default SearchBar
 
 const styles = StyleSheet.create({
-
-    searchBarContainer: {
+    searchBarContainer:{
+        alignItems: 'center',
+        alignSelf: 'center',
         backgroundColor: colors.container,
-        borderRadius: 16,
-        flex: 1,
+        borderRadius: 48,
         flexDirection: 'row',
-        marginTop: 10,
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        marginTop: 20,
         paddingVertical: 20,
     },
-
-    textInput: {
+    textInput:{
         alignSelf: 'center',
         backgroundColor: colors.input,
         borderColor: colors.input,
-        borderRadius: 8,
-        marginBottom: 10,
+        borderRadius: 32,
         padding: 10,
     },
-
     errorText:{
+        alignSelf: 'center',
         color: colors.error,
+        margin: 0,
+        paddingTop: 15,
+    },
+    button:{
         paddingHorizontal: 10,
-    }
-
+    },
 })

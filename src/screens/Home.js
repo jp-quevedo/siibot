@@ -6,15 +6,15 @@ import {
 import CategoriesContainer from '../components/CategoriesContainer'
 import Header from '../components/Header'
 
-const Home = ({screenWidth, selectedCategoryState}) => {
+const Home = ({selectedCategoryState, windowWidth}) => {
     return (
         <View style={styles.home}>
             <Header
-                screenWidth={screenWidth}
+                windowWidth={windowWidth}
                 title='Bienvenido'
             />
             <CategoriesContainer
-                screenWidth={screenWidth}
+                windowWidth={windowWidth}
                 selectedCategoryState={selectedCategoryState}
             />
         </View>
@@ -24,9 +24,7 @@ const Home = ({screenWidth, selectedCategoryState}) => {
 export default Home
 
 const styles = StyleSheet.create({
-
     home:{
         alignItems: 'center',
-    }
-
+    },
 })

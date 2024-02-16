@@ -11,7 +11,7 @@ import SearchBar from '../components/SearchBar'
 
 import items from '../utils/data/items.json'
 
-const ItemListContainer = ({categorySelected, screenWidth}) => {
+const ItemListContainer = ({categorySelected, selectedItemState, windowWidth}) => {
 
     const [keyWord, setKeyWord] = useState('')
     const [itemFilter, setItemFilter] = useState([])
@@ -34,10 +34,13 @@ const ItemListContainer = ({categorySelected, screenWidth}) => {
 
     return (
         <View>
-            <Header title={categorySelected} />
+            <Header
+                title={categorySelected}
+                windowWidth={windowWidth}
+            />
             <SearchBar
                 keyWordHandler={keyWordHandler}
-                screenWidth={screenWidth}
+                windowWidth={windowWidth}
             />
             <View style={styles.itemByCategory}>
                 <FlatList
@@ -46,7 +49,8 @@ const ItemListContainer = ({categorySelected, screenWidth}) => {
                     renderItem={({item}) =>
                         <ItemList
                             item={item}
-                            screenWidth={screenWidth}
+                            selectedItemState={selectedItemState}
+                            windowWidth={windowWidth}
                         />
                     }
                 />
@@ -60,5 +64,5 @@ export default ItemListContainer
 const styles = StyleSheet.create({
     itemByCategory:{
         alignItems: 'center',
-    }
+    },
 })

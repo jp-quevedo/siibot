@@ -1,27 +1,21 @@
 import {
-    Image,
     Pressable,
     StyleSheet,
     Text,
 } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'
 
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const ItemList = ({item, itemIdSelected, screenWidth}) => {
-
+const ItemList = ({item, selectedItemState, windowWidth}) => {
     return (
         <Pressable
-            onPress={() => itemIdSelected(item.id)}
-            screenWidth={screenWidth}
-            style={[styles.itemListContainer, {width: screenWidth - 20}]}
+            onPress={() => selectedItemState(item.id)}
+            style={[styles.itemListContainer, {width: windowWidth - 20}]}
             title='Detalle'
         >
-            <Image
-                source={{uri: 'https://cdn-icons-png.freepik.com/512/929/929446.png?ga=GA1.1.1433597810.1707753757&'}}
-                style={styles.itemIcon}
-                resizeMode='cover'
-            />
+            <MaterialIcons name='info-outline' size={30} color='white' style={styles.itemIcon}/>
             <Text style={styles.itemName}>{item.name}</Text>
         </Pressable>
     )
@@ -30,7 +24,6 @@ const ItemList = ({item, itemIdSelected, screenWidth}) => {
 export default ItemList
 
 const styles = StyleSheet.create({
-
     itemListContainer:{
         alignItems: 'center',
         backgroundColor: colors.container,
@@ -39,17 +32,14 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingVertical: 20,
     },
-
     itemName:{
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 16,
     },
-
     itemIcon:{
         marginHorizontal: 20,
         minWidth: 30,
         minHeight: 30,
-    }
-
+    },
 })

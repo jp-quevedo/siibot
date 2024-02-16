@@ -1,4 +1,5 @@
 import {
+    Image,
     StyleSheet,
     View,
 } from 'react-native'
@@ -7,13 +8,29 @@ import MenuButton from './MenuButton'
 
 import colors from '../utils/globals/colors'
 
-const MenuContainer = ({screenWidth}) => {
+const MenuContainer = ({windowWidth}) => {
     return (
-        <View style={[styles.menuContainer, {width: screenWidth}]}>
-            <MenuButton title='INICIO' />
-            <MenuButton title='BALANCE' />
-            <MenuButton title='DETALLE' />
-            <MenuButton title='PERFIL' />
+        <View style={[styles.menuContainer, {width: windowWidth}]}>
+            <Image
+                source={{uri: '../../assets/icons/home.png'}}
+                style={styles.itemIcon}
+                resizeMode='cover'
+            />
+            <Image
+                source={{uri: '../../assets/icons/balance.png'}}
+                style={styles.itemIcon}
+                resizeMode='cover'
+            />
+            <Image
+                source={{uri: '../../assets/icons/detail.png'}}
+                style={styles.itemIcon}
+                resizeMode='cover'
+            />
+            <Image
+                source={{uri: '../../assets/icons/profile.png'}}
+                style={styles.itemIcon}
+                resizeMode='cover'
+            />
         </View>
     )
 }
@@ -21,12 +38,9 @@ const MenuContainer = ({screenWidth}) => {
 export default MenuContainer
 
 const styles = StyleSheet.create({
-
-    menuContainer: {
+    menuContainer:{
         backgroundColor: colors.container,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        paddingTop: 10,
     },
-
 })

@@ -9,16 +9,16 @@ import Categories from './Categories'
 import categories from '../utils/data/categories.json'
 import colors from '../utils/globals/colors'
 
-const CategoriesContainer = ({screenWidth, selectedCategoryState}) => {
+const CategoriesContainer = ({selectedCategoryState, windowWidth}) => {
     return (
-        <View style={[styles.categoriesContainer, {width: screenWidth - 20}]}>
+        <View style={[styles.categoriesContainer, {width: windowWidth - 20}]}>
             <FlatList
                     data={categories}
                     keyExtractor={item => item}
                     renderItem={({item}) => <Categories
                         item={item}
-                        screenWidth={screenWidth}
                         selectedCategoryState={selectedCategoryState}
+                        windowWidth={windowWidth}
                     />}
             />
         </View>
@@ -28,7 +28,6 @@ const CategoriesContainer = ({screenWidth, selectedCategoryState}) => {
 export default CategoriesContainer
 
 const styles = StyleSheet.create({
-
     categoriesContainer:{
         alignItems: 'center',
         backgroundColor: colors.container,
@@ -36,6 +35,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 20,
         paddingTop: 20,
-    }
-
+    },
 })

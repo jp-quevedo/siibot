@@ -1,22 +1,20 @@
 import {
     StyleSheet,
-    View,
 } from 'react-native'
 
 import EventButton from './EventButton'
-
 import Shadow from './wrappers/Shadow'
 
 const Categories = ({
     item,
-    screenWidth,
-    selectedCategoryState
+    selectedCategoryState,
+    windowWidth
 }) => {
     return (
         <Shadow style={styles.categories}>
             <EventButton
                 onPress={() => selectedCategoryState(item)}
-                screenWidth={screenWidth}
+                windowWidth={windowWidth}
                 title={item}
             />
         </Shadow>
@@ -26,9 +24,7 @@ const Categories = ({
 export default Categories
 
 const styles = StyleSheet.create({
-    
     categories:{
         marginBottom: 20,
     },
-
 })

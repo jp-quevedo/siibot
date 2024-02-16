@@ -6,7 +6,6 @@ import {
 import colors from '../../utils/globals/colors'
 
 const Shadow = ({children, style}) => {
-
   return (
     <View style={[styles.shadowContainer, style]}>
       {children}
@@ -17,21 +16,19 @@ const Shadow = ({children, style}) => {
 export default Shadow
 
 const styles = StyleSheet.create({
-
     shadowContainer:{
-
-        /*Android*/
+        /*
+        Android
         elevation: 12,
 
-        /*IOS*/
+        IOS
         shadowColor: colors.text,
         shadowOffset: {
-            width: 8,
-            height: 3,
+            width: -1,
+            height: 2,
         },
-        shadowOpacity: 0.3,
+        shadowOpacity: 0.25,
         shadowRadius: 8,
-
+        */
     },
-
 })

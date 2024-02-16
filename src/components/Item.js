@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 
 import EventButton from './EventButton'
+import ItemUpdateModal from '../components/ItemUpdateModal'
 
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
@@ -14,12 +15,21 @@ const Item = ({
     item,
     onHandleModal,
     updatePaidStatus,
-    screenWidth,
+    windowWidth,
+    // modal
+    deleteItem,
+    itemSelected,
+    modalVisible,
+    onHandleUpdateAmount,
+    onHandleUpdateName,
+    saveItemUpdate,
 }) => {
     return (
-        <View style={[styles.itemCard, {width: screenWidth - 20}]}>
+        <View style={[styles.itemCard, {width: windowWidth - 20}]}>
+            <Text style={styles.itemText}>Categoría :    {item.category}</Text>
             <Text style={styles.itemText}>Glosa :    {item.name}</Text>
             <Text style={styles.itemText}>Monto :    {item.amount}</Text>
+            <Text style={styles.itemText}>Fecha :    {item.date}</Text>
             <View style={styles.switchContainer}>
                 <Text style={styles.itemText}>Estado de Pago: </Text>
                 <Switch
@@ -29,9 +39,19 @@ const Item = ({
             </View>
             <EventButton
                 onPress={() => onHandleModal(item)}
-                screenWidth={screenWidth}
+                windowWidth={windowWidth}
                 title='Editar'
             />
+            {/* <ItemUpdateModal 
+                deleteItem={deleteItem}
+                itemSelected={itemSelected}
+                modalVisible={modalVisible}
+                onHandleUpdateAmount={onHandleUpdateAmount}
+                onHandleUpdateName={onHandleUpdateName}
+                onHandleModal={onHandleModal}
+                saveItemUpdate={saveItemUpdate}
+                windowWidth={windowWidth}
+            /> */}
         </View>
     )
 }
@@ -39,8 +59,7 @@ const Item = ({
 export default Item
 
 const styles = StyleSheet.create({
-
-    itemCard: {
+    itemCard:{
         backgroundColor: colors.container,
         borderColor: colors.container,
         borderRadius: 16,
@@ -49,19 +68,16 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         paddingVertical: 20,
     },
-
-    itemText: {
+    itemText:{
         color: colors.text,
-        fontFamily: fonts.bold,
+        fontFamily: fonts.regular,
         fontSize: 16,
         paddingHorizontal: 20,
     },
-
-    switchContainer: {
+    switchContainer:{
         alignItems: 'center',
         alignSelf: 'flex-start',
         flexDirection: 'row',
         flexWrap: 'nowrap',
     },
-
 })

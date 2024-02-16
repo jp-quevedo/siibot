@@ -66,8 +66,7 @@ const ItemUpdateModal = ({
 export default ItemUpdateModal
 
 const styles = StyleSheet.create({
-
-    itemModal: {
+    itemModal:{
         alignSelf: 'center',
         backgroundColor: colors.container,
         borderColor: colors.container,
@@ -78,21 +77,17 @@ const styles = StyleSheet.create({
         marginTop: 10,
         paddingVertical: 20,
     },
-
-
-    itemText: {
+    itemText:{
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 16,
         paddingHorizontal: 20,
     },
-
-    textInput: {
+    textInput:{
         alignSelf: 'center',
         backgroundColor: colors.input,
         borderColor: colors.input,
         borderRadius: 8,
         padding: 10,
     },
-
 })

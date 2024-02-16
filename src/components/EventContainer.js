@@ -45,16 +45,14 @@ const EventContainer = ({
 export default EventContainer
 
 const styles = StyleSheet.create({
-
-    itemHandleContainer: {
+    itemHandleContainer:{
         backgroundColor: colors.container,
         borderRadius: 16,
         flexDirection: 'column',
         marginTop: 10,
         paddingVertical: 20,
     },
-    
-    textInput: {
+    textInput:{
         alignSelf: 'center',
         backgroundColor: colors.input,
         borderColor: colors.input,
@@ -62,5 +60,4 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         padding: 10,
     },
-
 })
