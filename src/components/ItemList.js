@@ -1,4 +1,5 @@
 import {
+    Dimensions,
     Pressable,
     StyleSheet,
     Text,
@@ -8,10 +9,13 @@ import { MaterialIcons } from '@expo/vector-icons'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const ItemList = ({item, selectedItemState, windowWidth}) => {
+const ItemList = ({item, navigation}) => {
+
+    const windowWidth = Dimensions.get('window').width
+    
     return (
         <Pressable
-            onPress={() => selectedItemState(item.id)}
+            onPress={() => navigation.navigate('ItemContainer', {itemId: item.id})}
             style={[styles.itemListContainer, {width: windowWidth - 20}]}
             title='Detalle'
         >

@@ -1,4 +1,5 @@
 import {
+    Dimensions,
     Keyboard,
     StyleSheet,
     TextInput,
@@ -10,13 +11,19 @@ import EventButton from './EventButton'
 
 import colors from '../utils/globals/colors'
 
-const EventContainer = ({
-    itemList,
-    newItem,
-    setItemList,
-    setNewItem,
-    windowWidth,
-}) => {
+// falta corregir lógica de eventos
+const EventContainer = () => {
+
+    const windowWidth = Dimensions.get('window').width
+
+    const [newItem, setNewItem] = useState({
+        id: '',
+        category: '',
+        name: '',
+        amount: '',
+        date: '',
+        paid: '',
+    })
 
     const addItem = () => {
         setItemList([...itemList, newItem])
@@ -66,7 +73,6 @@ const EventContainer = ({
             />
             <EventButton
                 onPress={addItem}
-                windowWidth={windowWidth}
                 title='Agregar'
             />
         </View>

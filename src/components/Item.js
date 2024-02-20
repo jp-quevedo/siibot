@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import {
+    Dimensions,
     StyleSheet,
     Switch,
     Text,
@@ -8,24 +10,21 @@ import {
 import EventButton from './EventButton'
 import ItemUpdateModal from '../components/ItemUpdateModal'
 
-import itemsData from '../utils/data/itemsData.json'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
+import itemsData from '../utils/data/itemsData.json'
 
-const Item = ({
-    item,
-    windowWidth,
-    // modal
-    itemSelected,
-    modalVisible,
-    setItemSelected,
-    setModalVisible,
-}) => {
+// falta corregir lógica de modal
+const Item = ({item}) => {
 
-    const onHandleModal = (item) => {
-        setItemSelected(item)
-        setModalVisible(!modalVisible)
-    }
+    const windowWidth = Dimensions.get('window').width
+
+    const [modalVisible, setModalVisible] = useState(false)
+
+    // const onHandleModal = (item) => {
+    //     setItemSelected(item)
+    //     setModalVisible(!modalVisible)
+    // }
 
     const updatePaidStatus = (id) => {
         const update = itemsData.map(item => {
@@ -53,17 +52,15 @@ const Item = ({
             </View>
             <EventButton
                 onPress={() => onHandleModal(item)}
-                windowWidth={windowWidth}
                 title='Editar'
             />
-            <ItemUpdateModal 
+            {/* <ItemUpdateModal 
                 itemSelected={itemSelected}
                 modalVisible={modalVisible}
                 setItemSelected={setItemSelected}
                 setModalVisible={setModalVisible}
                 onHandleModal={onHandleModal}
-                windowWidth={windowWidth}
-            />
+            /> */}
         </View>
     )
 }
@@ -77,7 +74,7 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         gap: 10,
         height: 'auto',
-        marginBottom: 10,
+        marginTop: 20,
         paddingVertical: 20,
     },
     itemText:{

@@ -1,5 +1,5 @@
 import {
-    Image,
+    Dimensions,
     StyleSheet,
     View,
 } from 'react-native'
@@ -9,13 +9,16 @@ import MenuButton from './MenuButton'
 
 import colors from '../utils/globals/colors'
 
-const MenuContainer = ({windowWidth}) => {
+const MenuContainer = () => {
+
+    const windowWidth = Dimensions.get('window').width
+    
     return (
         <View style={[styles.menuContainer, {width: windowWidth}]}>
-            <MaterialIcons name='home' size={55} color='white' style={styles.itemIcon}/>
-            <MaterialIcons name='account-balance-wallet' size={55} color='white' style={styles.itemIcon}/>
-            <MaterialIcons name='feed' size={55} color='white' style={styles.itemIcon}/>
-            <MaterialIcons name='account-box' size={55} color='white' style={styles.itemIcon}/>
+            <MaterialIcons name='home' size={45} color='white' style={styles.itemIcon}/>
+            <MaterialIcons name='account-balance-wallet' size={45} color='white' style={styles.itemIcon}/>
+            <MaterialIcons name='feed' size={45} color='white' style={styles.itemIcon}/>
+            <MaterialIcons name='account-box' size={45} color='white' style={styles.itemIcon}/>
         </View>
     )
 }

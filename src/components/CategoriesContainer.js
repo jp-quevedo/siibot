@@ -1,4 +1,5 @@
 import {
+    Dimensions,
     FlatList,
     StyleSheet,
     View,
@@ -9,7 +10,10 @@ import Categories from './Categories'
 import categories from '../utils/data/categories.json'
 import colors from '../utils/globals/colors'
 
-const CategoriesContainer = ({selectedCategoryState, windowWidth}) => {
+const CategoriesContainer = ({navigation}) => {
+
+    const windowWidth = Dimensions.get('window').width
+
     return (
         <View style={[styles.categoriesContainer, {width: windowWidth - 20}]}>
             <FlatList
@@ -17,8 +21,7 @@ const CategoriesContainer = ({selectedCategoryState, windowWidth}) => {
                     keyExtractor={item => item}
                     renderItem={({item}) => <Categories
                         item={item}
-                        selectedCategoryState={selectedCategoryState}
-                        windowWidth={windowWidth}
+                        navigation={navigation}
                     />}
             />
         </View>

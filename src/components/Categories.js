@@ -1,23 +1,21 @@
 import {
     StyleSheet,
+    View,
 } from 'react-native'
 
 import EventButton from './EventButton'
-import Shadow from './wrappers/Shadow'
 
 const Categories = ({
     item,
-    selectedCategoryState,
-    windowWidth
+    navigation,
 }) => {
     return (
-        <Shadow style={styles.categories}>
+        <View style={styles.categories}>
             <EventButton
-                onPress={() => selectedCategoryState(item)}
-                windowWidth={windowWidth}
+                onPress={() => navigation.navigate('ItemListContainer', {categorySelected: item})}
                 title={item}
             />
-        </Shadow>
+        </View>
     )
 }
 

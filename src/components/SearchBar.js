@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {
+    Dimensions,
     Keyboard,
     Pressable,
     StyleSheet,
@@ -11,7 +12,9 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 import colors from '../utils/globals/colors'
 
-const SearchBar = ({keyWordHandler, windowWidth}) => {
+const SearchBar = ({keyWordHandler}) => {
+
+    const windowWidth = Dimensions.get('window').width
 
     const [error, setError] = useState('')
     const [input, setInput] = useState('')

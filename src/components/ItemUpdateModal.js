@@ -1,4 +1,5 @@
 import {
+    Dimensions,
     Modal,
     StyleSheet,
     TextInput,
@@ -16,8 +17,9 @@ const ItemUpdateModal = ({
     onHandleModal,
     setItemSelected,
     setModalVisible,
-    windowWidth,
 }) => {
+
+    const windowWidth = Dimensions.get('window').width
 
     const deleteItem = () => {
         setItemList(itemList.filter(item => item.id != itemSelected.id))
@@ -66,17 +68,14 @@ const ItemUpdateModal = ({
                 />
                 <EventButton
                     onPress={() => saveItemUpdate(itemSelected)}
-                    screenWidth={windowWidth}
                     title='Guardar'
                 />
                 <EventButton
                     onPress={deleteItem}
-                    screenWidth={windowWidth}
                     title='Borrar'
                 />
                 <EventButton
                     onPress={() => onHandleModal({})}
-                    screenWidth={windowWidth}
                     title='Cancelar'
                 />
             </View>

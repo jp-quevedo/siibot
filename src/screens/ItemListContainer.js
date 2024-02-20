@@ -13,21 +13,16 @@ import SearchBar from '../components/SearchBar'
 import itemsData from '../utils/data/itemsData.json'
 
 const ItemListContainer = ({
-    categorySelected,
-    selectedItemState,
-    windowWidth,
-    // event container
-    itemList,
-    newItem,
-    setItemList,
-    setNewItem,
+    navigation,
+    route,
 }) => {
+
+    const {categorySelected} = route.params
 
     // búsqueda de item
 
     const [keyWord, setKeyWord] = useState('')
     const [itemFilter, setItemFilter] = useState([])
-
     const keyWordHandler = (text) => {
         setKeyWord(text)
     }
@@ -46,20 +41,9 @@ const ItemListContainer = ({
 
     return (
         <View>
-            <Header
-                title={categorySelected}
-                windowWidth={windowWidth}
-            />
-            <EventContainer
-                itemList={itemList}
-                newItem={newItem}
-                setItemList={setItemList}
-                setNewItem={setNewItem}
-                windowWidth={windowWidth}
-            />
+            {/* <EventContainer /> */}
             <SearchBar
                 keyWordHandler={keyWordHandler}
-                windowWidth={windowWidth}
             />
             <View style={styles.itemByCategory}>
                 <FlatList
@@ -68,8 +52,7 @@ const ItemListContainer = ({
                     renderItem={({item}) =>
                         <ItemList
                             item={item}
-                            selectedItemState={selectedItemState}
-                            windowWidth={windowWidth}
+                            navigation={navigation}
                         />
                     }
                 />

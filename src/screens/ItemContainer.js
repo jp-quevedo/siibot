@@ -4,43 +4,23 @@ import {
     View,
 } from 'react-native'
 
-import Header from '../components/Header'
 import Item from '../components/Item'
 
 import itemsData from '../utils/data/itemsData.json'
 
-const ItemContainer = ({
-    itemSelected,
-    windowWidth,
-    // modal
-    modalVisible,
-    setItemSelected,
-    setModalVisible,
-}) => {
+const ItemContainer = ({route}) => {
 
+    const {itemId} = route.params
     const [item, setItem] = useState({})
-    useEffect(() => 
-        {
-            const itemFound = itemsData.find(item => item.id === itemSelected)
-            setItem(itemFound)
-        },
-        [itemSelected]
-    )
+    useEffect(() => {
+        const itemFound = itemsData.find(item => item.id === itemId)
+        setItem(itemFound)
+    },[itemId])
 
     return (
         <View style={styles.itemContainer}>
-            <Header
-                title={item.name}
-                windowWidth={windowWidth}
-            />
             <Item
                 item={item}
-                windowWidth={windowWidth}
-                // modal
-                itemSelected={itemSelected}
-                modalVisible={modalVisible}
-                setItemSelected={setItemSelected}
-                setModalVisible={setModalVisible}
             />
         </View>
     )
