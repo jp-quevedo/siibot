@@ -39,7 +39,5 @@ const styles = StyleSheet.create({
     },
     itemIcon:{
         marginHorizontal: 20,
-        minWidth: 30,
-        minHeight: 30,
     },
 })

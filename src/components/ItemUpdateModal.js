@@ -11,28 +11,49 @@ import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
 const ItemUpdateModal = ({
-    deleteItem,
     itemSelected,
     modalVisible,
     onHandleModal,
-    onHandleUpdateAmount,
-    onHandleUpdateName,
-    saveItemUpdate,
-    screenWidth,
+    setItemSelected,
+    setModalVisible,
+    windowWidth,
 }) => {
+
+    const deleteItem = () => {
+        setItemList(itemList.filter(item => item.id != itemSelected.id))
+        setModalVisible(!modalVisible)
+    }
+    
+    const onHandleUpdateAmount = (input) => {
+        setItemSelected({...itemSelected, amount: input})
+    }
+    
+    const onHandleUpdateName = (input) => {
+        setItemSelected({...itemSelected, name: input})
+    }
+    
+    const saveItemUpdate = (itemSelected) => {
+        setItemList(itemList.map(item => {
+          if(item.id === itemSelected.id) {
+            return ({...itemSelected})
+          }
+        }))
+        setModalVisible(!modalVisible)
+    }
+
     return (
         <Modal
             visible={modalVisible}
             animationType='slide'
             onRequestClose={() => onHandleModal({})}
         >
-            <View style={[styles.itemModal, {width: screenWidth - 20}]}>
+            <View style={[styles.itemModal, {width: windowWidth - 20}]}>
                 <TextInput 
                     maxLength={20}
                     onChangeText={onHandleUpdateName}
                     placeholder='Glosa'
                     placeholderTextColor={colors.text}
-                    style={[styles.textInput, {width: screenWidth - 60}]}
+                    style={[styles.textInput, {width: windowWidth - 60}]}
                     value={itemSelected.name}
                 />
                 <TextInput
@@ -40,22 +61,22 @@ const ItemUpdateModal = ({
                     onChangeText={onHandleUpdateAmount}
                     placeholder='Monto'
                     placeholderTextColor={colors.text}
-                    style={[styles.textInput, {width: screenWidth - 60}]}
+                    style={[styles.textInput, {width: windowWidth - 60}]}
                     value={itemSelected.amount}
                 />
                 <EventButton
                     onPress={() => saveItemUpdate(itemSelected)}
-                    screenWidth={screenWidth}
+                    screenWidth={windowWidth}
                     title='Guardar'
                 />
                 <EventButton
                     onPress={deleteItem}
-                    screenWidth={screenWidth}
+                    screenWidth={windowWidth}
                     title='Borrar'
                 />
                 <EventButton
                     onPress={() => onHandleModal({})}
-                    screenWidth={screenWidth}
+                    screenWidth={windowWidth}
                     title='Cancelar'
                 />
             </View>

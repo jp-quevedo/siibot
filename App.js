@@ -1,23 +1,23 @@
 import { useState } from 'react'
 import {
   Dimensions,
-  Keyboard,
   StatusBar,
   StyleSheet,
   View,
 } from 'react-native'
 import { useFonts } from 'expo-font'
-import uuid from 'react-native-uuid'
-
-import EventContainer from './src/components/EventContainer'
-import MenuContainer from './src/components/MenuContainer'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator }from '@react-navigation/native-stack'
 
 import Home from './src/screens/Home'
 import ItemContainer from './src/screens/ItemContainer'
 import ItemListContainer from './src/screens/ItemListContainer'
+import MenuContainer from './src/components/MenuContainer'
 
 import colors from './src/utils/globals/colors'
 import { fontCollection } from './src/utils/globals/fonts'
+
+const Stack = createNativeStackNavigator()
 
 export default function App() {
 
@@ -42,61 +42,6 @@ export default function App() {
     return null
   }
 
-  const addItem = () => {
-    setItemList([...itemList, newItem])
-    setNewItem({
-      id: '',
-      category: '',
-      name: '',
-      amount: '',
-      date: '',
-      paid: '',
-    })
-    Keyboard.dismiss()
-  }
-
-  const deleteItem = () => {
-    setItemList(itemList.filter(item => item.id != itemSelected.id))
-    setModalVisible(!modalVisible)
-  }
-
-  const onHandleAddAmount = (input) => {
-    setNewItem({...newItem, amount: input})
-  }
-
-  const onHandleAddName = (input) => {
-    setNewItem({
-      ...newItem,
-      id: uuid.v4(),
-      category: 'IVA',
-      name: input,
-      date: new Date().toLocaleString(),
-      paid: false,
-    })
-  }
-
-  const onHandleModal = (item) => {
-    setItemSelected(item)
-    setModalVisible(!modalVisible)
-  }
-
-  const onHandleUpdateAmount = (input) => {
-    setItemSelected({...itemSelected, amount: input})
-  }
-
-  const onHandleUpdateName = (input) => {
-    setItemSelected({...itemSelected, name: input})
-  }
-
-  const saveItemUpdate = (itemSelected) => {
-    setItemList(itemList.map(item => {
-      if(item.id === itemSelected.id) {
-        return ({...itemSelected})
-      }
-    }))
-    setModalVisible(!modalVisible)
-  }
-
   const selectedCategoryState = (category) => {
     setCategorySelected(category)
   }
@@ -105,63 +50,49 @@ export default function App() {
     setItemSelected(id)
   }
 
-  const updatePaidStatus = (id) => {
-    setItemList(itemList.map(item => {
-      if(item.id === id) {
-        return ({
-          ...item,...{paid: !item.paid}
-        })}
-        return item
-    }))
-  }
-
   return (
     <>
-      <StatusBar backgroundColor={colors.container}/>
-      <View style={styles.appContainer}>
+      <StatusBar backgroundColor={colors.container} />
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name='home' component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      {/* <View style={styles.appContainer}>
+        <View style={styles.app}>
           {
             categorySelected
               ? itemSelected
-                ? <ItemContainer 
+                ? <ItemContainer
                   itemSelected={itemSelected}
                   windowWidth={windowWidth}
+                  // modal
+                  modalVisible={modalVisible}
+                  setItemSelected={setItemSelected}
+                  setModalVisible={setModalVisible}
                 />
-                  :<ItemListContainer 
+                  : <ItemListContainer
                       categorySelected={categorySelected}
-                      windowWidth={windowWidth}
                       selectedItemState={selectedItemState}
+                      windowWidth={windowWidth}
+                      // event container
+                      itemList={itemList}
+                      newItem={newItem}
+                      setItemList={setItemList}
+                      setNewItem={setNewItem}
                   />
                 : <Home
                     windowWidth={windowWidth}
                     selectedCategoryState={selectedCategoryState}
                 />
           }
-
-        {/* <CalendarContainer />
-        <EventContainer
-          addItem={addItem}
-          newItem={newItem}
-          onHandleAddAmount={onHandleAddAmount}
-          onHandleAddName={onHandleAddName}
-          windowWidth={windowWidth}
-        />
-        <ItemContainer
-          itemList={itemList}
-          onHandleModal={onHandleModal}
-          windowWidth={windowWidth}
-
-          deleteItem={deleteItem}
-          itemSelected={itemSelected}
-          modalVisible={modalVisible}
-          onHandleUpdateAmount={onHandleUpdateAmount}
-          onHandleUpdateName={onHandleUpdateName}
-          saveItemUpdate={saveItemUpdate}
-          updatePaidStatus={updatePaidStatus}
-        />
-        <MenuContainer
-          windowWidth={windowWidth}
-        /> */}
-      </View>
+        </View>
+        <View style={styles.menu}>
+          <MenuContainer
+            windowWidth={windowWidth}
+          />
+        </View>
+      </View> */}
     </>
   )
 }
@@ -173,4 +104,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flexWrap: 'nowrap',
   },
+  app:{
+    flex: 9,
+  },
+  menu:{
+    maxHeight: 80,
+    flex: 1,
+  }
 })

@@ -1,28 +1,59 @@
 import {
+    Keyboard,
     StyleSheet,
     TextInput,
     View,
 } from 'react-native'
+import uuid from 'react-native-uuid'
 
 import EventButton from './EventButton'
 
 import colors from '../utils/globals/colors'
 
 const EventContainer = ({
-    addItem,
+    itemList,
     newItem,
-    onHandleAddAmount,
-    onHandleAddName,
-    screenWidth,
+    setItemList,
+    setNewItem,
+    windowWidth,
 }) => {
+
+    const addItem = () => {
+        setItemList([...itemList, newItem])
+        setNewItem({
+            id: '',
+            category: '',
+            name: '',
+            amount: '',
+            date: '',
+            paid: '',
+        })
+        Keyboard.dismiss()
+    }
+
+    const onHandleAddAmount = (input) => {
+        setNewItem({...newItem, amount: input})
+    }
+    
+    const onHandleAddName = (input) => {
+        setNewItem({
+            ...newItem,
+            id: uuid.v4(),
+            category: 'IVA',
+            name: input,
+            date: new Date().toLocaleString(),
+            paid: false,
+        })
+    }
+
     return (
-        <View style={[styles.itemHandleContainer, {width: screenWidth - 20}]}>
+        <View style={[styles.itemHandleContainer, {width: windowWidth - 20}]}>
             <TextInput 
                 maxLength={20}
                 onChangeText={onHandleAddName}
                 placeholder='Glosa'
                 placeholderTextColor={colors.text}
-                style={[styles.textInput, {width: screenWidth - 60}]}
+                style={[styles.textInput, {width: windowWidth - 60}]}
                 value={newItem.name}
             />
             <TextInput
@@ -30,12 +61,12 @@ const EventContainer = ({
                 onChangeText={onHandleAddAmount}
                 placeholder='Monto'
                 placeholderTextColor={colors.text}
-                style={[styles.textInput, {width: screenWidth - 60}]}
+                style={[styles.textInput, {width: windowWidth - 60}]}
                 value={newItem.amount}
             />
             <EventButton
                 onPress={addItem}
-                screenWidth={screenWidth}
+                windowWidth={windowWidth}
                 title='Agregar'
             />
         </View>
@@ -46,10 +77,11 @@ export default EventContainer
 
 const styles = StyleSheet.create({
     itemHandleContainer:{
+        alignSelf: 'center',
         backgroundColor: colors.container,
         borderRadius: 16,
         flexDirection: 'column',
-        marginTop: 10,
+        marginTop: 20,
         paddingVertical: 20,
     },
     textInput:{

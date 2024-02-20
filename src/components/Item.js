@@ -8,22 +8,36 @@ import {
 import EventButton from './EventButton'
 import ItemUpdateModal from '../components/ItemUpdateModal'
 
+import itemsData from '../utils/data/itemsData.json'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
 const Item = ({
     item,
-    onHandleModal,
-    updatePaidStatus,
     windowWidth,
     // modal
-    deleteItem,
     itemSelected,
     modalVisible,
-    onHandleUpdateAmount,
-    onHandleUpdateName,
-    saveItemUpdate,
+    setItemSelected,
+    setModalVisible,
 }) => {
+
+    const onHandleModal = (item) => {
+        setItemSelected(item)
+        setModalVisible(!modalVisible)
+    }
+
+    const updatePaidStatus = (id) => {
+        const update = itemsData.map(item => {
+          if(item.id === id) {
+            return ({
+              ...item,...{paid: !item.paid}
+            })}
+            return item
+        })
+        // falta hacer update en archivo
+      }
+
     return (
         <View style={[styles.itemCard, {width: windowWidth - 20}]}>
             <Text style={styles.itemText}>Categoría :    {item.category}</Text>
@@ -42,16 +56,14 @@ const Item = ({
                 windowWidth={windowWidth}
                 title='Editar'
             />
-            {/* <ItemUpdateModal 
-                deleteItem={deleteItem}
+            <ItemUpdateModal 
                 itemSelected={itemSelected}
                 modalVisible={modalVisible}
-                onHandleUpdateAmount={onHandleUpdateAmount}
-                onHandleUpdateName={onHandleUpdateName}
+                setItemSelected={setItemSelected}
+                setModalVisible={setModalVisible}
                 onHandleModal={onHandleModal}
-                saveItemUpdate={saveItemUpdate}
                 windowWidth={windowWidth}
-            /> */}
+            />
         </View>
     )
 }

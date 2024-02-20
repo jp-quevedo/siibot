@@ -7,25 +7,21 @@ import {
 import Header from '../components/Header'
 import Item from '../components/Item'
 
-import items from '../utils/data/items.json'
+import itemsData from '../utils/data/itemsData.json'
 
 const ItemContainer = ({
-    onHandleModal,
+    itemSelected,
     windowWidth,
     // modal
-    deleteItem,
-    itemSelected,
     modalVisible,
-    onHandleUpdateAmount,
-    onHandleUpdateName,
-    saveItemUpdate,
-    updatePaidStatus,
+    setItemSelected,
+    setModalVisible,
 }) => {
 
     const [item, setItem] = useState({})
     useEffect(() => 
         {
-            const itemFound = items.find(item => item.id === itemSelected)
+            const itemFound = itemsData.find(item => item.id === itemSelected)
             setItem(itemFound)
         },
         [itemSelected]
@@ -39,16 +35,12 @@ const ItemContainer = ({
             />
             <Item
                 item={item}
-                onHandleModal={onHandleModal}
-                updatePaidStatus={updatePaidStatus}
                 windowWidth={windowWidth}
                 // modal
-                deleteItem={deleteItem}
                 itemSelected={itemSelected}
                 modalVisible={modalVisible}
-                onHandleUpdateAmount={onHandleUpdateAmount}
-                onHandleUpdateName={onHandleUpdateName}
-                saveItemUpdate={saveItemUpdate}
+                setItemSelected={setItemSelected}
+                setModalVisible={setModalVisible}
             />
         </View>
     )

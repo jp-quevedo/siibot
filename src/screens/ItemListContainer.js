@@ -5,13 +5,25 @@ import {
     View,
 } from 'react-native'
 
+import EventContainer from '../components/EventContainer'
 import Header from '../components/Header'
 import ItemList from '../components/ItemList'
 import SearchBar from '../components/SearchBar'
 
-import items from '../utils/data/items.json'
+import itemsData from '../utils/data/itemsData.json'
 
-const ItemListContainer = ({categorySelected, selectedItemState, windowWidth}) => {
+const ItemListContainer = ({
+    categorySelected,
+    selectedItemState,
+    windowWidth,
+    // event container
+    itemList,
+    newItem,
+    setItemList,
+    setNewItem,
+}) => {
+
+    // búsqueda de item
 
     const [keyWord, setKeyWord] = useState('')
     const [itemFilter, setItemFilter] = useState([])
@@ -22,7 +34,7 @@ const ItemListContainer = ({categorySelected, selectedItemState, windowWidth}) =
 
     useEffect(() => 
         {
-            if (categorySelected) {setItemFilter(items.filter(item => item.category === categorySelected))}
+            if (categorySelected) {setItemFilter(itemsData.filter(item => item.category === categorySelected))}
             if (keyWord) {setItemFilter(itemFilter.filter(item => {
                 const itemName = item.name.toLowerCase()
                 const keyWordInput = keyWord.toLowerCase()
@@ -36,6 +48,13 @@ const ItemListContainer = ({categorySelected, selectedItemState, windowWidth}) =
         <View>
             <Header
                 title={categorySelected}
+                windowWidth={windowWidth}
+            />
+            <EventContainer
+                itemList={itemList}
+                newItem={newItem}
+                setItemList={setItemList}
+                setNewItem={setNewItem}
                 windowWidth={windowWidth}
             />
             <SearchBar
