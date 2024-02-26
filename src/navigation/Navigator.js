@@ -1,44 +1,83 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import {
+    Dimensions,
+    StyleSheet,
+} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import Home from '../screens/Home'
-import ItemContainer from '../screens/ItemContainer'
-import ItemListContainer from '../screens/ItemListContainer'
+import BalanceStack from './BalanceStack'
+import ItemStack from './ItemStack'
+import UserStack from './UserStack'
 
-import Header from '../components/Header'
+import TabBarIcon from '../components/TabBarIcon'
 
-const Stack = createNativeStackNavigator()
+import colors from '../utils/globals/colors'
+
+const Tab = createBottomTabNavigator()
 
 const Navigator = () => {
+
+    const windowWidth = Dimensions.get('window').width
+
     return (
         <NavigationContainer>
-            <Stack.Navigator
-                initialRouteName='Home'
-                screenOptions={({route, navigation}) => {
-                    return {
-                        header: () => {
-                            return (
-                                <Header
-                                    navigation={navigation}
-                                    title={
-                                        route.name === 'Home'
-                                            ? 'Categorías'
-                                            : route.name === 'ItemListContainer'
-                                                ? route.params.categorySelected
-                                                : 'Detalle'
-                                    }
-                                />
-                            )
-                        }
-                    }
+            <Tab.Navigator
+                initialRouteName='ItemStack'
+                screenOptions={{
+                    headerShown: false,
+                    tabBarShowLabel: false,
+                    tabBarStyle: styles.menuContainer,
                 }}
             >
-                <Stack.Screen name='Home' component={Home} />
-                <Stack.Screen name='ItemContainer' component={ItemContainer} />
-                <Stack.Screen name='ItemListContainer' component={ItemListContainer} />
-            </Stack.Navigator>
-      </NavigationContainer>
+                <Tab.Screen
+                    component={ItemStack}
+                    name='ItemStack'
+                    options={{
+                        tabBarIcon: ({focused}) => 
+                            <TabBarIcon
+                                iconName='home'
+                                title='Inicio'
+                                focused={focused}
+                        />
+                    }}
+                />
+                <Tab.Screen
+                    component={BalanceStack}
+                    name='BalanceStack'
+                    options={{
+                        tabBarIcon: ({focused}) => 
+                            <TabBarIcon
+                                iconName='account-balance-wallet'
+                                title='Balance'
+                                focused={focused}
+                        />
+                    }}
+                />
+                <Tab.Screen
+                    component={UserStack}
+                    name='UserStack'
+                    options={{
+                        tabBarIcon: ({focused}) => 
+                            <TabBarIcon
+                                iconName='account-box'
+                                title='Perfil'
+                                focused={focused}
+                        />
+                    }}
+                />
+            </Tab.Navigator>
+        </NavigationContainer>
     )
 }
 
 export default Navigator
+
+const styles = StyleSheet.create({
+    menuContainer:{
+        backgroundColor: colors.container,
+        flexDirection: 'row',
+        height: 80,
+        justifyContent: 'space-evenly',
+        position: 'absolute',
+    },
+})

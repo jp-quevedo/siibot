@@ -6,7 +6,6 @@ import {
 } from 'react-native'
 
 import EventContainer from '../components/EventContainer'
-import Header from '../components/Header'
 import ItemList from '../components/ItemList'
 import SearchBar from '../components/SearchBar'
 

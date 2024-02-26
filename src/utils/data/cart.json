@@ -1,0 +1,15 @@
+{
+    "cart_id": "123abc",
+    "user_id": "456def",
+    "date": "2024-02-23T18:25:43.511Z",
+    "total_price": 789,
+    "status": true,
+    "products": [
+        {
+            "id": "101ghi",
+            "title": "Contabilidad Premium",
+            "description": "Suscripción anual con todos los servicios incluidos y renovación automática.",
+            "price": 111
+        }
+    ]
+}

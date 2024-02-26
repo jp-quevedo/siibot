@@ -1,0 +1,16 @@
+{
+    "user_id": "456def",
+    "name": "Pedro",
+    "age": 20,
+    "email": "mail@mail.com",
+    "join_date": "2024-02-23T18:25:43.511Z",
+    "validation": true,
+    "products": [
+        {
+            "id": "101ghi",
+            "title": "Contabilidad Premium",
+            "description": "Suscripción anual con todos los servicios incluidos y renovación automática.",
+            "price": 111
+        }
+    ]
+}
