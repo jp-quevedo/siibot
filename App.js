@@ -1,4 +1,6 @@
-import { StatusBar } from 'react-native'
+import {
+  StatusBar,
+} from 'react-native'
 import { useFonts } from 'expo-font'
 
 import Navigator from './src/navigation/Navigator'
@@ -16,7 +18,7 @@ export default function App() {
   return (
     <>
       <StatusBar backgroundColor={colors.container} />
-      <Navigator backgroundColor={colors.background} />
-    </> 
+      <Navigator />
+    </>
   )
 }

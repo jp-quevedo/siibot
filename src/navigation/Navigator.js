@@ -2,10 +2,11 @@ import {
     Dimensions,
     StyleSheet,
 } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import BalanceStack from './BalanceStack'
+import HistoryStack from './HistoryStack'
 import ItemStack from './ItemStack'
 import UserStack from './UserStack'
 
@@ -14,13 +15,19 @@ import TabBarIcon from '../components/TabBarIcon'
 import colors from '../utils/globals/colors'
 
 const Tab = createBottomTabNavigator()
+const MyTheme = {
+    ...DefaultTheme,
+    colors: {
+        background: colors.background,
+    },
+  };
 
 const Navigator = () => {
 
     const windowWidth = Dimensions.get('window').width
 
     return (
-        <NavigationContainer>
+        <NavigationContainer theme={MyTheme}>
             <Tab.Navigator
                 initialRouteName='ItemStack'
                 screenOptions={{
@@ -49,6 +56,18 @@ const Navigator = () => {
                             <TabBarIcon
                                 iconName='account-balance-wallet'
                                 title='Balance'
+                                focused={focused}
+                        />
+                    }}
+                />
+                <Tab.Screen
+                    component={HistoryStack}
+                    name='HistoryStack'
+                    options={{
+                        tabBarIcon: ({focused}) => 
+                            <TabBarIcon
+                                iconName='history'
+                                title='Historial'
                                 focused={focused}
                         />
                     }}

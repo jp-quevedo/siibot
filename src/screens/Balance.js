@@ -62,6 +62,6 @@ const styles = StyleSheet.create({
     totalBalance:{
         color: colors.text,
         fontFamily: fonts.bold,
-        fontSize: 16,
+        fontSize: 18,
     },
 })
