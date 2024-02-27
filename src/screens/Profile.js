@@ -1,13 +1,11 @@
 import {
     Dimensions,
-    FlatList,
     StyleSheet,
     Text,
     View,
 } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
-import CartItem from '../components/CartItem'
 import EventButton from '../components/EventButton'
 
 import user from '../utils/data/user.json'
@@ -27,7 +25,7 @@ const Profile = ({navigation}) => {
                 title='Datos Personales'
             />
             <EventButton
-                onPress={() => navigation.navigate('Settings')}
+                // onPress={}
                 title='Preferencias'
             />
             <EventButton

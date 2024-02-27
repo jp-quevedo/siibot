@@ -4,21 +4,15 @@ import {
     StyleSheet,
     View,
 } from 'react-native'
+import { useSelector } from 'react-redux'
 
 import EventContainer from '../components/EventContainer'
 import ItemList from '../components/ItemList'
 import SearchBar from '../components/SearchBar'
 
-import itemsData from '../utils/data/itemsData.json'
-
 const ItemListContainer = ({
     navigation,
-    route,
 }) => {
-
-    const {categorySelected} = route.params
-
-    // búsqueda de item
 
     const [keyWord, setKeyWord] = useState('')
     const [itemFilter, setItemFilter] = useState([])
@@ -26,17 +20,13 @@ const ItemListContainer = ({
         setKeyWord(text)
     }
 
-    useEffect(() => 
-        {
-            if (categorySelected) {setItemFilter(itemsData.filter(item => item.category === categorySelected))}
-            if (keyWord) {setItemFilter(itemFilter.filter(item => {
-                const itemName = item.name.toLowerCase()
-                const keyWordInput = keyWord.toLowerCase()
-                return itemName.includes(keyWordInput)
-            }))}
-        },
-        [categorySelected, keyWord]
-    )
+    const itemsFilterByCategory = useSelector(state => state.itemReducer.value.itemsFilterByCategory)
+    useEffect(() => {
+        const itemsFilter = itemsFilterByCategory.filter((item) =>
+            item.title.toLowerCase().includes(keyWord) || item.title.toUpperCase().includes(keyWord)
+        )
+        setItemFilter(itemsFilter)
+    }, [itemsFilterByCategory, keyWord])
 
     return (
         <View>

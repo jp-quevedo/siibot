@@ -4,7 +4,10 @@ import {
     StyleSheet,
     Text,
 } from 'react-native'
+import { useDispatch } from 'react-redux'
 import { MaterialIcons } from '@expo/vector-icons'
+
+import { setItemIdSelected } from '../features/item/itemSlice'
 
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
@@ -12,15 +15,20 @@ import fonts from '../utils/globals/fonts'
 const ItemList = ({item, navigation}) => {
 
     const windowWidth = Dimensions.get('window').width
+
+    const dispatch = useDispatch()
     
     return (
         <Pressable
-            onPress={() => navigation.navigate('ItemContainer', {itemId: item.id})}
+            onPress={() => {
+                dispatch(setItemIdSelected(item))
+                navigation.navigate('ItemContainer', {itemId: item.id})
+            }}
             style={[styles.itemListContainer, {width: windowWidth - 20}]}
             title='Detalle'
         >
             <MaterialIcons name='info-outline' size={30} color='white' style={styles.itemIcon}/>
-            <Text style={styles.itemName}>{item.name}</Text>
+            <Text style={styles.itemTitle}>{item.title}</Text>
         </Pressable>
     )
 }
@@ -36,7 +44,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingVertical: 20,
     },
-    itemName:{
+    itemTitle:{
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 16,

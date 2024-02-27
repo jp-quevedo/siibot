@@ -2,7 +2,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Cart from '../screens/Cart'
 import Profile from '../screens/Profile'
-import Settings from '../screens/Settings'
 
 import Header from '../components/Header'
 
@@ -33,7 +32,6 @@ const UserStack = () => {
         >
             <Stack.Screen name='Profile' component={Profile} />
             <Stack.Screen name='Cart' component={Cart} />
-            <Stack.Screen name='Settings' component={Settings} />
         </Stack.Navigator>
     )
 }

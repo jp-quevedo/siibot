@@ -2,7 +2,7 @@
     {
         "id": 1,
         "category": "IVA",
-        "name": "Compra Camion",
+        "title": "Compra Camion",
         "amount": 50000000,
         "date": "fecha",
         "paid": false
@@ -10,7 +10,7 @@
     {
         "id": 2,
         "category": "IVA",
-        "name": "Compra Auto",
+        "title": "Compra Auto",
         "amount": 9000000,
         "date": "fecha",
         "paid": true

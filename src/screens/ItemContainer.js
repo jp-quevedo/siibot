@@ -3,19 +3,17 @@ import {
     StyleSheet,
     View,
 } from 'react-native'
+import { useSelector } from 'react-redux'
 
 import Item from '../components/Item'
 
-import itemsData from '../utils/data/itemsData.json'
+const ItemContainer = () => {
 
-const ItemContainer = ({route}) => {
-
-    const {itemId} = route.params
     const [item, setItem] = useState({})
+    const itemSelected = useSelector(state => state.itemReducer.value.itemIdSelected)
     useEffect(() => {
-        const itemFound = itemsData.find(item => item.id === itemId)
-        setItem(itemFound)
-    },[itemId])
+        setItem(itemSelected)
+    }, [itemSelected])
 
     return (
         <View style={styles.itemContainer}>

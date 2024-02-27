@@ -2,6 +2,9 @@ import {
   StatusBar,
 } from 'react-native'
 import { useFonts } from 'expo-font'
+import { Provider } from 'react-redux'
+
+import { store } from './src/app/store'
 
 import Navigator from './src/navigation/Navigator'
 
@@ -18,7 +21,13 @@ export default function App() {
   return (
     <>
       <StatusBar backgroundColor={colors.container} />
-      <Navigator />
+      <Provider store={store}>
+        <Navigator />
+      </Provider>
     </>
   )
 }
+
+// ruta cart: perfil > plan
+// redux implementado para eventos (items) creados por el usuario (lógica de creación pendiente de actualizar según persistencia)
+// ruta balance reutiliza componente de itemlist el cual aplica filtro por categoría

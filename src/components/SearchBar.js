@@ -24,7 +24,7 @@ const SearchBar = ({keyWordHandler}) => {
     const search = () => {
         const expression = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
         if(expression.test(input)){
-            setError('Characters not supported for searching')
+            setError('Buscar exclusivamente con letras y/o números.')
             return
         }
         keyWordHandler(input)

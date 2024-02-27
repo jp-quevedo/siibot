@@ -12,7 +12,6 @@ import ItemUpdateModal from '../components/ItemUpdateModal'
 
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
-import itemsData from '../utils/data/itemsData.json'
 
 // falta corregir lógica de modal
 const Item = ({item}) => {
@@ -40,18 +39,18 @@ const Item = ({item}) => {
     return (
         <View style={[styles.itemCard, {width: windowWidth - 20}]}>
             <Text style={styles.itemText}>Categoría :    {item.category}</Text>
-            <Text style={styles.itemText}>Glosa :    {item.name}</Text>
+            <Text style={styles.itemText}>Glosa :    {item.title}</Text>
             <Text style={styles.itemText}>Monto :    {item.amount}</Text>
             <Text style={styles.itemText}>Fecha :    {item.date}</Text>
             <View style={styles.switchContainer}>
                 <Text style={styles.itemText}>Estado de Pago: </Text>
                 <Switch
                     value={item.paid}
-                    onValueChange={() => updatePaidStatus(item.id)}
+                    // onValueChange={() => updatePaidStatus(item.id)}
                 />
             </View>
             <EventButton
-                onPress={() => onHandleModal(item)}
+                // onPress={() => onHandleModal(item)}
                 title='Editar'
             />
             {/* <ItemUpdateModal 
