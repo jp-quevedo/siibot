@@ -8,7 +8,6 @@ import {
 import uuid from 'react-native-uuid'
 
 import EventButton from './EventButton'
-
 import colors from '../utils/globals/colors'
 
 // falta corregir lógica de eventos

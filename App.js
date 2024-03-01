@@ -4,12 +4,10 @@ import {
 import { useFonts } from 'expo-font'
 import { Provider } from 'react-redux'
 
-import { store } from './src/app/store'
-
 import Navigator from './src/navigation/Navigator'
-
-import { fontCollection } from './src/utils/globals/fonts'
 import colors from './src/utils/globals/colors'
+import { fontCollection } from './src/utils/globals/fonts'
+import { store } from './src/app/store'
 
 export default function App() {
 
@@ -31,3 +29,5 @@ export default function App() {
 // ruta cart: perfil > plan
 // redux implementado para eventos (items) creados por el usuario (lógica de creación pendiente de actualizar según persistencia)
 // ruta balance reutiliza componente de itemlist el cual aplica filtro por categoría
+
+// trabajar como cart la lógica de eventos crud por cliente 

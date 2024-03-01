@@ -5,11 +5,10 @@ import {
     Text,
     View,
 } from 'react-native'
-import { useSelector } from 'react-redux'
 
+import { useGetItemsQuery } from '../app/services/events'
 import ItemList from '../components/ItemList'
 import EventButton from '../components/EventButton'
-
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
@@ -17,12 +16,12 @@ const Balance = ({navigation}) => {
 
     const windowWidth = Dimensions.get('window').width
 
-    const itemsFilterByCategory = useSelector(state => state.itemReducer.value.itemsFilterByCategory)
+    const { data: items } = useGetItemsQuery() // podemos agregar los is...
 
     return (
         <View style={[styles.balanceContainer, {width: windowWidth - 20}]}>
             <FlatList
-                data={itemsFilterByCategory}
+                data={items}
                 keyExtractor={item => item.id}
                 renderItem={({item}) =>
                     <ItemList

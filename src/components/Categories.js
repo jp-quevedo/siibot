@@ -5,7 +5,6 @@ import {
 import { useDispatch } from 'react-redux'
 
 import { setCategorySelected } from '../features/item/itemSlice'
-
 import EventButton from './EventButton'
 
 const Categories = ({

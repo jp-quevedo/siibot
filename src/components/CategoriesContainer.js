@@ -4,17 +4,16 @@ import {
     StyleSheet,
     View,
 } from 'react-native'
-import { useSelector } from 'react-redux'
 
 import Categories from './Categories'
-
 import colors from '../utils/globals/colors'
+import { useGetCategoriesQuery } from '../app/services/events'
 
 const CategoriesContainer = ({navigation}) => {
 
     const windowWidth = Dimensions.get('window').width
-    const categories = useSelector(state => state.itemReducer.value.categories)
-    
+    const { data: categories } = useGetCategoriesQuery()
+
     return (
         <View style={[styles.categoriesContainer, {width: windowWidth - 20}]}>
             <FlatList

@@ -7,7 +7,6 @@ import {
 import { MaterialIcons } from '@expo/vector-icons'
 
 import EventButton from '../components/EventButton'
-
 import user from '../utils/data/user.json'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'

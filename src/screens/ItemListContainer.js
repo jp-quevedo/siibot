@@ -14,19 +14,16 @@ const ItemListContainer = ({
     navigation,
 }) => {
 
+    const [itemFilter, setItemFilter] = useState([])    
     const [keyWord, setKeyWord] = useState('')
-    const [itemFilter, setItemFilter] = useState([])
-    const keyWordHandler = (text) => {
-        setKeyWord(text)
-    }
-
-    const itemsFilterByCategory = useSelector(state => state.itemReducer.value.itemsFilterByCategory)
+    const keyWordHandler = (text) => {setKeyWord(text)}
     useEffect(() => {
         const itemsFilter = itemsFilterByCategory.filter((item) =>
             item.title.toLowerCase().includes(keyWord) || item.title.toUpperCase().includes(keyWord)
         )
         setItemFilter(itemsFilter)
     }, [itemsFilterByCategory, keyWord])
+    const itemsFilterByCategory = useSelector(state => state.itemReducer.value.itemsFilterByCategory)
 
     return (
         <View>

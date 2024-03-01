@@ -7,7 +7,6 @@ import {
 } from 'react-native'
 
 import EventButton from './EventButton'
-
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 

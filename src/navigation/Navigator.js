@@ -9,9 +9,7 @@ import BalanceStack from './BalanceStack'
 import HistoryStack from './HistoryStack'
 import ItemStack from './ItemStack'
 import UserStack from './UserStack'
-
 import TabBarIcon from '../components/TabBarIcon'
-
 import colors from '../utils/globals/colors'
 
 const Tab = createBottomTabNavigator()

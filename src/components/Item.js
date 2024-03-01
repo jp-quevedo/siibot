@@ -9,7 +9,6 @@ import {
 
 import EventButton from './EventButton'
 import ItemUpdateModal from '../components/ItemUpdateModal'
-
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 

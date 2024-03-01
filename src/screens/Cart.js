@@ -8,7 +8,6 @@ import {
 
 import CartItem from '../components/CartItem'
 import EventButton from '../components/EventButton'
-
 import cart from '../utils/data/cart.json'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'

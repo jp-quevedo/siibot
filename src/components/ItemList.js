@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux'
 import { MaterialIcons } from '@expo/vector-icons'
 
 import { setItemIdSelected } from '../features/item/itemSlice'
-
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
