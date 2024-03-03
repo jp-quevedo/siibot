@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import {
     Dimensions,
     Keyboard,
@@ -6,9 +6,9 @@ import {
     StyleSheet,
     Text,
     TextInput,
-    View,
+    View
 } from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons'
+import {MaterialIcons} from '@expo/vector-icons'
 
 import colors from '../utils/globals/colors'
 
@@ -74,22 +74,22 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'center',
         marginTop: 20,
-        paddingVertical: 20,
+        paddingVertical: 20
     },
     textInput:{
         alignSelf: 'center',
         backgroundColor: colors.input,
         borderColor: colors.input,
         borderRadius: 32,
-        padding: 10,
+        padding: 10
     },
     errorText:{
         alignSelf: 'center',
         color: colors.error,
         margin: 0,
-        paddingTop: 15,
+        paddingTop: 15
     },
     button:{
-        paddingHorizontal: 10,
-    },
+        paddingHorizontal: 10
+    }
 })

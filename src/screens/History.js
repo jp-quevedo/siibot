@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import {
     Dimensions,
     StyleSheet,
-    View,
+    View
 } from 'react-native'
 
 import SearchBar from '../components/SearchBar'
@@ -30,6 +30,6 @@ export default History
 const styles = StyleSheet.create({
     historyContainer:{
         alignSelf: 'center',
-        justifyContent: 'center',
-    },
+        justifyContent: 'center'
+    }
 })

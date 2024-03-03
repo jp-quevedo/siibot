@@ -1,15 +1,15 @@
 import {
     StyleSheet,
-    View,
+    View
 } from 'react-native'
-import { useDispatch } from 'react-redux'
+import {useDispatch} from 'react-redux'
 
-import { setCategorySelected } from '../features/item/itemSlice'
+import {setCategorySelected} from '../features/item/itemSlice'
 import EventButton from './EventButton'
 
 const Categories = ({
     item,
-    navigation,
+    navigation
 }) => {
 
     const dispatch = useDispatch()
@@ -31,6 +31,6 @@ export default Categories
 
 const styles = StyleSheet.create({
     categories:{
-        marginBottom: 20,
+        marginBottom: 20
     },
 })

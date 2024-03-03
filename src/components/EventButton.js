@@ -2,7 +2,7 @@ import {
     Dimensions,
     Pressable,
     StyleSheet,
-    Text,
+    Text
 } from 'react-native'
 
 import colors from '../utils/globals/colors'
@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 16,
-        textAlign: 'center',
-    },
+        textAlign: 'center'
+    }
 })

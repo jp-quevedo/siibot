@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 import {
     StyleSheet,
-    View,
+    View
 } from 'react-native'
-import { useSelector } from 'react-redux'
+import {useSelector} from 'react-redux'
 
 import Item from '../components/Item'
 
@@ -30,5 +30,5 @@ const styles = StyleSheet.create({
     itemContainer:{
         alignItems: 'center',
         gap: 20
-    },
+    }
 })

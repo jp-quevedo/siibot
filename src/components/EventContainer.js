@@ -3,7 +3,7 @@ import {
     Keyboard,
     StyleSheet,
     TextInput,
-    View,
+    View
 } from 'react-native'
 import uuid from 'react-native-uuid'
 
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         flexDirection: 'column',
         marginTop: 20,
-        paddingVertical: 20,
+        paddingVertical: 20
     },
     textInput:{
         alignSelf: 'center',
@@ -95,6 +95,6 @@ const styles = StyleSheet.create({
         borderColor: colors.input,
         borderRadius: 8,
         marginBottom: 10,
-        padding: 10,
-    },
+        padding: 10
+    }
 })

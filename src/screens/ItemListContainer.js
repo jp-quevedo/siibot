@@ -1,21 +1,22 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 import {
     FlatList,
     StyleSheet,
-    View,
+    View
 } from 'react-native'
-import { useSelector } from 'react-redux'
+import {useSelector} from 'react-redux'
 
 import EventContainer from '../components/EventContainer'
 import ItemList from '../components/ItemList'
 import SearchBar from '../components/SearchBar'
 
 const ItemListContainer = ({
-    navigation,
+    navigation
 }) => {
 
     const [itemFilter, setItemFilter] = useState([])    
     const [keyWord, setKeyWord] = useState('')
+    
     const keyWordHandler = (text) => {setKeyWord(text)}
     useEffect(() => {
         const itemsFilter = itemsFilterByCategory.filter((item) =>
@@ -51,6 +52,6 @@ export default ItemListContainer
 
 const styles = StyleSheet.create({
     itemByCategory:{
-        alignItems: 'center',
-    },
+        alignItems: 'center'
+    }
 })

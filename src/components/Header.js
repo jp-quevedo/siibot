@@ -3,9 +3,9 @@ import {
     Pressable,
     StyleSheet,
     Text,
-    View,
+    View
 } from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons'
+import {MaterialIcons} from '@expo/vector-icons'
 
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
@@ -36,18 +36,18 @@ const styles = StyleSheet.create({
     headerContainer:{
         backgroundColor: colors.container,
         height: 60,
-        position: 'relative',
+        position: 'relative'
     },
     headerTitle:{
         alignSelf: 'center',
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 20,
-        top: 12,
+        top: 12
     },
     itemIcon:{
         bottom: 10,
         left: 10,
-        position: 'absolute',
+        position: 'absolute'
     }
 })

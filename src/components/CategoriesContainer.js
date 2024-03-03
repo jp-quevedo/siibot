@@ -2,17 +2,17 @@ import {
     Dimensions,
     FlatList,
     StyleSheet,
-    View,
+    View
 } from 'react-native'
 
 import Categories from './Categories'
 import colors from '../utils/globals/colors'
-import { useGetCategoriesQuery } from '../app/services/events'
+import {useGetCategoriesQuery} from '../app/services/events'
 
 const CategoriesContainer = ({navigation}) => {
 
     const windowWidth = Dimensions.get('window').width
-    const { data: categories } = useGetCategoriesQuery()
+    const {data: categories} = useGetCategoriesQuery()
 
     return (
         <View style={[styles.categoriesContainer, {width: windowWidth - 20}]}>
@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         justifyContent: 'center',
         marginTop: 20,
-        paddingTop: 20,
-    },
+        paddingTop: 20
+    }
 })

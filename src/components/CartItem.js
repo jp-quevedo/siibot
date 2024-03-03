@@ -1,9 +1,9 @@
 import {
     StyleSheet,
     Text,
-    View,
+    View
 } from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons'
+import {MaterialIcons} from '@expo/vector-icons'
 
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
@@ -29,15 +29,15 @@ const styles = StyleSheet.create({
         gap: 10,
         height: 'auto',
         marginTop: 20,
-        paddingVertical: 20,
+        paddingVertical: 20
     },
     cartItemText:{
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 16,
-        paddingHorizontal: 20,
+        paddingHorizontal: 20
     },
     cartItemIcon:{
-        alignSelf: 'center',
-    },
+        alignSelf: 'center'
+    }
 })

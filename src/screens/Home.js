@@ -1,6 +1,6 @@
 import {
     StyleSheet,
-    View,
+    View
 } from 'react-native'
 
 import CategoriesContainer from '../components/CategoriesContainer'
@@ -19,6 +19,6 @@ export default Home
 
 const styles = StyleSheet.create({
     home:{
-        alignItems: 'center',
-    },
+        alignItems: 'center'
+    }
 })

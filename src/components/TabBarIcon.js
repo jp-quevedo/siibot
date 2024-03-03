@@ -1,9 +1,9 @@
 import {
     StyleSheet,
     Text,
-    View,
+    View
 } from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons'
+import {MaterialIcons} from '@expo/vector-icons'
 
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
@@ -21,13 +21,13 @@ export default TabBarIcon
 
 const styles = StyleSheet.create({
     tabItemIcon:{
-        alignSelf: 'center',
+        alignSelf: 'center'
     },
     itemTitle:{
         alignSelf: 'center',
         color: colors.button,
         fontFamily: fonts.regular,
-        fontSize: 14,
+        fontSize: 14
     },
     titleFocus:{
         color: colors.text

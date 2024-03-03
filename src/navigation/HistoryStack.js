@@ -1,4 +1,4 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
 import History from '../screens/History'
 import Header from '../components/Header'

@@ -3,10 +3,10 @@ import {
     FlatList,
     StyleSheet,
     Text,
-    View,
+    View
 } from 'react-native'
 
-import { useGetItemsQuery } from '../app/services/events'
+import {useGetItemsQuery} from '../app/services/events'
 import ItemList from '../components/ItemList'
 import EventButton from '../components/EventButton'
 import colors from '../utils/globals/colors'
@@ -16,7 +16,7 @@ const Balance = ({navigation}) => {
 
     const windowWidth = Dimensions.get('window').width
 
-    const { data: items } = useGetItemsQuery() // podemos agregar los is...
+    const {data: items} = useGetItemsQuery() // podemos agregar los is...
 
     return (
         <View style={[styles.balanceContainer, {width: windowWidth - 20}]}>
@@ -48,7 +48,7 @@ export default Balance
 const styles = StyleSheet.create({
     balanceContainer:{
         alignSelf: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     summaryContainer:{
         alignItems: 'center',
@@ -58,11 +58,11 @@ const styles = StyleSheet.create({
         gap: 10,
         height: 'auto',
         marginTop: 20,
-        paddingVertical: 20,
+        paddingVertical: 20
     },
     totalBalance:{
         color: colors.text,
         fontFamily: fonts.bold,
-        fontSize: 18,
-    },
+        fontSize: 18
+    }
 })

@@ -1,8 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+
+import {baseUrl} from '../database'
 
 export const eventsApi = createApi({
     reducerPath: 'eventsApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://siibot-103f3-default-rtdb.firebaseio.com'}),
+    baseQuery: fetchBaseQuery({baseUrl}),
     endpoints: (builder) => ({
         getCategories: builder.query({
             query: () => '/categories.json'
@@ -23,4 +25,4 @@ export const eventsApi = createApi({
     })
 })
 
-export const { useGetCategoriesQuery, useGetItemsQuery ,useGetItemsByCategoryQuery, useGetItemByIdQuery } = eventsApi
+export const {useGetCategoriesQuery, useGetItemsQuery ,useGetItemsByCategoryQuery, useGetItemByIdQuery} = eventsApi

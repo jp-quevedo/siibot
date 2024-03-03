@@ -3,7 +3,7 @@ import {
     Modal,
     StyleSheet,
     TextInput,
-    View,
+    View
 } from 'react-native'
 
 import EventButton from './EventButton'
@@ -94,19 +94,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: 'auto',
         marginTop: 10,
-        paddingVertical: 20,
+        paddingVertical: 20
     },
     itemText:{
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 16,
-        paddingHorizontal: 20,
+        paddingHorizontal: 20
     },
     textInput:{
         alignSelf: 'center',
         backgroundColor: colors.input,
         borderColor: colors.input,
         borderRadius: 8,
-        padding: 10,
-    },
+        padding: 10
+    }
 })

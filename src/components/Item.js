@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import {
     Dimensions,
     StyleSheet,
     Switch,
     Text,
-    View,
+    View
 } from 'react-native'
 
 import EventButton from './EventButton'
@@ -73,18 +73,18 @@ const styles = StyleSheet.create({
         gap: 10,
         height: 'auto',
         marginTop: 20,
-        paddingVertical: 20,
+        paddingVertical: 20
     },
     itemText:{
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 16,
-        paddingHorizontal: 20,
+        paddingHorizontal: 20
     },
     switchContainer:{
         alignItems: 'center',
         alignSelf: 'flex-start',
         flexDirection: 'row',
-        flexWrap: 'nowrap',
-    },
+        flexWrap: 'nowrap'
+    }
 })

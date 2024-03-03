@@ -1,0 +1,99 @@
+import {useState} from 'react'
+import {useDispatch} from 'react-redux'
+import {
+    Dimensions,
+    Keyboard,
+    StyleSheet,
+    Text,
+    View
+} from 'react-native'
+
+import {useLoginMutation} from '../app/services/auth'
+import {setUser} from '../features/auth/authSlice'
+import EventButton from '../components/EventButton'
+import InputForm from '../components/InputForm'
+import colors from '../utils/globals/colors'
+
+const Login = ({navigation}) => {
+
+    const windowWidth = Dimensions.get('window').width
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [triggerLogin] = useLoginMutation()
+    const [warning, setWarning] = useState('')
+
+    const emailValidation = (input) => {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+        if (!emailRegex.test(input)) {
+            setWarning('Email incorrecto.')
+            return
+        }
+        setError('')
+        Keyboard.dismiss()
+    }
+
+    const dispatch = useDispatch()
+    const onSubmit = async () => {
+        const {data} = await triggerLogin({email, password})
+        dispatch(setUser({email: data.email, idToken: data.idToken}))
+    }
+
+    return (
+        <View style={[styles.loginContainer, {width: windowWidth - 20}]}>
+            <Text style={styles.optionText}>Ingresa tus credenciales</Text>
+            <InputForm
+                label='Email'
+                value={email}
+                onChangeText={(t) => setEmail(t)}
+                sensitiveInfo={false}
+                warning=''
+            />
+            <InputForm
+                label='Contraseña'
+                value={password}
+                onChangeText={(t) => setPassword(t)}
+                sensitiveInfo={true}
+                warning=''
+            />
+            <EventButton
+                onPress={onSubmit}
+                title='Iniciar sesión'
+            />
+            <Text style={styles.optionText}>¿Olvidaste tu contraseña?</Text>
+            <EventButton
+                // onPress={() => {
+                //     navigation.navigate('Signup')
+                // }}
+                title='Recuperar contraseña'
+            />
+            <Text style={styles.optionText}>¿No tienes una cuenta?</Text>
+            <EventButton
+                onPress={() => {
+                    navigation.navigate('Signup')
+                }}
+                title='Registrarse'
+            />
+        </View>
+    )
+}
+
+export default Login
+
+const styles = StyleSheet.create({
+    loginContainer:{
+        alignSelf: 'center',
+        backgroundColor: colors.container,
+        borderRadius: 16,
+        flexDirection: 'column',
+        gap: 10,
+        marginTop: 20,
+        paddingVertical: 20
+    },
+    optionText:{
+        alignSelf: 'center',
+        color: colors.text,
+        fontSize: 16,
+        paddingVertical: 10
+    }
+})

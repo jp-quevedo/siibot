@@ -2,9 +2,9 @@ import {
     Dimensions,
     StyleSheet,
     Text,
-    View,
+    View
 } from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons'
+import {MaterialIcons} from '@expo/vector-icons'
 
 import EventButton from '../components/EventButton'
 import user from '../utils/data/user.json'
@@ -51,14 +51,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 20,
         padding: 20,
-        paddingTop: 0,
+        paddingTop: 0
     },
     userIcon:{
-        alignSelf: 'center',
+        alignSelf: 'center'
     },
     userName:{
         color: colors.text,
         fontFamily: fonts.bold,
-        fontSize: 22,
-    },
+        fontSize: 22
+    }
 })

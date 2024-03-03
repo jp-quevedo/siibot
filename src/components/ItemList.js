@@ -2,12 +2,12 @@ import {
     Dimensions,
     Pressable,
     StyleSheet,
-    Text,
+    Text
 } from 'react-native'
-import { useDispatch } from 'react-redux'
-import { MaterialIcons } from '@expo/vector-icons'
+import {useDispatch} from 'react-redux'
+import {MaterialIcons} from '@expo/vector-icons'
 
-import { setItemIdSelected } from '../features/item/itemSlice'
+import {setItemIdSelected} from '../features/item/itemSlice'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
@@ -41,14 +41,14 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         flexDirection: 'row',
         marginTop: 20,
-        paddingVertical: 20,
+        paddingVertical: 20
     },
     itemTitle:{
         color: colors.text,
         fontFamily: fonts.regular,
-        fontSize: 16,
+        fontSize: 16
     },
     itemIcon:{
-        marginHorizontal: 20,
-    },
+        marginHorizontal: 20
+    }
 })

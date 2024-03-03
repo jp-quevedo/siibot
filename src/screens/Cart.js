@@ -3,7 +3,7 @@ import {
     FlatList,
     StyleSheet,
     Text,
-    View,
+    View
 } from 'react-native'
 
 import CartItem from '../components/CartItem'
@@ -41,7 +41,7 @@ export default Cart
 const styles = StyleSheet.create({
     cartContainer:{
         alignSelf: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     purchaseContainer:{
         alignItems: 'center',
@@ -51,11 +51,11 @@ const styles = StyleSheet.create({
         gap: 10,
         height: 'auto',
         marginTop: 20,
-        paddingVertical: 20,
+        paddingVertical: 20
     },
     purchaseTotal:{
         color: colors.text,
         fontFamily: fonts.bold,
-        fontSize: 16,
-    },
+        fontSize: 16
+    }
 })
