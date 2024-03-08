@@ -26,7 +26,7 @@ const HistoryStack = () => {
                 }
             }}
         >
-            <Stack.Screen name = 'History' componenent = { History } />
+            <Stack.Screen name = 'History' component = { History } />
         </Stack.Navigator>
     )
 }

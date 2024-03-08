@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux'
 import {
     Dimensions,
     Keyboard,
+    ScrollView,
     StyleSheet,
-    Text,
-    View
+    Text
 } from 'react-native'
 
 import { useLoginMutation } from '../app/services/auth'
@@ -22,11 +22,13 @@ const Login = ({ navigation }) => {
     const [ password, setPassword ] = useState('')
     const [ emailError, setEmailError ] = useState('')
     const [ passwordError, setPasswordError ] = useState('')
-    const dispatch = useDispatch()
     const [ triggerLogin ] = useLoginMutation()
+    const dispatch = useDispatch()
+
     const onSubmit = async () => {
         try {
-            loginSchema.validateSync({ email, password })
+            Keyboard.dismiss()
+            // loginSchema.validateSync({ email, password })
             const { data } = await triggerLogin({ email, password })
             dispatch(setUser({ email: data.email, idToken: data.idToken, localId: data.localId }))
         } catch (error) {
@@ -46,7 +48,7 @@ const Login = ({ navigation }) => {
     }
 
     return (
-        <View style = {[ styles.loginContainer, { width: windowWidth - 20 } ]}>
+        <ScrollView style = {[ styles.loginContainer, { width: windowWidth - 20 } ]}>
             <Text style = { styles.optionText }>Ingresa tus credenciales</Text>
             <InputForm
                 label = 'Email'
@@ -80,7 +82,7 @@ const Login = ({ navigation }) => {
                 }}
                 title = 'Registrarse'
             />
-        </View>
+        </ScrollView>
     )
 }
 

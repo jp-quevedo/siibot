@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import {
     Dimensions,
+    Keyboard,
+    ScrollView,
     StyleSheet,
-    Text,
-    View
+    Text
 } from 'react-native'
 
 import { useSignupMutation } from '../app/services/auth'
@@ -34,13 +35,14 @@ const Signup = ({ navigation }) => {
 
     const [ triggerSignup ] = useSignupMutation()
     const dispatch = useDispatch()
-
     const onSubmit = async () => {
         try {
-            signupSchema.validateSync({ name, dni, address, phoneNumber, email, password })
+            Keyboard.dismiss()
+            // signupSchema.validateSync({ name, dni, address, phoneNumber, email, password })
             const { data } = await triggerSignup({ email, password })
-            dispatch(setUser({ email: data.email, idToken: data.idToken, localId: data.localId }))
+            dispatch(setUser({ email: data.email, idToken: data.idToken, password: data.password }))
         } catch (error) {
+            console.log('test', error)
             setNameError('')
             setDniError('')
             setAddressError('')
@@ -73,7 +75,7 @@ const Signup = ({ navigation }) => {
     }
 
     return (
-        <View style = {[ styles.signupContainer, { width: windowWidth - 20 } ]}>
+        <ScrollView style = {[ styles.signupContainer, { width: windowWidth - 20 } ]}>
             <Text style = { styles.optionText }>Registra tus credenciales</Text>
             <InputForm
                 label = 'Nombre'
@@ -128,7 +130,7 @@ const Signup = ({ navigation }) => {
                 }}
                 title = 'Iniciar sesión'
             />
-        </View>
+        </ScrollView>
     )
 }
 
