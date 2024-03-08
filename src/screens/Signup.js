@@ -40,7 +40,7 @@ const Signup = ({ navigation }) => {
             Keyboard.dismiss()
             // signupSchema.validateSync({ name, dni, address, phoneNumber, email, password })
             const { data } = await triggerSignup({ email, password })
-            dispatch(setUser({ email: data.email, idToken: data.idToken, password: data.password }))
+            dispatch(setUser({ email: data.email, idToken: data.idToken }))
         } catch (error) {
             console.log('test', error)
             setNameError('')
