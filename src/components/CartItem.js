@@ -3,18 +3,18 @@ import {
     Text,
     View
 } from 'react-native'
-import {MaterialIcons} from '@expo/vector-icons'
+import { MaterialIcons } from '@expo/vector-icons'
 
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const CartItem = ({item}) => {
+const CartItem = ({ item }) => {
     return (
-        <View style={styles.cartItemCard}>
-            <Text style={styles.cartItemText}>Suscripción: {item.title}</Text>
-            <Text style={styles.cartItemText}>Descripción: {item.description}</Text>
-            <Text style={styles.cartItemText}>Precio: $ {item.price}</Text>
-            <MaterialIcons name='delete' size={40} style={styles.cartItemIcon} color={colors.text} />
+        <View style = { styles.cartItemCard }>
+            <Text style = { styles.cartItemText }>Suscripción: { item.title }</Text>
+            <Text style = { styles.cartItemText }>Descripción: { item.description }</Text>
+            <Text style = { styles.cartItemText }>Precio: $ { item.price }</Text>
+            <MaterialIcons name = 'delete' size = { 40 } style = { styles.cartItemIcon } color = { colors.text } />
         </View>
     )
 }
@@ -22,7 +22,7 @@ const CartItem = ({item}) => {
 export default CartItem
 
 const styles = StyleSheet.create({
-    cartItemCard:{
+    cartItemCard: {
         backgroundColor: colors.container,
         borderColor: colors.container,
         borderRadius: 16,
@@ -31,13 +31,13 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingVertical: 20
     },
-    cartItemText:{
+    cartItemText: {
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 16,
         paddingHorizontal: 20
     },
-    cartItemIcon:{
+    cartItemIcon: {
         alignSelf: 'center'
     }
 })

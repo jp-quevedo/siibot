@@ -1,4 +1,4 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Balance from '../screens/Balance'
 import Header from '../components/Header'
@@ -9,13 +9,13 @@ const BalanceStack = () => {
     return (
         <Stack.Navigator
             initialRouteName='Balance'
-            screenOptions={({route, navigation}) => {
+            screenOptions = {({ route, navigation }) => {
                 return {
                     header: () => {
                         return (
                             <Header
-                                navigation={navigation}
-                                title={
+                                navigation = { navigation }
+                                title = {
                                     route.name === 'Balance'
                                         ? 'Balance'
                                         : 'Otros'
@@ -26,7 +26,7 @@ const BalanceStack = () => {
                 }
             }}
         >
-            <Stack.Screen name='Balance' component={Balance} />
+            <Stack.Screen name = 'Balance' component = { Balance } />
         </Stack.Navigator>
     )
 }

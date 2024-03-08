@@ -26,17 +26,17 @@ const ItemUpdateModal = ({
     }
     
     const onHandleUpdateAmount = (input) => {
-        setItemSelected({...itemSelected, amount: input})
+        setItemSelected({ ...itemSelected, amount: input })
     }
     
     const onHandleUpdateName = (input) => {
-        setItemSelected({...itemSelected, name: input})
+        setItemSelected({ ...itemSelected, name: input })
     }
     
     const saveItemUpdate = (itemSelected) => {
         setItemList(itemList.map(item => {
           if(item.id === itemSelected.id) {
-            return ({...itemSelected})
+            return ({ ...itemSelected })
           }
         }))
         setModalVisible(!modalVisible)
@@ -44,38 +44,38 @@ const ItemUpdateModal = ({
 
     return (
         <Modal
-            visible={modalVisible}
-            animationType='slide'
-            onRequestClose={() => onHandleModal({})}
+            visible = { modalVisible }
+            animationType = 'slide'
+            onRequestClose = {() => onHandleModal({})}
         >
-            <View style={[styles.itemModal, {width: windowWidth - 20}]}>
+            <View style = {[ styles.itemModal, { width: windowWidth - 20 } ]}>
                 <TextInput 
-                    maxLength={20}
-                    onChangeText={onHandleUpdateName}
-                    placeholder='Glosa'
-                    placeholderTextColor={colors.text}
-                    style={[styles.textInput, {width: windowWidth - 60}]}
-                    value={itemSelected.name}
+                    maxLength = { 20 }
+                    onChangeText = { onHandleUpdateName }
+                    placeholder = 'Glosa'
+                    placeholderTextColor = { colors.text }
+                    style = {[ styles.textInput, { width: windowWidth - 60 } ]}
+                    value = { itemSelected.name }
                 />
                 <TextInput
-                    maxLength={10}
-                    onChangeText={onHandleUpdateAmount}
-                    placeholder='Monto'
-                    placeholderTextColor={colors.text}
-                    style={[styles.textInput, {width: windowWidth - 60}]}
-                    value={itemSelected.amount}
+                    maxLength = { 10 }
+                    onChangeText = { onHandleUpdateAmount }
+                    placeholder = 'Monto'
+                    placeholderTextColor = { colors.text }
+                    style = {[ styles.textInput, { width: windowWidth - 60 } ]}
+                    value = { itemSelected.amount }
                 />
                 <EventButton
-                    onPress={() => saveItemUpdate(itemSelected)}
-                    title='Guardar'
+                    onPress = {() => saveItemUpdate(itemSelected)}
+                    title = 'Guardar'
                 />
                 <EventButton
-                    onPress={deleteItem}
-                    title='Borrar'
+                    onPress = { deleteItem }
+                    title = 'Borrar'
                 />
                 <EventButton
                     onPress={() => onHandleModal({})}
-                    title='Cancelar'
+                    title = 'Cancelar'
                 />
             </View>
         </Modal>
@@ -85,7 +85,7 @@ const ItemUpdateModal = ({
 export default ItemUpdateModal
 
 const styles = StyleSheet.create({
-    itemModal:{
+    itemModal: {
         alignSelf: 'center',
         backgroundColor: colors.container,
         borderColor: colors.container,
@@ -96,13 +96,13 @@ const styles = StyleSheet.create({
         marginTop: 10,
         paddingVertical: 20
     },
-    itemText:{
+    itemText: {
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 16,
         paddingHorizontal: 20
     },
-    textInput:{
+    textInput: {
         alignSelf: 'center',
         backgroundColor: colors.input,
         borderColor: colors.input,

@@ -15,7 +15,7 @@ const EventContainer = () => {
 
     const windowWidth = Dimensions.get('window').width
 
-    const [newItem, setNewItem] = useState({
+    const [ newItem, setNewItem ] = useState({
         id: '',
         category: '',
         name: '',
@@ -25,7 +25,7 @@ const EventContainer = () => {
     })
 
     const addItem = () => {
-        setItemList([...itemList, newItem])
+        setItemList([ ...itemList, newItem ])
         setNewItem({
             id: '',
             category: '',
@@ -38,7 +38,7 @@ const EventContainer = () => {
     }
 
     const onHandleAddAmount = (input) => {
-        setNewItem({...newItem, amount: input})
+        setNewItem({ ...newItem, amount: input })
     }
     
     const onHandleAddName = (input) => {
@@ -53,26 +53,26 @@ const EventContainer = () => {
     }
 
     return (
-        <View style={[styles.itemHandleContainer, {width: windowWidth - 20}]}>
+        <View style = {[ styles.itemHandleContainer, { width: windowWidth - 20 } ]}>
             <TextInput 
-                maxLength={20}
-                onChangeText={onHandleAddName}
-                placeholder='Glosa'
-                placeholderTextColor={colors.text}
-                style={[styles.textInput, {width: windowWidth - 60}]}
-                value={newItem.name}
+                maxLength = { 20 }
+                onChangeText = { onHandleAddName }
+                placeholder = 'Glosa'
+                placeholderTextColor = { colors.text} 
+                style = {[ styles.textInput, { width: windowWidth - 60 } ]}
+                value = { newItem.name }
             />
             <TextInput
-                maxLength={10}
-                onChangeText={onHandleAddAmount}
-                placeholder='Monto'
-                placeholderTextColor={colors.text}
-                style={[styles.textInput, {width: windowWidth - 60}]}
-                value={newItem.amount}
+                maxLength = { 10 }
+                onChangeText = { onHandleAddAmount }
+                placeholder = 'Monto'
+                placeholderTextColor = { colors.text }
+                style = {[ styles.textInput, { width: windowWidth - 60 } ]}
+                value = { newItem.amount }
             />
             <EventButton
-                onPress={addItem}
-                title='Agregar'
+                onPress = { addItem }
+                title = 'Agregar'
             />
         </View>
     )
@@ -81,7 +81,7 @@ const EventContainer = () => {
 export default EventContainer
 
 const styles = StyleSheet.create({
-    itemHandleContainer:{
+    itemHandleContainer: {
         alignSelf: 'center',
         backgroundColor: colors.container,
         borderRadius: 16,
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingVertical: 20
     },
-    textInput:{
+    textInput: {
         alignSelf: 'center',
         backgroundColor: colors.input,
         borderColor: colors.input,

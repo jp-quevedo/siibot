@@ -11,15 +11,15 @@ import { store } from './src/app/store'
 
 export default function App() {
 
-  const [fontsLoaded] = useFonts(fontCollection)
+  const [ fontsLoaded ] = useFonts(fontCollection)
   if (!fontsLoaded) {
     return null
   }
 
   return (
     <>
-      <StatusBar backgroundColor={colors.container} />
-      <Provider store={store}>
+      <StatusBar backgroundColor = { colors.container } />
+      <Provider store = { store }>
         <Navigator />
       </Provider>
     </>

@@ -1,4 +1,4 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Login from '../screens/Login'
 import Signup from '../screens/Signup'
@@ -9,14 +9,14 @@ const Stack = createNativeStackNavigator()
 const AuthStack = () => {
     return (
         <Stack.Navigator
-            initialRouteName='Login'
-            screenOptions={({route, navigation}) => {
+            initialRouteName = 'Login'
+            screenOptions = {({ route, navigation }) => {
                 return {
                     header: () => {
                         return (
                             <Header
-                                navigation={navigation}
-                                title={
+                                navigation = { navigation }
+                                title = {
                                     route.name === 'Login'
                                         ? 'Inicio de sesión'
                                         : 'Registro de usuario'
@@ -27,8 +27,8 @@ const AuthStack = () => {
                 }
             }}
         >
-            <Stack.Screen name='Login' component={Login} />
-            <Stack.Screen name='Signup' component={Signup} />
+            <Stack.Screen name = 'Login' component = { Login } />
+            <Stack.Screen name = 'Signup' component = { Signup } />
         </Stack.Navigator>
     )
 }

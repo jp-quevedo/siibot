@@ -2,9 +2,9 @@ import {
     StyleSheet,
     View
 } from 'react-native'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-import {setCategorySelected} from '../features/item/itemSlice'
+import { setCategorySelected } from '../features/item/itemSlice'
 import EventButton from './EventButton'
 
 const Categories = ({
@@ -15,13 +15,13 @@ const Categories = ({
     const dispatch = useDispatch()
 
     return (
-        <View style={styles.categories}>
+        <View style = { styles.categories }>
             <EventButton
-                onPress={() => {
+                onPress = {() => {
                     dispatch(setCategorySelected(item))
-                    navigation.navigate('ItemListContainer', {categorySelected: item})
+                    navigation.navigate('ItemListContainer', { categorySelected: item })
                 }}
-                title={item}
+                title = { item }
             />
         </View>
     )
@@ -30,7 +30,7 @@ const Categories = ({
 export default Categories
 
 const styles = StyleSheet.create({
-    categories:{
+    categories: {
         marginBottom: 20
-    },
+    }
 })

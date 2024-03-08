@@ -11,15 +11,15 @@ const History = () => {
 
     const windowWidth = Dimensions.get('window').width
 
-    const [keyWord, setKeyWord] = useState('')
+    const [ keyWord, setKeyWord ] = useState('')
     const keyWordHandler = (text) => {
         setKeyWord(text)
     }
 
     return (
-        <View style={[styles.historyContainer, {width: windowWidth - 20}]}>
+        <View style = {[ styles.historyContainer, { width: windowWidth - 20 } ]}>
             <SearchBar 
-                keyWordHandler={keyWordHandler}
+                keyWordHandler = { keyWordHandler }
             />
         </View>
     )
@@ -28,7 +28,7 @@ const History = () => {
 export default History
 
 const styles = StyleSheet.create({
-    historyContainer:{
+    historyContainer: {
         alignSelf: 'center',
         justifyContent: 'center'
     }

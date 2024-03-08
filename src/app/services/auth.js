@@ -1,10 +1,10 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import {signupUrl, loginUrl} from '../database'
+import { baseAuthUrl, signupUrl, loginUrl } from '../database'
 
 export const authApi = createApi({
     reducerPath: 'authApi',
-    baseQuery: fetchBaseQuery({baseUrl: ''}),
+    baseQuery: fetchBaseQuery({ baseUrl: baseAuthUrl }),
     endpoints: (builder) => ({
         signup: builder.mutation({
             query: (user) => ({
@@ -23,4 +23,4 @@ export const authApi = createApi({
     })
 })
 
-export const {useSignupMutation, useLoginMutation} = authApi
+export const { useSignupMutation, useLoginMutation } = authApi

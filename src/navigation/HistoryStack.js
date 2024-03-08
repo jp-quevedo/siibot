@@ -1,4 +1,4 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import History from '../screens/History'
 import Header from '../components/Header'
@@ -8,14 +8,14 @@ const Stack = createNativeStackNavigator()
 const HistoryStack = () => {
     return (
         <Stack.Navigator
-            initialRouteName='History'
-            screenOptions={({route, navigation}) => {
+            initialRouteName = 'History'
+            screenOptions = {({ route, navigation }) => {
                 return {
                     header: () => {
                         return (
                             <Header
-                                navigation={navigation}
-                                title={
+                                navigation = { navigation }
+                                title = {
                                     route.name === 'History'
                                         ? 'Historial'
                                         : 'Otros'
@@ -26,7 +26,7 @@ const HistoryStack = () => {
                 }
             }}
         >
-            <Stack.Screen name='History' component={History} />
+            <Stack.Screen name = 'History' componenent = { History } />
         </Stack.Navigator>
     )
 }

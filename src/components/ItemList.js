@@ -4,14 +4,14 @@ import {
     StyleSheet,
     Text
 } from 'react-native'
-import {useDispatch} from 'react-redux'
-import {MaterialIcons} from '@expo/vector-icons'
+import { useDispatch } from 'react-redux'
+import { MaterialIcons } from '@expo/vector-icons'
 
-import {setItemIdSelected} from '../features/item/itemSlice'
+import { setItemIdSelected } from '../features/item/itemSlice'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const ItemList = ({item, navigation}) => {
+const ItemList = ({ item, navigation }) => {
 
     const windowWidth = Dimensions.get('window').width
 
@@ -21,13 +21,13 @@ const ItemList = ({item, navigation}) => {
         <Pressable
             onPress={() => {
                 dispatch(setItemIdSelected(item))
-                navigation.navigate('ItemContainer', {itemId: item.id})
+                navigation.navigate('ItemContainer', { itemId: item.id })
             }}
-            style={[styles.itemListContainer, {width: windowWidth - 20}]}
-            title='Detalle'
+            style = {[ styles.itemListContainer, { width: windowWidth - 20 } ]}
+            title = 'Detalle'
         >
-            <MaterialIcons name='info-outline' size={30} color='white' style={styles.itemIcon}/>
-            <Text style={styles.itemTitle}>{item.title}</Text>
+            <MaterialIcons name = 'info-outline' size = { 30 } color = 'white' style = { styles.itemIcon }/>
+            <Text style = { styles.itemTitle }>{ item.title }</Text>
         </Pressable>
     )
 }
@@ -35,7 +35,7 @@ const ItemList = ({item, navigation}) => {
 export default ItemList
 
 const styles = StyleSheet.create({
-    itemListContainer:{
+    itemListContainer: {
         alignItems: 'center',
         backgroundColor: colors.container,
         borderRadius: 16,
@@ -43,12 +43,12 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingVertical: 20
     },
-    itemTitle:{
+    itemTitle: {
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 16
     },
-    itemIcon:{
+    itemIcon: {
         marginHorizontal: 20
     }
 })

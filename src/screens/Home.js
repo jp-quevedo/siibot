@@ -5,11 +5,11 @@ import {
 
 import CategoriesContainer from '../components/CategoriesContainer'
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
     return (
-        <View style={styles.home}>
+        <View style = { styles.home }>
             <CategoriesContainer
-                navigation={navigation}
+                navigation = { navigation }
             />
         </View>
     )
@@ -18,7 +18,7 @@ const Home = ({navigation}) => {
 export default Home
 
 const styles = StyleSheet.create({
-    home:{
+    home: {
         alignItems: 'center'
     }
 })

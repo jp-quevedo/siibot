@@ -17,19 +17,19 @@ const Cart = () => {
     const windowWidth = Dimensions.get('window').width
 
     return (
-        <View style={[styles.cartContainer, {width: windowWidth - 20}]}>
+        <View style = {[ styles.cartContainer, { width: windowWidth - 20 } ]}>
             <FlatList
-                data={cart.products}
-                keyExtractor={(item) => item.id}
-                renderItem={({item}) => <CartItem item={item}/>}
+                data = { cart.products }
+                keyExtractor = { (item) => item.id }
+                renderItem = {({ item }) => <CartItem item = { item }/>}
             />
-            <View style={styles.purchaseContainer}>
-                <Text style={styles.purchaseTotal}>
-                    Total: ${cart.total_price}
+            <View style = { styles.purchaseContainer }>
+                <Text style = { styles.purchaseTotal }>
+                    Total: ${ cart.total_price }
                 </Text>
                 <EventButton
                     // onPress={}
-                    title='Confirmar'
+                    title = 'Confirmar'
                 />
             </View>
         </View>
@@ -39,11 +39,11 @@ const Cart = () => {
 export default Cart
 
 const styles = StyleSheet.create({
-    cartContainer:{
+    cartContainer: {
         alignSelf: 'center',
         justifyContent: 'center'
     },
-    purchaseContainer:{
+    purchaseContainer: {
         alignItems: 'center',
         backgroundColor: colors.container,
         borderColor: colors.container,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingVertical: 20
     },
-    purchaseTotal:{
+    purchaseTotal: {
         color: colors.text,
         fontFamily: fonts.bold,
         fontSize: 16

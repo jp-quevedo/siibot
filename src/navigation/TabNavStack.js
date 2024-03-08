@@ -1,7 +1,7 @@
 import {
     StyleSheet
 } from 'react-native'
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import BalanceStack from './BalanceStack'
 import HistoryStack from './HistoryStack'
@@ -15,58 +15,58 @@ const Tab = createBottomTabNavigator()
 const TabNavStack = () => {
     return (
         <Tab.Navigator
-            initialRouteName='ItemStack'
-            screenOptions={{
+            initialRouteName = 'ItemStack'
+            screenOptions = {{
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: styles.menuContainer,
             }}
         >
             <Tab.Screen
-                component={ItemStack}
-                name='ItemStack'
-                options={{
-                    tabBarIcon: ({focused}) => 
+                component = { ItemStack }
+                name = 'ItemStack'
+                options = {{
+                    tabBarIcon: ({ focused }) => 
                         <TabBarIcon
-                            iconName='home'
-                            title='Inicio'
-                            focused={focused}
+                            iconName = 'home'
+                            title = 'Inicio'
+                            focused = { focused }
                     />
                 }}
             />
             <Tab.Screen
-                component={BalanceStack}
-                name='BalanceStack'
-                options={{
-                    tabBarIcon: ({focused}) => 
+                component = { BalanceStack }
+                name = 'BalanceStack'
+                options = {{
+                    tabBarIcon: ({ focused }) => 
                         <TabBarIcon
-                            iconName='account-balance-wallet'
-                            title='Balance'
-                            focused={focused}
+                            iconName = 'account-balance-wallet'
+                            title = 'Balance'
+                            focused = { focused }
                     />
                 }}
             />
             <Tab.Screen
-                component={HistoryStack}
-                name='HistoryStack'
-                options={{
-                    tabBarIcon: ({focused}) => 
+                component = { HistoryStack }
+                name = 'HistoryStack'
+                options = {{
+                    tabBarIcon: ({ focused }) => 
                         <TabBarIcon
-                            iconName='history'
-                            title='Historial'
-                            focused={focused}
+                            iconName = 'history'
+                            title = 'Historial'
+                            focused = { focused }
                     />
                 }}
             />
             <Tab.Screen
-                component={UserStack}
-                name='UserStack'
-                options={{
-                    tabBarIcon: ({focused}) => 
+                component = { UserStack }
+                name = 'UserStack'
+                options = {{
+                    tabBarIcon: ({ focused }) => 
                         <TabBarIcon
-                            iconName='account-box'
-                            title='Perfil'
-                            focused={focused}
+                            iconName = 'account-box'
+                            title = 'Perfil'
+                            focused = { focused }
                     />
                 }}
             />
@@ -77,7 +77,7 @@ const TabNavStack = () => {
 export default TabNavStack
 
 const styles = StyleSheet.create({
-    menuContainer:{
+    menuContainer: {
         backgroundColor: colors.container,
         flexDirection: 'row',
         height: 80,

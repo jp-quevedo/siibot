@@ -8,16 +8,16 @@ import {
     TextInput,
     View
 } from 'react-native'
-import {MaterialIcons} from '@expo/vector-icons'
+import { MaterialIcons } from '@expo/vector-icons'
 
 import colors from '../utils/globals/colors'
 
-const SearchBar = ({keyWordHandler}) => {
+const SearchBar = ({ keyWordHandler }) => {
 
     const windowWidth = Dimensions.get('window').width
 
-    const [error, setError] = useState('')
-    const [input, setInput] = useState('')
+    const [ error, setError ] = useState('')
+    const [ input, setInput ] = useState('')
 
     const inputHandler = (text) => setInput(text)
 
@@ -41,23 +41,26 @@ const SearchBar = ({keyWordHandler}) => {
 
     return (
         <View>
-            <View style={[styles.searchBarContainer, {width: windowWidth - 20}]}>
+            <View style = {[ styles.searchBarContainer, { width: windowWidth - 20 } ]}>
                 <TextInput
-                    maxLength={20}
-                    onChangeText={inputHandler}
-                    placeholder='Buscar'
-                    placeholderTextColor={colors.text}
-                    style={[styles.textInput, {width: windowWidth - 140}]}
-                    value={input}
+                    maxLength = { 20 }
+                    onChangeText = { inputHandler }
+                    placeholder = 'Buscar'
+                    placeholderTextColor = { colors.text }
+                    style = {[ styles.textInput, { width: windowWidth - 140 } ]}
+                    value = { input }
                 />
-                <Pressable onPress={search} style={styles.button}>
-                    <MaterialIcons name='search' size={30} color='white' />
+                <Pressable onPress = { search } style = { styles.button }>
+                    <MaterialIcons name = 'search' size = { 30 } color = 'white' />
                 </Pressable>
-                <Pressable onPress={reset}>
-                    <MaterialIcons name='close' size={30} color='white' />
+                <Pressable onPress = { reset }>
+                    <MaterialIcons name = 'close' size = { 30 } color = 'white' />
                 </Pressable>
             </View>
-            {error ? <Text style={styles.errorText}>{error}</Text> : null}
+            { error
+                ? <Text style = { styles.errorText }>{ error }</Text>
+                : null
+            }
         </View>
     )
 }
@@ -65,7 +68,7 @@ const SearchBar = ({keyWordHandler}) => {
 export default SearchBar
 
 const styles = StyleSheet.create({
-    searchBarContainer:{
+    searchBarContainer: {
         alignItems: 'center',
         alignSelf: 'center',
         backgroundColor: colors.container,
@@ -76,20 +79,20 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingVertical: 20
     },
-    textInput:{
+    textInput: {
         alignSelf: 'center',
         backgroundColor: colors.input,
         borderColor: colors.input,
         borderRadius: 32,
         padding: 10
     },
-    errorText:{
+    errorText: {
         alignSelf: 'center',
         color: colors.error,
         margin: 0,
         paddingTop: 15
     },
-    button:{
+    button: {
         paddingHorizontal: 10
     }
 })

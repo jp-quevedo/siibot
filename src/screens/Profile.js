@@ -4,36 +4,36 @@ import {
     Text,
     View
 } from 'react-native'
-import {MaterialIcons} from '@expo/vector-icons'
+import { MaterialIcons } from '@expo/vector-icons'
 
 import EventButton from '../components/EventButton'
 import user from '../utils/data/user.json'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const Profile = ({navigation}) => {
+const Profile = ({ navigation }) => {
 
     const windowWidth = Dimensions.get('window').width
 
     return (
-        <View style={[styles.profileContainer, {width: windowWidth - 20}]}>
-            <MaterialIcons name='account-circle' size={200} style={styles.userIcon} color={colors.text} />
-            <Text style={styles.userName}>{user.name}</Text>
+        <View style = {[ styles.profileContainer, { width: windowWidth - 20 } ]}>
+            <MaterialIcons name = 'account-circle' size = { 200 } style = { styles.userIcon } color = { colors.text } />
+            <Text style = { styles.userName }>{ user.name }</Text>
             <EventButton
                 // onPress={}
-                title='Datos Personales'
+                title = 'Datos Personales'
             />
             <EventButton
                 // onPress={}
-                title='Preferencias'
+                title = 'Preferencias'
             />
             <EventButton
-                onPress={() => navigation.navigate('Cart')}
-                title='Plan'
+                onPress = {() => navigation.navigate('Cart')}
+                title = 'Plan'
             />
             <EventButton
                 // onPress={}
-                title='Cerrar Sesión'
+                title = 'Cerrar Sesión'
             />
         </View>
     )
@@ -42,7 +42,7 @@ const Profile = ({navigation}) => {
 export default Profile
 
 const styles = StyleSheet.create({
-    profileContainer:{
+    profileContainer: {
         alignItems: 'center',
         alignSelf: 'center',
         backgroundColor: colors.container,
@@ -53,10 +53,10 @@ const styles = StyleSheet.create({
         padding: 20,
         paddingTop: 0
     },
-    userIcon:{
+    userIcon: {
         alignSelf: 'center'
     },
-    userName:{
+    userName: {
         color: colors.text,
         fontFamily: fonts.bold,
         fontSize: 22

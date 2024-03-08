@@ -1,5 +1,5 @@
-import {useSelector} from 'react-redux'
-import {NavigationContainer, DefaultTheme} from '@react-navigation/native'
+import { useSelector } from 'react-redux'
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 
 import AuthStack from './AuthStack'
 import TabNavStack from './TabNavStack'
@@ -17,8 +17,8 @@ const Navigator = () => {
     const user = useSelector((state) => state.auth)
     
     return (
-        <NavigationContainer theme={MyTheme}>
-            {user.idToken
+        <NavigationContainer theme = { MyTheme }>
+            { user.idToken
                 ? <TabNavStack />
                 : <AuthStack />
             }

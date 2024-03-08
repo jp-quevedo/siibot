@@ -21,15 +21,15 @@ const InputForm = ({
     return (
         <View>
             <TextInput
-                value={value}
-                onChangeText={onChangeText}
-                placeholder={label}
-                placeholderTextColor={colors.text}
-                secureTextEntry={sensitiveInfo}
-                style={[styles.textInput, {width: windowWidth - 60}]}
+                value = { value }
+                onChangeText = { onChangeText }
+                placeholder = { label }
+                placeholderTextColor = { colors.text }
+                secureTextEntry = { sensitiveInfo }
+                style = {[ styles.textInput, { width: windowWidth - 60 } ]}
             />
-            {warning
-                ? <Text style={styles.warningText}>{warning}</Text>
+            { warning
+                ? <Text style = { styles.warningText }>{ warning }</Text>
                 : null
             }
         </View>
@@ -39,7 +39,7 @@ const InputForm = ({
 export default InputForm
 
 const styles = StyleSheet.create({
-    textInput:{
+    textInput: {
         alignSelf: 'center',
         backgroundColor: colors.input,
         borderColor: colors.input,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         padding: 10
     },
-    warningText:{
+    warningText: {
         alignSelf: 'center',
         color: colors.error,
         margin: 0,
