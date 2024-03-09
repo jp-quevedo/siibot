@@ -1,7 +1,7 @@
 import { object, string, number } from 'yup'
 
 export const signupSchema = object().shape({
-    passowrd:
+    password:
         string()
         .required('Contraseña requerida')
         .min(8, 'La contraseña debe tener 8 carácteres como mínimo'),
@@ -27,7 +27,7 @@ export const signupSchema = object().shape({
 })
 
 export const loginSchema = object().shape({
-    passowrd:
+    password:
         string()
         .required('Contraseña requerida'),
     email:

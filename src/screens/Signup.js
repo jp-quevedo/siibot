@@ -37,12 +37,11 @@ const Signup = ({ navigation }) => {
     const dispatch = useDispatch()
     const onSubmit = async () => {
         try {
-            Keyboard.dismiss()
-            // signupSchema.validateSync({ name, dni, address, phoneNumber, email, password })
+            signupSchema.validateSync({ name, dni, address, phoneNumber, email, password })
             const { data } = await triggerSignup({ email, password })
             dispatch(setUser({ email: data.email, idToken: data.idToken }))
+            Keyboard.dismiss()
         } catch (error) {
-            console.log('test', error)
             setNameError('')
             setDniError('')
             setAddressError('')
@@ -87,7 +86,7 @@ const Signup = ({ navigation }) => {
             <InputForm
                 label ='Rut'
                 value = { dni }
-                onChangeText = { (t) => setDni(t)} 
+                onChangeText = { (t) => setDni(t) } 
                 sensitiveInfo = { false }
                 warning = { dniError }
             />
@@ -101,7 +100,7 @@ const Signup = ({ navigation }) => {
             <InputForm
                 label = 'Teléfono'
                 value = { phoneNumber }
-                onChangeText = { (t) => setPhoneNumber(t)} 
+                onChangeText = { (t) => setPhoneNumber(t) } 
                 sensitiveInfo = { false }
                 warning = { phoneNumberError }
             />

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import {
     FlatList,
     StyleSheet,
     View
 } from 'react-native'
-import { useSelector } from 'react-redux'
 
 import EventContainer from '../components/EventContainer'
 import ItemList from '../components/ItemList'
@@ -24,7 +24,7 @@ const ItemListContainer = ({
         )
         setItemFilter(itemsFilter)
     }, [ itemsFilterByCategory, keyWord ])
-    const itemsFilterByCategory = useSelector(state => state.itemReducer.value.itemsFilterByCategory)
+    const itemsFilterByCategory = useSelector(state => state.item.value.itemsFilterByCategory)
 
     return (
         <View>

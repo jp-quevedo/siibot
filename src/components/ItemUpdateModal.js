@@ -46,7 +46,7 @@ const ItemUpdateModal = ({
         <Modal
             visible = { modalVisible }
             animationType = 'slide'
-            onRequestClose = {() => onHandleModal({})}
+            onRequestClose = { () => onHandleModal({}) }
         >
             <View style = {[ styles.itemModal, { width: windowWidth - 20 } ]}>
                 <TextInput 
@@ -66,7 +66,7 @@ const ItemUpdateModal = ({
                     value = { itemSelected.amount }
                 />
                 <EventButton
-                    onPress = {() => saveItemUpdate(itemSelected)}
+                    onPress = { () => saveItemUpdate(itemSelected) }
                     title = 'Guardar'
                 />
                 <EventButton
@@ -74,7 +74,7 @@ const ItemUpdateModal = ({
                     title = 'Borrar'
                 />
                 <EventButton
-                    onPress={() => onHandleModal({})}
+                    onPress={ () => onHandleModal({}) }
                     title = 'Cancelar'
                 />
             </View>

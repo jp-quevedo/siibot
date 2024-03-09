@@ -1,13 +1,13 @@
 import {
   StatusBar,
 } from 'react-native'
-import { useFonts } from 'expo-font'
 import { Provider } from 'react-redux'
+import { useFonts } from 'expo-font'
 
+import { store } from './src/app/store'
+import { fontCollection } from './src/utils/globals/fonts'
 import Navigator from './src/navigation/Navigator'
 import colors from './src/utils/globals/colors'
-import { fontCollection } from './src/utils/globals/fonts'
-import { store } from './src/app/store'
 
 export default function App() {
 

@@ -5,9 +5,9 @@ import {
     View
 } from 'react-native'
 
+import { useGetCategoriesQuery } from '../app/services/events'
 import Categories from './Categories'
 import colors from '../utils/globals/colors'
-import { useGetCategoriesQuery } from '../app/services/events'
 
 const CategoriesContainer = ({ navigation }) => {
 

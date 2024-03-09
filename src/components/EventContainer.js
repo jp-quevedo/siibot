@@ -58,7 +58,7 @@ const EventContainer = () => {
                 maxLength = { 20 }
                 onChangeText = { onHandleAddName }
                 placeholder = 'Glosa'
-                placeholderTextColor = { colors.text} 
+                placeholderTextColor = { colors.text } 
                 style = {[ styles.textInput, { width: windowWidth - 60 } ]}
                 value = { newItem.name }
             />

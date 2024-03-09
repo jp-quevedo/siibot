@@ -8,7 +8,7 @@ import authReducer from '../features/auth/authSlice'
 
 export const store = configureStore({
     reducer: {
-        itemReducer,
+        item: itemReducer,
         auth: authReducer,
         [ eventsApi.reducerPath ]: eventsApi.reducer,
         [ authApi.reducerPath ]: authApi.reducer

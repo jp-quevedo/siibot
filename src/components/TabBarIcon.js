@@ -12,7 +12,7 @@ const TabBarIcon = ({ iconName, focused, title }) => {
     return (
         <View>
             <MaterialIcons
-                name = { iconName}
+                name = { iconName }
                 size = { 40 }
                 style = { styles.tabItemIcon }
                 color = { focused ? colors.button : colors.text }

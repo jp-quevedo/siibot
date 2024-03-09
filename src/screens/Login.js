@@ -27,10 +27,10 @@ const Login = ({ navigation }) => {
 
     const onSubmit = async () => {
         try {
-            Keyboard.dismiss()
-            // loginSchema.validateSync({ email, password })
+            loginSchema.validateSync({ email, password })
             const { data } = await triggerLogin({ email, password })
             dispatch(setUser({ email: data.email, idToken: data.idToken }))
+            Keyboard.dismiss()
         } catch (error) {
             setEmailError('')
             setPasswordError('')

@@ -45,11 +45,11 @@ const Item = ({ item }) => {
                 <Text style = { styles.itemText }>Estado de Pago: </Text>
                 <Switch
                     value = { item.paid }
-                    // onValueChange={() => updatePaidStatus(item.id)}
+                    // onValueChange={ () => updatePaidStatus(item.id) }
                 />
             </View>
             <EventButton
-                // onPress={() => onHandleModal(item)}
+                // onPress={ () => onHandleModal(item) }
                 title = 'Editar'
             />
             {/* <ItemUpdateModal 

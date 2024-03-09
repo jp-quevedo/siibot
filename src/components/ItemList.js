@@ -19,7 +19,7 @@ const ItemList = ({ item, navigation }) => {
     
     return (
         <Pressable
-            onPress={() => {
+            onPress = {() => {
                 dispatch(setItemIdSelected(item))
                 navigation.navigate('ItemContainer', { itemId: item.id })
             }}

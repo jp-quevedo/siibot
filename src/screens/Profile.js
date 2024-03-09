@@ -28,7 +28,7 @@ const Profile = ({ navigation }) => {
                 title = 'Preferencias'
             />
             <EventButton
-                onPress = {() => navigation.navigate('Cart')}
+                onPress = { () => navigation.navigate('Cart') }
                 title = 'Plan'
             />
             <EventButton
