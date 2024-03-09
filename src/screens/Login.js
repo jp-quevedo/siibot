@@ -29,7 +29,7 @@ const Login = ({ navigation }) => {
         try {
             loginSchema.validateSync({ email, password })
             const { data } = await triggerLogin({ email, password })
-            dispatch(setUser({ email: data.email, idToken: data.idToken }))
+            dispatch(setUser({ email: data.email, idToken: data.idToken, localId: data.localId }))
             Keyboard.dismiss()
         } catch (error) {
             setEmailError('')
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         flexDirection: 'column',
         gap: 10,
+        marginBottom: 20,
         marginTop: 20,
         paddingVertical: 20
     },

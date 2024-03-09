@@ -51,10 +51,10 @@ const SearchBar = ({ keyWordHandler }) => {
                     value = { input }
                 />
                 <Pressable onPress = { search } style = { styles.button }>
-                    <MaterialIcons name = 'search' size = { 30 } color = 'white' />
+                    <MaterialIcons name = 'search' size = { 30 } color = {colors.text} />
                 </Pressable>
                 <Pressable onPress = { reset }>
-                    <MaterialIcons name = 'close' size = { 30 } color = 'white' />
+                    <MaterialIcons name = 'close' size = { 30 } color = {colors.text} />
                 </Pressable>
             </View>
             { error
