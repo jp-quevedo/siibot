@@ -18,8 +18,8 @@ const AuthStack = () => {
                                 navigation = { navigation }
                                 title = {
                                     route.name === 'Login'
-                                        ? 'Inicio de sesión'
-                                        : 'Registro de usuario'
+                                        ? 'Inicio de Sesión'
+                                        : 'Registro de Usuario'
                                 }
                             />
                         )

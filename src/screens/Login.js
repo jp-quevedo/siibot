@@ -66,14 +66,14 @@ const Login = ({ navigation }) => {
             />
             <EventButton
                 onPress = { onSubmit }
-                title = 'Iniciar sesión'
+                title = 'Iniciar Sesión'
             />
             <Text style = { styles.optionText }>¿Olvidaste tu contraseña?</Text>
             <EventButton
                 // onPress={() => {
                 //     navigation.navigate('Signup')
                 // }}
-                title = 'Recuperar contraseña'
+                title = 'Recuperar Contraseña'
             />
             <Text style = { styles.optionText }>¿No tienes una cuenta?</Text>
             <EventButton

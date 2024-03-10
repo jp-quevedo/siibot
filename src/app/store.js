@@ -3,7 +3,8 @@ import { setupListeners } from '@reduxjs/toolkit/query'
 
 import { eventsApi } from './services/events'
 import { authApi } from './services/auth'
-import { profPicApi } from './services/profPic'
+import { userPicApi } from './services/userPic'
+import { userLocApi } from './services/userLoc'
 import itemReducer from '../features/item/itemSlice'
 import authReducer from '../features/auth/authSlice'
 
@@ -13,14 +14,16 @@ export const store = configureStore({
         auth: authReducer,
         [ eventsApi.reducerPath ]: eventsApi.reducer,
         [ authApi.reducerPath ]: authApi.reducer,
-        [ profPicApi.reducerPath ]: profPicApi.reducer
+        [ userPicApi.reducerPath ]: userPicApi.reducer,
+        [ userLocApi.reducerPath ]: userLocApi.reducer
     },
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware()
             .concat(
                 eventsApi.middleware,
                 authApi.middleware,
-                profPicApi.middleware
+                userPicApi.middleware,
+                userLocApi.middleware
             )
 })
 

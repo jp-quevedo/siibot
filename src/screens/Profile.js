@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
-import { useGetProfPicQuery } from '../app/services/profPic'
+import { useGetUserPicQuery } from '../app/services/userPic'
 import EventButton from '../components/EventButton'
 import IconButton from '../components/IconButton'
 import user from '../utils/data/user.json'
@@ -20,7 +20,7 @@ const Profile = ({ navigation }) => {
     const windowWidth = Dimensions.get('window').width
 
     const localId = useSelector((state) => state.auth.localId)
-    const { data } = useGetProfPicQuery(localId)
+    const { data } = useGetUserPicQuery(localId)
 
     return (
         <View style = {[ styles.profileContainer, { width: windowWidth - 20 } ]}>
@@ -39,7 +39,7 @@ const Profile = ({ navigation }) => {
             <View style = { styles.userDataContainer }>
                 <Text style = { styles.userName }>{ user.name }</Text>
                 <EventButton
-                    // onPress={}
+                    onPress = { () => navigation.navigate('ProfileManager') }
                     title = 'Datos Personales'
                 />
                 <EventButton

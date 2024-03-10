@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery }  from '@reduxjs/toolkit/query/react'
 
-import { baseUrl } from '../database'
+import { baseUrl } from '../../utils/data/database'
 
 export const eventsApi = createApi({
     reducerPath: 'eventsApi',

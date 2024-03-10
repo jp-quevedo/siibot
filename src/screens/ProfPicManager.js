@@ -9,7 +9,7 @@ import {
 import { MaterialIcons } from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker'
 
-import { usePutProfPicMutation, useGetProfPicQuery } from '../app/services/profPic'
+import { usePutUserPicMutation, useGetUserPicQuery } from '../app/services/userPic'
 import EventButton from '../components/EventButton'
 import colors from '../utils/globals/colors'
 
@@ -18,9 +18,9 @@ const ProfPicManager = ({ navigation }) => {
     const windowWidth = Dimensions.get('window').width
 
     const [ picture, setPicture] = useState('')
-    const [ triggerProfPic ] = usePutProfPicMutation()
+    const [ triggerProfPic ] = usePutUserPicMutation()
     const localId = useSelector((state) => state.auth.localId)
-    const { data, isSuccess } = useGetProfPicQuery(localId)
+    const { data, isSuccess } = useGetUserPicQuery(localId)
 
     useEffect(() => {
         if (data && isSuccess) setPicture(data.picture)
@@ -54,15 +54,11 @@ const ProfPicManager = ({ navigation }) => {
                     style = { styles.picture }
                     resizeMode = 'cover'
                     /> )
-                : ( <Image
-                    source = {{ uri: data.picture }}
-                    style = { styles.picture }
-                    resizeMode = 'cover'
-                    /> )
+                : ( <MaterialIcons name = 'account-circle' size = { 200 } style = { styles.userIcon } color = { colors.text } /> )
             }
             <EventButton
                 onPress={ selectPicture }
-                title = 'Seleccionar imagen'
+                title = 'Cambiar foto'
             />
             <EventButton
                 onPress={ savePicture }
