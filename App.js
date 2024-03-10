@@ -31,3 +31,5 @@ export default function App() {
 // ruta balance reutiliza componente de itemlist el cual aplica filtro por categoría
 
 // trabajar como cart la lógica de eventos crud por cliente 
+
+// ordenar lógica de datos de usuario en firebase
