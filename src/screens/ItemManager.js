@@ -2,36 +2,34 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
     Dimensions,
-    Keyboard,
     StyleSheet,
     TextInput,
     View
 } from 'react-native'
-import { firebase } from '@react-native-firebase/database';
-import database from '@react-native-firebase/database'
+import { getDatabase, ref, update } from "firebase/database"
 import uuid from 'react-native-uuid'
 
-import { baseUrl } from '../utils/data/database';
 import EventButton from '../components/EventButton'
 import colors from '../utils/globals/colors'
+import { app } from '../utils/data/index'
 
 const ItemManager = ({ navigation }) => {
 
     const windowWidth = Dimensions.get('window').width
-    const localId = useSelector((state) => state.auth.localId)
     const categorySelected = useSelector(state => state.item.value.categorySelected)
-    const reference = firebase
-        .app()
-        .database(baseUrl)
-        .ref(`/users/${ localId }/items`)
+    const localId = useSelector((state) => state.auth.localId)
+    const app = app
+    const db = getDatabase()
 
     const [ newItem, setNewItem ] = useState({
-        id: '',
-        category: '',
+        id: uuid.v4(),
+        category: categorySelected,
         name: '',
         amount: '',
         date: '',
     })
+
+    const itemsRef = ref(db, `/users/${ localId }/items/${ newItem.id }`)
 
     const onHandleAddAmount = (input) => {
         setNewItem({ ...newItem, amount: input })
@@ -40,18 +38,13 @@ const ItemManager = ({ navigation }) => {
     const onHandleAddName = (input) => {
         setNewItem({
             ...newItem,
-            id: uuid.v4(),
-            category: categorySelected,
             name: input,
             date: new Date().toLocaleString(),
         })
     }
 
     const saveItem = () => {
-        console.log('test', newItem)
-        database()
-            .ref(`/users/${ localId }/items`)
-            .update({ ...newItem })
+        update(itemsRef, { ...newItem })
         setNewItem({
             id: '',
             category: '',

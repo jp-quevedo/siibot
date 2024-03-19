@@ -1,23 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
-
-import allCategories from '../../utils/data/categories.json'
-import allItems from '../../utils/data/itemsData.json'
+import { baseUrl } from '../../utils/data/database'
+import { info } from '../../utils/data/items'
 
 export const itemSlice = createSlice({
     name: 'item',
     initialState: {
         value: {
-            categories: allCategories,
+            categories: baseUrl + '/categories.json',
             categorySelected: '',
-            items: allItems,
-            itemsFilterByCategory: [],
+            items: info,
+            itemsFilterByCategory: '',
             itemIdSelected: null
         }
     },
     reducers: {
         setCategorySelected: (state, action) => {
             const categorySelected = action.payload
-            const itemsFilter = allItems.filter(item => item.category === categorySelected)
+            const itemsFilter = info.filter(item => item.category === categorySelected)
             state.value.categorySelected = categorySelected
             state.value.itemsFilterByCategory = itemsFilter
         },
