@@ -17,14 +17,12 @@ const ProfileManager = ({ navigation }) => {
 
     const [ name, setName ] = useState('')
     const [ dni, setDni ] = useState('')
-    const [ address, setAddress ] = useState('')
     const [ phoneNumber, setPhoneNumber ] = useState('')
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
 
     const [ nameError, setNameError ] = useState('')
     const [ dniError, setDniError ] = useState('')
-    const [ addressError, setAddressError ] = useState('')
     const [ phoneNumberError, setPhoneNumberError ] = useState('')
     const [ emailError, setEmailError ] = useState('')
     const [ passwordError, setPasswordError ] = useState('')
@@ -78,7 +76,7 @@ const ProfileManager = ({ navigation }) => {
             <Text style = { styles.optionText }>Para poder generar una declaración necesitas verificar tu dirección</Text>
             <EventButton
                 onPress = {() => {
-                    navigation.navigate('ProfLocManager')
+                    navigation.navigate('LocationManager')
                 }}
                 title = 'Verificar Dirección'
             />

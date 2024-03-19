@@ -9,18 +9,18 @@ import {
 import { MaterialIcons } from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker'
 
-import { usePutUserPicMutation, useGetUserPicQuery } from '../app/services/userPic'
+import { usePutAvatarMutation, useGetAvatarQuery } from '../app/services/avatar'
 import EventButton from '../components/EventButton'
 import colors from '../utils/globals/colors'
 
-const ProfPicManager = ({ navigation }) => {
+const AvatarManager = ({ navigation }) => {
 
     const windowWidth = Dimensions.get('window').width
 
     const [ picture, setPicture] = useState('')
-    const [ triggerProfPic ] = usePutUserPicMutation()
+    const [ triggerPicture ] = usePutAvatarMutation()
     const localId = useSelector((state) => state.auth.localId)
-    const { data, isSuccess } = useGetUserPicQuery(localId)
+    const { data, isSuccess } = useGetAvatarQuery(localId)
 
     useEffect(() => {
         if (data && isSuccess) setPicture(data.picture)
@@ -42,7 +42,7 @@ const ProfPicManager = ({ navigation }) => {
     }
 
     const savePicture = () => {
-        triggerProfPic({ picture, localId })
+        triggerPicture({ picture, localId })
         navigation.goBack()
     }
 
@@ -68,7 +68,7 @@ const ProfPicManager = ({ navigation }) => {
     )
 }
 
-export default ProfPicManager
+export default AvatarManager
 
 const styles = StyleSheet.create({
     selectorContainer: {

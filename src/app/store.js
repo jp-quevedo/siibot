@@ -1,29 +1,31 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
-import { eventsApi } from './services/events'
+import { itemsApi } from './services/items'
 import { authApi } from './services/auth'
-import { userPicApi } from './services/userPic'
-import { userLocApi } from './services/userLoc'
-import itemReducer from '../features/item/itemSlice'
+import { avatarApi } from './services/avatar'
+import { locationApi } from './services/location'
 import authReducer from '../features/auth/authSlice'
+import itemReducer from '../features/item/itemSlice'
+import returnReducer from '../features/return/returnSlice'
 
 export const store = configureStore({
     reducer: {
-        item: itemReducer,
         auth: authReducer,
-        [ eventsApi.reducerPath ]: eventsApi.reducer,
+        item: itemReducer,
+        return: returnReducer,
         [ authApi.reducerPath ]: authApi.reducer,
-        [ userPicApi.reducerPath ]: userPicApi.reducer,
-        [ userLocApi.reducerPath ]: userLocApi.reducer
+        [ itemsApi.reducerPath ]: itemsApi.reducer,
+        [ avatarApi.reducerPath ]: avatarApi.reducer,
+        [ locationApi.reducerPath ]: locationApi.reducer
     },
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware()
             .concat(
-                eventsApi.middleware,
                 authApi.middleware,
-                userPicApi.middleware,
-                userLocApi.middleware
+                itemsApi.middleware,
+                avatarApi.middleware,
+                locationApi.middleware
             )
 })
 

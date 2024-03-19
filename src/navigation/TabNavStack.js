@@ -3,7 +3,7 @@ import {
 } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import BalanceStack from './BalanceStack'
+import ReturnStack from './ReturnStack'
 import HistoryStack from './HistoryStack'
 import ItemStack from './ItemStack'
 import UserStack from './UserStack'
@@ -28,20 +28,20 @@ const TabNavStack = () => {
                 options = {{
                     tabBarIcon: ({ focused }) => 
                         <TabBarIcon
-                            iconName = 'home'
-                            title = 'Inicio'
+                            iconName = 'event-note'
+                            title = 'Eventos'
                             focused = { focused }
                     />
                 }}
             />
             <Tab.Screen
-                component = { BalanceStack }
-                name = 'BalanceStack'
+                component = { ReturnStack }
+                name = 'ReturnStack'
                 options = {{
                     tabBarIcon: ({ focused }) => 
                         <TabBarIcon
-                            iconName = 'account-balance-wallet'
-                            title = 'Balance'
+                            iconName = 'article'
+                            title = 'Declaraciones'
                             focused = { focused }
                     />
                 }}

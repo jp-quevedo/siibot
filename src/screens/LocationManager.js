@@ -9,13 +9,13 @@ import {
 import * as Location from 'expo-location'
 
 import { locationKey } from '../utils/data/database'
-import { usePutUserLocMutation } from '../app/services/userLoc'
+import { usePutLocationMutation } from '../app/services/location'
 import EventButton from '../components/EventButton'
 import MapPreview from '../components/MapPreview'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const ProfLocManager = ({ navigation }) => {
+const LocationManager = ({ navigation }) => {
 
     const windowWidth = Dimensions.get('window').width
 
@@ -24,7 +24,7 @@ const ProfLocManager = ({ navigation }) => {
     const [ address, setAddress ] = useState('')
 
     const localId = useSelector((state) => state.auth.localId)
-    const [ triggerPutUserLoc ] = usePutUserLocMutation()
+    const [ triggerLocation ] = usePutLocationMutation()
 
     useEffect(() => {
         (async () => {
@@ -56,7 +56,7 @@ const ProfLocManager = ({ navigation }) => {
             address,
             location
         }
-        await triggerPutUserLoc({ localId, locationFormatted })
+        await triggerLocation({ localId, locationFormatted })
         navigation.goBack()
     }
 
@@ -72,7 +72,7 @@ const ProfLocManager = ({ navigation }) => {
     )
 }
 
-export default ProfLocManager
+export default LocationManager
 
 const styles = StyleSheet.create({
     profLocContainer: {

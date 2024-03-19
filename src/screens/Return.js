@@ -6,20 +6,20 @@ import {
     View
 } from 'react-native'
 
-import { useGetItemsQuery } from '../app/services/events'
+import { useGetItemsQuery } from '../app/services/items'
 import ItemList from '../components/ItemList'
 import EventButton from '../components/EventButton'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const Balance = ({ navigation }) => {
+const Return = ({ navigation }) => {
 
     const windowWidth = Dimensions.get('window').width
 
     const { data: items } = useGetItemsQuery() // podemos agregar los is...
 
     return (
-        <View style = {[ styles.balanceContainer, { width: windowWidth - 20 } ]}>
+        <View style = {[ styles.returnContainer, { width: windowWidth - 20 } ]}>
             <FlatList
                 data = { items }
                 keyExtractor = { item => item.id }
@@ -31,7 +31,7 @@ const Balance = ({ navigation }) => {
                 }
             />
             <View style = { styles.summaryContainer }>
-                <Text style = { styles.totalBalance }>
+                <Text style = { styles.totalReturn }>
                     Balance Total: $1
                 </Text>
                 <EventButton
@@ -43,10 +43,10 @@ const Balance = ({ navigation }) => {
     )
 }
 
-export default Balance
+export default Return
 
 const styles = StyleSheet.create({
-    balanceContainer: {
+    returnContainer: {
         alignSelf: 'center',
         justifyContent: 'center'
     },
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingVertical: 20
     },
-    totalBalance: {
+    totalReturn: {
         color: colors.text,
         fontFamily: fonts.bold,
         fontSize: 18

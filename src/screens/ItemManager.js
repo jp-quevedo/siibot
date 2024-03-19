@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
     Dimensions,
     Keyboard,
@@ -7,16 +7,23 @@ import {
     TextInput,
     View
 } from 'react-native'
+import { firebase } from '@react-native-firebase/database';
+import database from '@react-native-firebase/database'
 import uuid from 'react-native-uuid'
 
-import { useAddItemMutation } from '../app/services/items'
-import EventButton from './EventButton'
+import { baseUrl } from '../utils/data/database';
+import EventButton from '../components/EventButton'
 import colors from '../utils/globals/colors'
 
-// falta corregir lógica de eventos
-const EventContainer = ({ route }) => {
+const ItemManager = ({ navigation }) => {
 
     const windowWidth = Dimensions.get('window').width
+    const localId = useSelector((state) => state.auth.localId)
+    const categorySelected = useSelector(state => state.item.value.categorySelected)
+    const reference = firebase
+        .app()
+        .database(baseUrl)
+        .ref(`/users/${ localId }/items`)
 
     const [ newItem, setNewItem ] = useState({
         id: '',
@@ -26,18 +33,6 @@ const EventContainer = ({ route }) => {
         date: '',
     })
 
-    const addItem = () => {
-        setItemList([ ...itemList, newItem ])
-        setNewItem({
-            id: '',
-            category: '',
-            name: '',
-            amount: '',
-            date: '',
-        })
-        Keyboard.dismiss()
-    }
-
     const onHandleAddAmount = (input) => {
         setNewItem({ ...newItem, amount: input })
     }
@@ -46,10 +41,25 @@ const EventContainer = ({ route }) => {
         setNewItem({
             ...newItem,
             id: uuid.v4(),
-            category: route.params.categorySelected,
+            category: categorySelected,
             name: input,
             date: new Date().toLocaleString(),
         })
+    }
+
+    const saveItem = () => {
+        console.log('test', newItem)
+        database()
+            .ref(`/users/${ localId }/items`)
+            .update({ ...newItem })
+        setNewItem({
+            id: '',
+            category: '',
+            name: '',
+            amount: '',
+            date: '',
+        })
+        navigation.goBack()
     }
 
     return (
@@ -71,14 +81,14 @@ const EventContainer = ({ route }) => {
                 value = { newItem.amount }
             />
             <EventButton
-                onPress = { addItem }
+                onPress = { saveItem }
                 title = 'Guardar'
             />
         </View>
     )
 }
 
-export default EventContainer
+export default ItemManager
 
 const styles = StyleSheet.create({
     itemHandleContainer: {

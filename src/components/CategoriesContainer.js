@@ -2,12 +2,14 @@ import {
     Dimensions,
     FlatList,
     StyleSheet,
+    Text,
     View
 } from 'react-native'
 
-import { useGetCategoriesQuery } from '../app/services/events'
+import { useGetCategoriesQuery } from '../app/services/items'
 import Categories from './Categories'
 import colors from '../utils/globals/colors'
+import fonts from '../utils/globals/fonts'
 
 const CategoriesContainer = ({ navigation }) => {
 
@@ -16,6 +18,9 @@ const CategoriesContainer = ({ navigation }) => {
 
     return (
         <View style = {[ styles.categoriesContainer, { width: windowWidth - 20 } ]}>
+            <Text style = { styles.title }>
+                    Explorar por Categoría
+                </Text>
             <FlatList
                     data = { categories }
                     keyExtractor = { item => item }
@@ -32,11 +37,16 @@ export default CategoriesContainer
 
 const styles = StyleSheet.create({
     categoriesContainer: {
-        alignItems: 'center',
         backgroundColor: colors.container,
         borderRadius: 16,
-        justifyContent: 'center',
         marginTop: 20,
         paddingTop: 20
+    },
+    title: {
+        color: colors.text,
+        fontFamily: fonts.regular,
+        fontSize: 18,
+        paddingBottom: 20,
+        textAlign: 'center'
     }
 })

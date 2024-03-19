@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery }  from '@reduxjs/toolkit/query/react'
 
 import { baseUrl } from '../../utils/data/database'
 
-export const eventsApi = createApi({
-    reducerPath: 'eventsApi',
+export const itemsApi = createApi({
+    reducerPath: 'itemsApi',
     baseQuery: fetchBaseQuery({ baseUrl }),
     endpoints: (builder) => ({
         getCategories: builder.query({
@@ -25,4 +25,4 @@ export const eventsApi = createApi({
     })
 })
 
-export const { useGetCategoriesQuery, useGetItemsQuery ,useGetItemsByCategoryQuery, useGetItemByIdQuery } = eventsApi
+export const { useGetCategoriesQuery, useGetItemsQuery, useGetItemsByCategoryQuery, useGetItemByIdQuery } = itemsApi

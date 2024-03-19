@@ -1,18 +1,23 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
+    Dimensions,
     FlatList,
+    Pressable,
     StyleSheet,
+    Text,
     View
 } from 'react-native'
 
-import EventContainer from '../components/EventContainer'
 import ItemList from '../components/ItemList'
 import SearchBar from '../components/SearchBar'
+import colors from '../utils/globals/colors'
+import fonts from '../utils/globals/fonts'
 
-const ItemListContainer = ({
-    navigation
-}) => {
+const ItemListContainer = ({ navigation }) => {
+
+    const windowHeight = Dimensions.get('window').height
+    const windowWidth = Dimensions.get('window').width
 
     const [ itemFilter, setItemFilter ] = useState([])    
     const [ keyWord, setKeyWord ] = useState('')
@@ -27,8 +32,7 @@ const ItemListContainer = ({
     const itemsFilterByCategory = useSelector(state => state.item.value.itemsFilterByCategory)
 
     return (
-        <View>
-            {/* <EventContainer /> */}
+        <View style = {[ styles.container, { height: windowHeight } ]}>
             <SearchBar
                 keyWordHandler = { keyWordHandler }
             />
@@ -44,6 +48,12 @@ const ItemListContainer = ({
                     }
                 />
             </View>
+            <Pressable
+                onPress = { () => navigation.navigate('ItemManager') }
+                style = {[ styles.createButton, { width: windowWidth - 60 } ]}
+            >
+                <Text style = { styles.buttonTitle }>Agregar</Text>
+            </Pressable>
         </View>
     )
 }
@@ -51,7 +61,27 @@ const ItemListContainer = ({
 export default ItemListContainer
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+    },
     itemByCategory: {
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingBottom: 20
+    },
+    createButton: {
+        alignSelf: 'center',
+        backgroundColor: colors.button,
+        borderColor: colors.button,
+        borderRadius: 8,
+        padding: 10,
+        position: 'absolute',
+        bottom: 100,
+    },
+    buttonTitle: {
+        color: colors.text,
+        fontFamily: fonts.regular,
+        fontSize: 16,
+        textAlign: 'center'
     }
 })

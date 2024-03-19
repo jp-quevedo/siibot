@@ -23,10 +23,11 @@ export const itemSlice = createSlice({
         },
         setItemIdSelected: (state, action) => {
             state.value.itemIdSelected = action.payload
-        }
+        },
+        setItem: (state, action) => state = action.payload
     }
 })
 
-export const { setCategorySelected, setItemIdSelected } = itemSlice.actions
+export const { setCategorySelected, setItemIdSelected, setItem } = itemSlice.actions
 
 export default itemSlice.reducer

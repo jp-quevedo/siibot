@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
-import { useGetUserPicQuery } from '../app/services/userPic'
+import { useGetAvatarQuery } from '../app/services/avatar'
 import EventButton from '../components/EventButton'
 import IconButton from '../components/IconButton'
 import user from '../utils/data/user.json'
@@ -20,7 +20,7 @@ const Profile = ({ navigation }) => {
     const windowWidth = Dimensions.get('window').width
 
     const localId = useSelector((state) => state.auth.localId)
-    const { data } = useGetUserPicQuery(localId)
+    const { data } = useGetAvatarQuery(localId)
 
     return (
         <View style = {[ styles.profileContainer, { width: windowWidth - 20 } ]}>
@@ -33,7 +33,7 @@ const Profile = ({ navigation }) => {
                 : ( <MaterialIcons name = 'account-circle' size = { 200 } style = { styles.userIcon } color = { colors.text } /> )
             }
             <IconButton
-                    onPress = { () => navigation.navigate('ProfPicManager') }
+                    onPress = { () => navigation.navigate('AvatarManager') }
                     title = 'add-a-photo'
                 />
             <View style = { styles.userDataContainer }>

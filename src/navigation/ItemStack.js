@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Home from '../screens/Home'
 import ItemContainer from '../screens/ItemContainer'
 import ItemListContainer from '../screens/ItemListContainer'
+import ItemManager from '../screens/ItemManager'
 import Header from '../components/Header'
 
 const Stack = createNativeStackNavigator()
@@ -19,10 +20,10 @@ const ItemStack = () => {
                                 navigation = { navigation }
                                 title = {
                                     route.name === 'Home'
-                                        ? 'Categorías'
+                                        ? 'Eventos'
                                         : route.name === 'ItemListContainer'
                                             ? route.params.categorySelected
-                                            : 'Detalle'
+                                            : 'Agregar Evento'
                                 }
                             />
                         )
@@ -33,6 +34,7 @@ const ItemStack = () => {
             <Stack.Screen name = 'Home' component = { Home } />
             <Stack.Screen name = 'ItemContainer' component = { ItemContainer } />
             <Stack.Screen name = 'ItemListContainer' component = { ItemListContainer } />
+            <Stack.Screen name = 'ItemManager' component = { ItemManager } />
         </Stack.Navigator>
     )
 }
