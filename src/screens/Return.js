@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux'
 import {
     Dimensions,
     FlatList,
@@ -16,7 +17,8 @@ const Return = ({ navigation }) => {
 
     const windowWidth = Dimensions.get('window').width
 
-    const { data: items } = useGetItemsQuery() // podemos agregar los is...
+    const localId = useSelector((state) => state.auth.localId)
+    const { data: items } = useGetItemsQuery(localId)
 
     return (
         <View style = {[ styles.returnContainer, { width: windowWidth - 20 } ]}>

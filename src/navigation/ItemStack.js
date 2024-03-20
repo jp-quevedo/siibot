@@ -23,7 +23,9 @@ const ItemStack = () => {
                                         ? 'Eventos'
                                         : route.name === 'ItemListContainer'
                                             ? route.params.categorySelected
-                                            : 'Agregar Evento'
+                                            : route.name === 'ItemContainer'
+                                                ? 'Detalle'
+                                                : 'Agregar Evento'
                                 }
                             />
                         )

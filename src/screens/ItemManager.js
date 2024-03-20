@@ -13,10 +13,11 @@ import EventButton from '../components/EventButton'
 import colors from '../utils/globals/colors'
 import { app } from '../utils/data/index'
 
-const ItemManager = ({ navigation }) => {
+const ItemManager = ({ route, navigation }) => {
 
     const windowWidth = Dimensions.get('window').width
-    const categorySelected = useSelector(state => state.item.value.categorySelected)
+
+    const { categorySelected } = route.params
     const localId = useSelector((state) => state.auth.localId)
     const app = app
     const db = getDatabase()

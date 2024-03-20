@@ -10,17 +10,25 @@ export const itemsApi = createApi({
             query: () => '/categories.json'
         }),
         getItems: builder.query({
-            query: () => '/items.json'
+            query: (localId) => `/users/${localId}/items.json`,
+            transformResponse: (response) => {
+                const data = Object.entries(response).map(item => {
+                    return { id: item[0], ...item[1] }
+                })
+                return data
+            }
         }),
         getItemsByCategory: builder.query({
-            query: (category) => `/items.json?orderBy="category"&equalTo="${ category }"`,
+            query: (localId, category) => `/users/${localId}/items.json?orderBy="category"&equalTo="${ category }"`,
             transformResponse: (response) => {
-                const data = Object.values(response)
+                const data = Object.entries(response).map(item => {
+                    return { id: item[0], ...item[1] }
+                })
                 return data
             }
         }),
         getItemById: builder.query({
-            query: (id) => `/items/${ id }.json`
+            query: (localId, id) => `/users/${localId}/items/${ id }.json`
         })
     })
 })

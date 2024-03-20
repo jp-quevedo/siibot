@@ -2,9 +2,7 @@ import {
     StyleSheet,
     View
 } from 'react-native'
-import { useDispatch } from 'react-redux'
 
-import { setCategorySelected } from '../features/item/itemSlice'
 import EventButton from './EventButton'
 
 const Categories = ({
@@ -12,13 +10,10 @@ const Categories = ({
     navigation
 }) => {
 
-    const dispatch = useDispatch()
-
     return (
         <View style = { styles.categories }>
             <EventButton
                 onPress = {() => {
-                    dispatch(setCategorySelected(item))
                     navigation.navigate('ItemListContainer', { categorySelected: item })
                 }}
                 title = { item }

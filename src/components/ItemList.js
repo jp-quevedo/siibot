@@ -27,7 +27,7 @@ const ItemList = ({ item, navigation }) => {
             title = 'Detalle'
         >
             <MaterialIcons name = 'info-outline' size = { 30 } color = 'white' style = { styles.itemIcon }/>
-            <Text style = { styles.itemTitle }>{ item.title }</Text>
+            <Text style = { styles.itemTitle }>{ item.name }</Text>
         </Pressable>
     )
 }

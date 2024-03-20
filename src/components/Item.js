@@ -26,7 +26,7 @@ const Item = ({ item }) => {
     return (
         <View style = {[ styles.itemCard, { width: windowWidth - 20 } ]}>
             <Text style = { styles.itemText }>Categoría :    { item.category }</Text>
-            <Text style = { styles.itemText }>Glosa :    { item.title }</Text>
+            <Text style = { styles.itemText }>Glosa :    { item.name }</Text>
             <Text style = { styles.itemText }>Monto :    { item.amount }</Text>
             <Text style = { styles.itemText }>Fecha :    { item.date }</Text>
             <EventButton

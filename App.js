@@ -26,6 +26,11 @@ export default function App() {
   )
 }
 
-// trabajar como cart la lógica de eventos crud por cliente 
+// eventos
+// renderizar lista de items en tiempo real, editar items, generar declaracion
 
-// ordenar lógica de datos de usuario en firebase
+// declaraciones
+// primera pantalla ver declaraciones y generar declaracion
+// poner fecha
+// mapear y filtrar segun fecha
+// array nuevo calcular y generar declaracion

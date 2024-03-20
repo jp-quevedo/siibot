@@ -9,27 +9,40 @@ import {
     View
 } from 'react-native'
 
+import { useGetItemsQuery } from '../app/services/items'
 import ItemList from '../components/ItemList'
 import SearchBar from '../components/SearchBar'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const ItemListContainer = ({ navigation }) => {
+const ItemListContainer = ({ route, navigation }) => {
 
     const windowHeight = Dimensions.get('window').height
     const windowWidth = Dimensions.get('window').width
 
-    const [ itemFilter, setItemFilter ] = useState([])    
+    const { categorySelected } = route.params
+    const localId = useSelector((state) => state.auth.localId)
+    const { data: items } = useGetItemsQuery(localId)
+    const [categoryFilter, setCategoryFilter] = useState([])
+    useEffect(() => {
+        const fetchFilteredItems = async () => {
+            if (items) {
+            const filter = items.filter(item => item.category === categorySelected)
+            setCategoryFilter(filter)
+            }
+        }
+        fetchFilteredItems()
+    }, [items, categorySelected])
+
+    const [ itemFilter, setItemFilter ] = useState(categoryFilter)    
     const [ keyWord, setKeyWord ] = useState('')
-    
     const keyWordHandler = (text) => { setKeyWord(text) }
     useEffect(() => {
-        const itemsFilter = itemsFilterByCategory.filter((item) =>
-            item.title.toLowerCase().includes(keyWord) || item.title.toUpperCase().includes(keyWord)
+        const itemsFilter = categoryFilter.filter((item) =>
+            item.name.toLowerCase().includes(keyWord) || item.name.toUpperCase().includes(keyWord)
         )
         setItemFilter(itemsFilter)
-    }, [ itemsFilterByCategory, keyWord ])
-    const itemsFilterByCategory = useSelector(state => state.item.value.itemsFilterByCategory)
+    }, [ keyWord ])
 
     return (
         <View style = {[ styles.container, { height: windowHeight } ]}>
@@ -38,7 +51,7 @@ const ItemListContainer = ({ navigation }) => {
             />
             <View style = { styles.itemByCategory }>
                 <FlatList
-                    data = { itemFilter }
+                    data = { itemFilter.length === 0 ? categoryFilter : itemFilter }
                     keyExtractor = { item => item.id }
                     renderItem = {({ item }) =>
                         <ItemList
@@ -49,7 +62,10 @@ const ItemListContainer = ({ navigation }) => {
                 />
             </View>
             <Pressable
-                onPress = { () => navigation.navigate('ItemManager') }
+                onPress = { () => navigation.navigate(
+                    'ItemManager',
+                    { categorySelected }
+                )}
                 style = {[ styles.createButton, { width: windowWidth - 60 } ]}
             >
                 <Text style = { styles.buttonTitle }>Agregar</Text>
