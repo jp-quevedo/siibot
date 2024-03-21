@@ -7,7 +7,7 @@ import {
 
 import Item from '../components/Item'
 
-const ItemContainer = () => {
+const ItemContainer = ({ navigation }) => {
 
     const [ item, setItem ] = useState({})
     const itemSelected = useSelector(state => state.item.value.itemIdSelected)
@@ -19,6 +19,7 @@ const ItemContainer = () => {
         <View style = { styles.itemContainer }>
             <Item
                 item = { item }
+                navigation = { navigation }
             />
         </View>
     )

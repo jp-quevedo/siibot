@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux'
 import {
     Dimensions,
     Modal,
@@ -5,6 +6,7 @@ import {
     TextInput,
     View
 } from 'react-native'
+import { getDatabase, ref, update, remove } from 'firebase/database'
 
 import EventButton from './EventButton'
 import colors from '../utils/globals/colors'
@@ -16,13 +18,19 @@ const ItemUpdateModal = ({
     onHandleModal,
     setItemSelected,
     setModalVisible,
+    navigation
 }) => {
 
     const windowWidth = Dimensions.get('window').width
 
+    const localId = useSelector((state) => state.auth.localId)
+    const db = getDatabase()
+    const itemId = itemSelected.id
+    const itemRef = ref(db, `/users/${ localId }/items/${ itemId }`)
+
     const deleteItem = () => {
-        setItemList(itemList.filter(item => item.id != itemSelected.id))
-        setModalVisible(!modalVisible)
+        remove(itemRef)
+        navigation.navigate('Home')
     }
     
     const onHandleUpdateAmount = (input) => {
@@ -34,11 +42,9 @@ const ItemUpdateModal = ({
     }
     
     const saveItemUpdate = (itemSelected) => {
-        setItemList(itemList.map(item => {
-          if(item.id === itemSelected.id) {
-            return ({ ...itemSelected })
-          }
-        }))
+        update(itemRef, { ...itemSelected })
+        setItemSelected({})
+        navigation.goBack()
         setModalVisible(!modalVisible)
     }
 
@@ -47,6 +53,7 @@ const ItemUpdateModal = ({
             visible = { modalVisible }
             animationType = 'slide'
             onRequestClose = { () => onHandleModal({}) }
+            transparent = { true }
         >
             <View style = {[ styles.itemModal, { width: windowWidth - 20 } ]}>
                 <TextInput 
@@ -93,8 +100,8 @@ const styles = StyleSheet.create({
         gap: 10,
         justifyContent: 'center',
         height: 'auto',
-        marginTop: 10,
-        paddingVertical: 20
+        marginTop: 80,
+        paddingVertical: 20,
     },
     itemText: {
         color: colors.text,

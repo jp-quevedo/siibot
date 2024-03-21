@@ -12,16 +12,17 @@ import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
 // falta corregir lógica de modal
-const Item = ({ item }) => {
+const Item = ({ item, navigation }) => {
 
     const windowWidth = Dimensions.get('window').width
 
+    const [ itemSelected, setItemSelected ] = useState({})
     const [ modalVisible, setModalVisible ] = useState(false)
 
-    // const onHandleModal = (item) => {
-    //     setItemSelected(item)
-    //     setModalVisible(!modalVisible)
-    // }
+    const onHandleModal = (item) => {
+        setItemSelected(item)
+        setModalVisible(!modalVisible)
+    }
 
     return (
         <View style = {[ styles.itemCard, { width: windowWidth - 20 } ]}>
@@ -30,16 +31,17 @@ const Item = ({ item }) => {
             <Text style = { styles.itemText }>Monto :    { item.amount }</Text>
             <Text style = { styles.itemText }>Fecha :    { item.date }</Text>
             <EventButton
-                // onPress={ () => onHandleModal(item) }
+                onPress={ () => onHandleModal(item) }
                 title = 'Editar'
             />
-            {/* <ItemUpdateModal 
+            <ItemUpdateModal 
                 itemSelected = { itemSelected }
                 modalVisible = { modalVisible }
                 setItemSelected = { setItemSelected }
                 setModalVisible = { setModalVisible }
                 onHandleModal = { onHandleModal }
-            /> */}
+                navigation = { navigation }
+            />
         </View>
     )
 }

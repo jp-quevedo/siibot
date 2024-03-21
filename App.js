@@ -27,7 +27,7 @@ export default function App() {
 }
 
 // eventos
-// renderizar lista de items en tiempo real, editar items, generar declaracion
+// renderizar lista de items en tiempo real, generar declaracion
 
 // declaraciones
 // primera pantalla ver declaraciones y generar declaracion
