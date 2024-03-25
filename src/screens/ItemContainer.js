@@ -7,7 +7,9 @@ import {
 
 import Item from '../components/Item'
 
-const ItemContainer = ({ navigation }) => {
+const ItemContainer = ({
+    navigation
+}) => {
 
     const [ item, setItem ] = useState({})
     const itemSelected = useSelector(state => state.item.value.itemIdSelected)

@@ -4,7 +4,7 @@ import { baseUrl } from '../../utils/data/database'
 
 export const locationApi = createApi({
     reducerPath: 'locationApi',
-    tagTypes: ['location'],
+    tagTypes: [ 'location' ],
     baseQuery: fetchBaseQuery({ baseUrl }),
     endpoints: (builder) => ({
         putLocation: builder.mutation({
@@ -13,11 +13,11 @@ export const locationApi = createApi({
                 method: 'PUT',
                 body: locationFormatted
             }),
-            invalidatesTags: ['location']
+            invalidatesTags: [ 'location' ]
         }),
         getLocation: builder.query({
             query: (localId) => `/users/${ localId }/location.json`,
-            providesTags: ['location']
+            providesTags: [ 'location' ]
         })
     })
 })

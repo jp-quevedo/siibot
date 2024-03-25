@@ -15,7 +15,9 @@ import user from '../utils/data/user.json'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const Profile = ({ navigation }) => {
+const Profile = ({
+    navigation
+}) => {
 
     const windowWidth = Dimensions.get('window').width
 

@@ -8,14 +8,16 @@ import {
     Text
 } from 'react-native'
 
-import { useLoginMutation } from '../app/services/auth'
-import { setUser } from '../features/auth/authSlice'
 import { loginSchema } from '../utils/validations/authSchema'
+import { setUser } from '../features/auth/authSlice'
+import { useLoginMutation } from '../app/services/auth'
 import EventButton from '../components/EventButton'
 import InputForm from '../components/InputForm'
 import colors from '../utils/globals/colors'
 
-const Login = ({ navigation }) => {
+const Login = ({
+    navigation
+}) => {
 
     const windowWidth = Dimensions.get('window').width
     const [ email, setEmail ] = useState('')

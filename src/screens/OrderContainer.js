@@ -7,14 +7,16 @@ import {
 
 import Order from '../components/Order'
 
-const OrderContainer = ({ navigation }) => {
+const OrderContainer = ({
+    navigation
+}) => {
 
     const [ order, setOrder ] = useState({})
     const orderSelected = useSelector(state => state.order.value.orderIdSelected)
     useEffect(() => {
         setOrder(orderSelected)
     }, [ orderSelected ])
-    console.log('test', order)
+    
     return (
         <View style = { styles.orderContainer }>
             <Order

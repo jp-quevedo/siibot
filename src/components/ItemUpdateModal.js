@@ -15,10 +15,10 @@ import fonts from '../utils/globals/fonts'
 const ItemUpdateModal = ({
     itemSelected,
     modalVisible,
+    navigation,
     onHandleModal,
     setItemSelected,
-    setModalVisible,
-    navigation
+    setModalVisible
 }) => {
 
     const windowWidth = Dimensions.get('window').width

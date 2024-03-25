@@ -26,13 +26,8 @@ export default function App() {
   )
 }
 
-// eventos
+// eventos y declaraciones
 // renderizar lista de items en tiempo real
 
-// declaraciones
-// primera pantalla ver declaraciones y generar declaracion
-// poner fecha
-// mapear y filtrar segun fecha
-// array nuevo calcular y generar declaracion
-
-// generar costos declaracion
+// logica cart
+// segunda mitad clase 15 en adelante

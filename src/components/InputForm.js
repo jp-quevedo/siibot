@@ -10,9 +10,9 @@ import colors from '../utils/globals/colors'
 
 const InputForm = ({
     label,
-    value,
     onChangeText,
     sensitiveInfo,
+    value,
     warning
 }) => {
 
@@ -21,12 +21,12 @@ const InputForm = ({
     return (
         <View>
             <TextInput
-                value = { value }
                 onChangeText = { onChangeText }
                 placeholder = { label }
                 placeholderTextColor = { colors.text }
                 secureTextEntry = { sensitiveInfo }
                 style = {[ styles.textInput, { width: windowWidth - 60 } ]}
+                value = { value }
             />
             { warning
                 ? <Text style = { styles.warningText }>{ warning }</Text>

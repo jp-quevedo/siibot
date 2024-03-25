@@ -15,7 +15,9 @@ import EventButton from '../components/EventButton'
 import InputForm from '../components/InputForm'
 import colors from '../utils/globals/colors'
 
-const Signup = ({ navigation }) => {
+const Signup = ({
+    navigation
+}) => {
 
     const windowWidth = Dimensions.get('window').width
 

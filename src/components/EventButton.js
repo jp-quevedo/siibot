@@ -8,7 +8,10 @@ import {
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const EventButton = ({ onPress, title }) => {
+const EventButton = ({
+    onPress,
+    title
+}) => {
 
     const windowWidth = Dimensions.get('window').width
 

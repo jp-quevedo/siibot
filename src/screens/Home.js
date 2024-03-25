@@ -5,7 +5,9 @@ import {
 
 import CategoriesContainer from '../components/CategoriesContainer'
 
-const Home = ({ navigation }) => {
+const Home = ({
+    navigation
+}) => {
     return (
         <View style = { styles.home }>
             <CategoriesContainer

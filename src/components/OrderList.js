@@ -11,7 +11,10 @@ import { setOrderIdSelected } from '../features/order/orderSlice'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const ItemList = ({ order, navigation }) => {
+const OrderList = ({
+    navigation,
+    order
+}) => {
 
     const windowWidth = Dimensions.get('window').width
 
@@ -32,7 +35,7 @@ const ItemList = ({ order, navigation }) => {
     )
 }
 
-export default ItemList
+export default OrderList
 
 const styles = StyleSheet.create({
     orderListContainer: {

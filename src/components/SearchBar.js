@@ -12,7 +12,9 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 import colors from '../utils/globals/colors'
 
-const SearchBar = ({ keyWordHandler }) => {
+const SearchBar = ({
+    keyWordHandler
+}) => {
 
     const windowWidth = Dimensions.get('window').width
 

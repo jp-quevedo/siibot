@@ -6,7 +6,10 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 import colors from '../utils/globals/colors'
 
-const IconButton = ({ onPress, title }) => {
+const IconButton = ({
+    onPress,
+    title
+}) => {
 
     return (
         <Pressable

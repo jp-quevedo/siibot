@@ -3,9 +3,9 @@ import {
 } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import ReturnStack from './ReturnStack'
 import HistoryStack from './HistoryStack'
 import ItemStack from './ItemStack'
+import OrderStack from './OrderStack'
 import UserStack from './UserStack'
 import TabBarIcon from '../components/TabBarIcon'
 import colors from '../utils/globals/colors'
@@ -35,8 +35,8 @@ const TabNavStack = () => {
                 }}
             />
             <Tab.Screen
-                component = { ReturnStack }
-                name = 'ReturnStack'
+                component = { OrderStack }
+                name = 'OrderStack'
                 options = {{
                     tabBarIcon: ({ focused }) => 
                         <TabBarIcon

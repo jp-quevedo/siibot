@@ -10,7 +10,7 @@ export const itemsApi = createApi({
             query: () => '/categories.json'
         }),
         getItems: builder.query({
-            query: (localId) => `/users/${localId}/items.json`,
+            query: (localId) => `/users/${ localId }/items.json`,
             transformResponse: (response) => {
                 const data = Object.entries(response).map(item => {
                     return { id: item[0], ...item[1] }

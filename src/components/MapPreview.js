@@ -7,7 +7,10 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { locationKey } from '../utils/data/database'
 import colors from '../utils/globals/colors'
 
-const MapPreview = ({ latitude, longitude }) => {
+const MapPreview = ({
+    latitude,
+    longitude
+}) => {
 
     const mapPreviewUrl =
         `https://maps.googleapis.com/maps/api/staticmap?center=${ latitude },${ longitude }

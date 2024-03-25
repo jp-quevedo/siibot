@@ -8,7 +8,9 @@ import { MaterialIcons } from '@expo/vector-icons'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const CartItem = ({ item }) => {
+const CartItem = ({
+    item
+}) => {
     return (
         <View style = { styles.cartItemCard }>
             <Text style = { styles.cartItemText }>Suscripción: { item.title }</Text>

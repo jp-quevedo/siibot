@@ -9,11 +9,14 @@ import {
 import { getDatabase, ref, update } from "firebase/database"
 import uuid from 'react-native-uuid'
 
+import { app } from '../utils/data/index'
 import EventButton from '../components/EventButton'
 import colors from '../utils/globals/colors'
-import { app } from '../utils/data/index'
 
-const ItemManager = ({ route, navigation }) => {
+const ItemManager = ({
+    navigation,
+    route
+}) => {
 
     const windowWidth = Dimensions.get('window').width
 
@@ -27,20 +30,39 @@ const ItemManager = ({ route, navigation }) => {
         category: categorySelected,
         name: '',
         amount: '',
-        date: '',
+        taxes: '',
+        date: ''
     })
 
     const itemsRef = ref(db, `/users/${ localId }/items/${ newItem.id }`)
 
+    const taxCalc = (input, categorySelected) => {
+        return categorySelected === 'Contribuciones'
+            ? input * -1
+            : categorySelected === 'Herencias'
+                ? input * 0.01
+                : categorySelected === 'IVA'
+                    ? input * 0.019
+                    : categorySelected === 'Primera Categoría'
+                        ? input * 0.025
+                        : categorySelected === 'Segunda Categoría'
+                            ? input * 0.01
+                            : null
+    }
+
     const onHandleAddAmount = (input) => {
-        setNewItem({ ...newItem, amount: input })
+        setNewItem({
+            ...newItem,
+            amount: parseInt(input),
+            taxes: taxCalc(input, categorySelected)
+        })
     }
     
     const onHandleAddName = (input) => {
         setNewItem({
             ...newItem,
             name: input,
-            date: new Date().toLocaleString(),
+            date: new Date(),
         })
     }
 
@@ -51,7 +73,8 @@ const ItemManager = ({ route, navigation }) => {
             category: '',
             name: '',
             amount: '',
-            date: '',
+            taxes: '',
+            date: ''
         })
         navigation.goBack()
     }

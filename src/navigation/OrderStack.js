@@ -1,16 +1,16 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import ReturnListContainer from '../screens/ReturnListContainer'
 import OrderContainer from '../screens/OrderContainer'
-import ReturnManager from '../screens/ReturnManager'
+import OrderListContainer from '../screens/OrderListContainer'
+import OrderManager from '../screens/OrderManager'
 import Header from '../components/Header'
 
 const Stack = createNativeStackNavigator()
 
-const BalanceStack = () => {
+const OrderStack = () => {
     return (
         <Stack.Navigator
-            initialRouteName='ReturnListContainer'
+            initialRouteName = 'OrderListContainer'
             screenOptions = {({ route, navigation }) => {
                 return {
                     header: () => {
@@ -18,9 +18,9 @@ const BalanceStack = () => {
                             <Header
                                 navigation = { navigation }
                                 title = {
-                                    route.name === 'ReturnListContainer'
+                                    route.name === 'OrderListContainer'
                                         ? 'Declaraciones'
-                                        : route.name === 'ReturnManager'
+                                        : route.name === 'OrderManager'
                                             ? 'Nueva Declaración'
                                             : 'Detalle'
                                 }
@@ -30,11 +30,11 @@ const BalanceStack = () => {
                 }
             }}
         >
-            <Stack.Screen name = 'ReturnListContainer' component = { ReturnListContainer } />
+            <Stack.Screen name = 'OrdernListContainer' component = { OrderListContainer } />
             <Stack.Screen name = 'OrderContainer' component = { OrderContainer } />
-            <Stack.Screen name = 'ReturnManager' component = { ReturnManager } />
+            <Stack.Screen name = 'OrderManager' component = { OrderManager } />
         </Stack.Navigator>
     )
 }
 
-export default BalanceStack
+export default OrderStack

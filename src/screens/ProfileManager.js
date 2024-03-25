@@ -11,7 +11,9 @@ import InputForm from '../components/InputForm'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const ProfileManager = ({ navigation }) => {
+const ProfileManager = ({
+    navigation
+}) => {
 
     const windowWidth = Dimensions.get('window').width
 

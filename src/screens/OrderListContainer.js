@@ -10,12 +10,14 @@ import {
 } from 'react-native'
 
 import { useGetOrdersQuery } from '../app/services/orders'
-import ReturnList from '../components/ReturnList'
+import OrderList from '../components/OrderList'
 import SearchBar from '../components/SearchBar'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const ReturnListContainer = ({ navigation }) => {
+const OrderListContainer = ({
+    navigation
+}) => {
 
     const windowHeight = Dimensions.get('window').height
     const windowWidth = Dimensions.get('window').width
@@ -41,7 +43,7 @@ const ReturnListContainer = ({ navigation }) => {
         )
         setOrderFilter(filter)
     }, [ keyWord ])
-
+    
     return (
         <View style = {[ styles.container, { height: windowHeight } ]}>
             <SearchBar
@@ -52,7 +54,7 @@ const ReturnListContainer = ({ navigation }) => {
                     data = { orderFilter.length === 0 ? orders : orderFilter }
                     keyExtractor = { item => item.id }
                     renderItem = {({ item }) =>
-                        <ReturnList
+                        <OrderList
                             order = { item }
                             navigation = { navigation }
                         />
@@ -61,7 +63,7 @@ const ReturnListContainer = ({ navigation }) => {
             </View>
             <Pressable
                 onPress = { () => navigation.navigate(
-                    'ReturnManager'
+                    'OrderManager'
                 )}
                 style = {[ styles.createButton, { width: windowWidth - 60 } ]}
             >
@@ -71,7 +73,7 @@ const ReturnListContainer = ({ navigation }) => {
     )
 }
 
-export default ReturnListContainer
+export default OrderListContainer
 
 const styles = StyleSheet.create({
     container: {

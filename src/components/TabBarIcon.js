@@ -8,7 +8,11 @@ import { MaterialIcons } from '@expo/vector-icons'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const TabBarIcon = ({ iconName, focused, title }) => {
+const TabBarIcon = ({
+    focused,
+    iconName,
+    title
+}) => {
     return (
         <View>
             <MaterialIcons

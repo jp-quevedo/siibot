@@ -11,7 +11,9 @@ import Categories from './Categories'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const CategoriesContainer = ({ navigation }) => {
+const CategoriesContainer = ({
+    navigation
+}) => {
 
     const windowWidth = Dimensions.get('window').width
     const { data: categories } = useGetCategoriesQuery()

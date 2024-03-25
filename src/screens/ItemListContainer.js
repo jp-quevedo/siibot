@@ -15,7 +15,10 @@ import SearchBar from '../components/SearchBar'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const ItemListContainer = ({ route, navigation }) => {
+const ItemListContainer = ({
+    navigation,
+    route
+}) => {
 
     const windowHeight = Dimensions.get('window').height
     const windowWidth = Dimensions.get('window').width

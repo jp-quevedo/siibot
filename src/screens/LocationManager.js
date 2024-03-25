@@ -15,7 +15,9 @@ import MapPreview from '../components/MapPreview'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const LocationManager = ({ navigation }) => {
+const LocationManager = ({
+    navigation
+}) => {
 
     const windowWidth = Dimensions.get('window').width
 

@@ -1,47 +1,56 @@
 import { useState } from 'react'
 import {
     Dimensions,
+    FlatList,
+    ScrollView,
     StyleSheet,
     Text,
     View
 } from 'react-native'
 
 import EventButton from './EventButton'
-import ItemUpdateModal from '../components/ItemUpdateModal'
+import ItemList from '../components/ItemList'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const Order = ({ order, navigation }) => {
+const Order = ({
+    navigation,
+    order
+}) => {
 
     const windowWidth = Dimensions.get('window').width
 
     const [ orderSelected, setOrderSelected ] = useState({})
     const [ modalVisible, setModalVisible ] = useState(false)
 
-    const onHandleModal = (order) => {
-        setOrderSelected(order)
-        setModalVisible(!modalVisible)
-    }
+    // const onHandleModal = (order) => {
+    //     setOrderSelected(order)
+    //     setModalVisible(!modalVisible)
+    // }
 
     return (
-        <View style = {[ styles.orderCard, { width: windowWidth - 20 } ]}>
+        <ScrollView style = {[ styles.orderCard, { width: windowWidth - 20 } ]}>
             <Text style = { styles.orderText }>Año :    { order.name }</Text>
             <Text style = { styles.orderText }>Total del Ejercicio :    { order.total }</Text>
             <Text style = { styles.orderText }>Resultado :    { order.taxes }</Text>
-            <Text style = { styles.orderText }>Operaciones :    { order.date }</Text>
+            <Text style = { styles.orderText }>Operaciones :</Text>
+            <View style = { styles.itemByCategory }>
+                <FlatList
+                    data = { order.items }
+                    keyExtractor = { item => item.id }
+                    renderItem = {({ item }) =>
+                        <ItemList
+                            item = { item }
+                            navigation = { navigation }
+                        />
+                    }
+                />
+            </View>
             <EventButton
-                onPress={ () => onHandleModal(order) }
+                // onPress={ () => onHandleModal(order) }
                 title = 'Exportar'
             />
-            {/* <ItemUpdateModal 
-                itemSelected = { orderSelected }
-                modalVisible = { modalVisible }
-                setItemSelected = { setItemSelected }
-                setModalVisible = { setModalVisible }
-                onHandleModal = { onHandleModal }
-                navigation = { navigation }
-            /> */}
-        </View>
+        </ScrollView>
     )
 }
 

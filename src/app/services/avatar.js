@@ -4,7 +4,7 @@ import { baseUrl } from '../../utils/data/database'
 
 export const avatarApi = createApi({
     reducerPath: 'avatarApi',
-    tagTypes: ['avatar'],
+    tagTypes: [ 'avatar' ],
     baseQuery: fetchBaseQuery({ baseUrl }),
     endpoints: (builder) => ({
         putAvatar: builder.mutation({
@@ -13,11 +13,11 @@ export const avatarApi = createApi({
                 method: 'PUT',
                 body: { picture: picture }
             }),
-            invalidatesTags: ['avatar']
+            invalidatesTags: [ 'avatar' ]
         }),
         getAvatar: builder.query({
             query: (localId) => `users/${ localId }/avatar.json`,
-            providesTags: ['avatar']
+            providesTags: [ 'avatar' ]
         })
     })
 })

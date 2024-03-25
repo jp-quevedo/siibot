@@ -10,7 +10,10 @@ import { MaterialIcons } from '@expo/vector-icons'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const Header = ({ navigation, title }) => {
+const Header = ({
+    navigation,
+    title
+}) => {
 
     const windowWidth = Dimensions.get('window').width
 

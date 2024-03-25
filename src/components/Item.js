@@ -11,7 +11,10 @@ import ItemUpdateModal from '../components/ItemUpdateModal'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const Item = ({ item, navigation }) => {
+const Item = ({
+    item,
+    navigation
+}) => {
 
     const windowWidth = Dimensions.get('window').width
 
@@ -28,6 +31,7 @@ const Item = ({ item, navigation }) => {
             <Text style = { styles.itemText }>Categoría :    { item.category }</Text>
             <Text style = { styles.itemText }>Glosa :    { item.name }</Text>
             <Text style = { styles.itemText }>Monto :    { item.amount }</Text>
+            <Text style = { styles.itemText }>Impuesto :    { item.taxes }</Text>
             <Text style = { styles.itemText }>Fecha :    { item.date }</Text>
             <EventButton
                 onPress={ () => onHandleModal(item) }
@@ -36,10 +40,10 @@ const Item = ({ item, navigation }) => {
             <ItemUpdateModal 
                 itemSelected = { itemSelected }
                 modalVisible = { modalVisible }
+                navigation = { navigation }
+                onHandleModal = { onHandleModal }
                 setItemSelected = { setItemSelected }
                 setModalVisible = { setModalVisible }
-                onHandleModal = { onHandleModal }
-                navigation = { navigation }
             />
         </View>
     )

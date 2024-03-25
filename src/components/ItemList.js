@@ -11,7 +11,10 @@ import { setItemIdSelected } from '../features/item/itemSlice'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const ItemList = ({ item, navigation }) => {
+const ItemList = ({
+    item,
+    navigation
+}) => {
 
     const windowWidth = Dimensions.get('window').width
 

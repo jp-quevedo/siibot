@@ -7,7 +7,7 @@ export const ordersApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl }),
     endpoints: (builder) => ({
         getOrders: builder.query({
-            query: (localId) => `/users/${localId}/orders.json`,
+            query: (localId) => `/users/${ localId }/orders.json`,
             transformResponse: (response) => {
                 const data = Object.entries(response).map(item => {
                     return { id: item[0], ...item[1] }
@@ -17,7 +17,7 @@ export const ordersApi = createApi({
         }),
         postOrder: builder.mutation({
             query: (localId) => ({
-                url: `/users/${localId}/items.json`,
+                url: `/users/${ localId }/items.json`,
                 method: 'POST',
                 body: order
             })
@@ -25,4 +25,4 @@ export const ordersApi = createApi({
     })
 })
 
-export const { useGetOrdersQuery ,usePostOrderMutation } = ordersApi
+export const { useGetOrdersQuery, usePostOrderMutation } = ordersApi

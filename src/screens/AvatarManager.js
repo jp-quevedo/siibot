@@ -13,7 +13,9 @@ import { usePutAvatarMutation, useGetAvatarQuery } from '../app/services/avatar'
 import EventButton from '../components/EventButton'
 import colors from '../utils/globals/colors'
 
-const AvatarManager = ({ navigation }) => {
+const AvatarManager = ({
+    navigation
+}) => {
 
     const windowWidth = Dimensions.get('window').width
 
