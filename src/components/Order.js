@@ -11,44 +11,44 @@ import ItemUpdateModal from '../components/ItemUpdateModal'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const Item = ({ item, navigation }) => {
+const Order = ({ order, navigation }) => {
 
     const windowWidth = Dimensions.get('window').width
 
-    const [ itemSelected, setItemSelected ] = useState({})
+    const [ orderSelected, setOrderSelected ] = useState({})
     const [ modalVisible, setModalVisible ] = useState(false)
 
-    const onHandleModal = (item) => {
-        setItemSelected(item)
+    const onHandleModal = (order) => {
+        setOrderSelected(order)
         setModalVisible(!modalVisible)
     }
 
     return (
-        <View style = {[ styles.itemCard, { width: windowWidth - 20 } ]}>
-            <Text style = { styles.itemText }>Categoría :    { item.category }</Text>
-            <Text style = { styles.itemText }>Glosa :    { item.name }</Text>
-            <Text style = { styles.itemText }>Monto :    { item.amount }</Text>
-            <Text style = { styles.itemText }>Fecha :    { item.date }</Text>
+        <View style = {[ styles.orderCard, { width: windowWidth - 20 } ]}>
+            <Text style = { styles.orderText }>Año :    { order.name }</Text>
+            <Text style = { styles.orderText }>Total del Ejercicio :    { order.total }</Text>
+            <Text style = { styles.orderText }>Resultado :    { order.taxes }</Text>
+            <Text style = { styles.orderText }>Operaciones :    { order.date }</Text>
             <EventButton
-                onPress={ () => onHandleModal(item) }
-                title = 'Editar'
+                onPress={ () => onHandleModal(order) }
+                title = 'Exportar'
             />
-            <ItemUpdateModal 
-                itemSelected = { itemSelected }
+            {/* <ItemUpdateModal 
+                itemSelected = { orderSelected }
                 modalVisible = { modalVisible }
                 setItemSelected = { setItemSelected }
                 setModalVisible = { setModalVisible }
                 onHandleModal = { onHandleModal }
                 navigation = { navigation }
-            />
+            /> */}
         </View>
     )
 }
 
-export default Item
+export default Order
 
 const styles = StyleSheet.create({
-    itemCard: {
+    orderCard: {
         backgroundColor: colors.container,
         borderColor: colors.container,
         borderRadius: 16,
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingVertical: 20
     },
-    itemText:{
+    orderText:{
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 16,

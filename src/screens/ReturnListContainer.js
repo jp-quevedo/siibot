@@ -9,39 +9,37 @@ import {
     View
 } from 'react-native'
 
-import { useGetItemsQuery } from '../app/services/items'
-import ItemList from '../components/ItemList'
+import { useGetOrdersQuery } from '../app/services/orders'
+import ReturnList from '../components/ReturnList'
 import SearchBar from '../components/SearchBar'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
-const ItemListContainer = ({ route, navigation }) => {
+const ReturnListContainer = ({ navigation }) => {
 
     const windowHeight = Dimensions.get('window').height
     const windowWidth = Dimensions.get('window').width
 
-    const { categorySelected } = route.params
     const localId = useSelector((state) => state.auth.localId)
-    const { data: items } = useGetItemsQuery(localId)
-    const [categoryFilter, setCategoryFilter] = useState([])
+    const { data: orders } = useGetOrdersQuery(localId)
+
+    const [ orderFilter, setOrderFilter ] = useState([])
     useEffect(() => {
-        const fetchFilteredItems = async () => {
-            if (items) {
-            const filter = items.filter(item => item.category === categorySelected)
-            setCategoryFilter(filter)
+        const fetchFilteredOrders = async () => {
+            if (orders) {
+                setOrderFilter(orders)
             }
         }
-        fetchFilteredItems()
-    }, [items, categorySelected])
-    
-    const [ itemFilter, setItemFilter ] = useState(categoryFilter)    
+        fetchFilteredOrders()
+    }, [ orders ])
+
     const [ keyWord, setKeyWord ] = useState('')
     const keyWordHandler = (text) => { setKeyWord(text) }
     useEffect(() => {
-        const itemsFilter = categoryFilter.filter((item) =>
-            item.name.toLowerCase().includes(keyWord) || item.name.toUpperCase().includes(keyWord)
+        const filter = orderFilter.filter((order) =>
+            order.name.toLowerCase().includes(keyWord) || order.name.toUpperCase().includes(keyWord)
         )
-        setItemFilter(itemsFilter)
+        setOrderFilter(filter)
     }, [ keyWord ])
 
     return (
@@ -49,13 +47,13 @@ const ItemListContainer = ({ route, navigation }) => {
             <SearchBar
                 keyWordHandler = { keyWordHandler }
             />
-            <View style = { styles.itemByCategory }>
+            <View style = { styles.ordersDisplay }>
                 <FlatList
-                    data = { itemFilter.length === 0 ? categoryFilter : itemFilter }
+                    data = { orderFilter.length === 0 ? orders : orderFilter }
                     keyExtractor = { item => item.id }
                     renderItem = {({ item }) =>
-                        <ItemList
-                            item = { item }
+                        <ReturnList
+                            order = { item }
                             navigation = { navigation }
                         />
                     }
@@ -63,25 +61,24 @@ const ItemListContainer = ({ route, navigation }) => {
             </View>
             <Pressable
                 onPress = { () => navigation.navigate(
-                    'ItemManager',
-                    { categorySelected }
+                    'ReturnManager'
                 )}
                 style = {[ styles.createButton, { width: windowWidth - 60 } ]}
             >
-                <Text style = { styles.buttonTitle }>Agregar</Text>
+                <Text style = { styles.buttonTitle }>Generar</Text>
             </Pressable>
         </View>
     )
 }
 
-export default ItemListContainer
+export default ReturnListContainer
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
     },
-    itemByCategory: {
+    ordersDisplay: {
         alignItems: 'center',
         paddingBottom: 20
     },

@@ -27,10 +27,12 @@ export default function App() {
 }
 
 // eventos
-// renderizar lista de items en tiempo real, generar declaracion
+// renderizar lista de items en tiempo real
 
 // declaraciones
 // primera pantalla ver declaraciones y generar declaracion
 // poner fecha
 // mapear y filtrar segun fecha
 // array nuevo calcular y generar declaracion
+
+// generar costos declaracion
