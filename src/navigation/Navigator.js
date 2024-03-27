@@ -21,7 +21,7 @@ const Navigator = () => {
     const user = useSelector((state) => state.auth)
 
     useEffect(() => {
-        ( async () => {
+        (async () => {
             const session = await fetchSession()
             if (session.rows.length) {
                 const user = session.rows._array[0]

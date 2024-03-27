@@ -29,10 +29,6 @@ export default function App() {
   )
 }
 
-// eventos y declaraciones
-// renderizar lista de items en tiempo real
-// alternativa a flatlist para items de una declaracion
-// agregar datos demograficos user a order
-
-// logica cart
-// segunda mitad clase 15 en adelante
+// renderizar lista de items en tiempo real (eventos y declaraciones)
+// usar datos de user para declaraciones y visualizaciones en el perfil
+// logica cart suscripciones

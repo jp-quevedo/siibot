@@ -7,7 +7,6 @@ import {
     Text,
     View
 } from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons'
 
 import EventButton from './EventButton'
 import colors from '../utils/globals/colors'
@@ -18,14 +17,6 @@ const Order = ({
 }) => {
 
     const windowWidth = Dimensions.get('window').width
-
-    // const [ orderSelected, setOrderSelected ] = useState({})
-    // const [ modalVisible, setModalVisible ] = useState(false)
-
-    // const onHandleModal = (order) => {
-    //     setOrderSelected(order)
-    //     setModalVisible(!modalVisible)
-    // }
 
     return (
         <ScrollView style = {[ styles.orderCard, { width: windowWidth - 20 } ]}>
@@ -46,7 +37,7 @@ const Order = ({
                 />
             </View>
             <EventButton
-                // onPress={ () => onHandleModal(order) }
+                // onPress = {}
                 title = 'Exportar'
             />
         </ScrollView>

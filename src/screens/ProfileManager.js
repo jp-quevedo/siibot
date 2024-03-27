@@ -29,10 +29,6 @@ const ProfileManager = ({
     const [ emailError, setEmailError ] = useState('')
     const [ passwordError, setPasswordError ] = useState('')
 
-    const onSubmit = async () => {
-
-    }
-
     return (
         <ScrollView style = {[ styles.profManContainer, { width: windowWidth - 20 } ]}>
             <Text style = { styles.optionText }>Actualiza tus credenciales</Text>
@@ -72,7 +68,7 @@ const ProfileManager = ({
                 warning = { passwordError }
             />
             <EventButton
-                onPress = { onSubmit }
+                // onPress = {}
                 title = 'Actualizar'
             />
             <Text style = { styles.optionText }>Para poder generar una declaración necesitas verificar tu dirección</Text>

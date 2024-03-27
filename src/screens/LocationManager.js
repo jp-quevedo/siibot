@@ -51,7 +51,7 @@ const LocationManager = ({
                 setAddress(data.results[0].formatted_address)
             }
         })()
-    }, [location])
+    }, [ location ])
 
     const onSetAddress = async () => {
         const locationFormatted = {
