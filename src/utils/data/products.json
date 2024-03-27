@@ -1,0 +1,20 @@
+[
+    {
+        "id": "1",
+        "title": "Contabilidad por Evento",
+        "description": "Pago por una gestoría puntual que incluye servicios esenciales de la app.",
+        "price": 14990
+    },
+    {
+        "id": "2",
+        "title": "Contabilidad Básica",
+        "description": "Suscripción anual con servicios esenciales incluidos y renovación automática.",
+        "price": 89990
+    },
+    {
+        "id": "3",
+        "title": "Contabilidad Premium",
+        "description": "Suscripción anual con todos los servicios incluidos y renovación automática.",
+        "price": 129990
+    }
+]

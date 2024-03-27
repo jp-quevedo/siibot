@@ -26,7 +26,22 @@ const ItemUpdateModal = ({
     const localId = useSelector((state) => state.auth.localId)
     const db = getDatabase()
     const itemId = itemSelected.id
+    const itemCat = itemSelected.category
     const itemRef = ref(db, `/users/${ localId }/items/${ itemId }`)
+
+    const taxCalc = (input, itemCat) => {
+        return itemCat === 'Contribuciones'
+            ? input * -1
+            : itemCat === 'Herencias'
+                ? input * 0.01
+                : itemCat === 'IVA'
+                    ? input * 0.19
+                    : itemCat === 'Primera Categoría'
+                        ? input * 0.025
+                        : itemCat === 'Segunda Categoría'
+                            ? input * 0.1
+                            : null
+    }
 
     const deleteItem = () => {
         remove(itemRef)
@@ -34,7 +49,11 @@ const ItemUpdateModal = ({
     }
     
     const onHandleUpdateAmount = (input) => {
-        setItemSelected({ ...itemSelected, amount: input })
+        setItemSelected({
+            ...itemSelected,
+            amount: input,
+            taxes: taxCalc(input, itemCat)
+        })
     }
     
     const onHandleUpdateName = (input) => {

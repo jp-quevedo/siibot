@@ -8,6 +8,7 @@ import {
     Text
 } from 'react-native'
 
+import { deleteSession, insertSession } from '../utils/db'
 import { loginSchema } from '../utils/validations/authSchema'
 import { setUser } from '../features/auth/authSlice'
 import { useLoginMutation } from '../app/services/auth'
@@ -31,6 +32,8 @@ const Login = ({
         try {
             loginSchema.validateSync({ email, password })
             const { data } = await triggerLogin({ email, password })
+            deleteSession()
+            insertSession(data)
             dispatch(setUser({ email: data.email, idToken: data.idToken, localId: data.localId }))
             Keyboard.dismiss()
         } catch (error) {

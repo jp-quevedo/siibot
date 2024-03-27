@@ -23,7 +23,7 @@ const UserStack = () => {
                                     route.name === 'Profile'
                                         ? 'Perfil'
                                         : route.name === 'Cart'
-                                            ? 'Plan'
+                                            ? 'Planes'
                                             : route.name === 'ProfileManager'
                                                 ? 'Datos Personales'
                                                 : route.name === 'AvatarManager'

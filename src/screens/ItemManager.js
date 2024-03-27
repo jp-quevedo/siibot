@@ -42,11 +42,11 @@ const ItemManager = ({
             : categorySelected === 'Herencias'
                 ? input * 0.01
                 : categorySelected === 'IVA'
-                    ? input * 0.019
+                    ? input * 0.19
                     : categorySelected === 'Primera Categoría'
                         ? input * 0.025
                         : categorySelected === 'Segunda Categoría'
-                            ? input * 0.01
+                            ? input * 0.1
                             : null
     }
 

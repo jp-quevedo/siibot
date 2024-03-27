@@ -8,9 +8,10 @@ import {
     Text
 } from 'react-native'
 
-import { useSignupMutation } from '../app/services/auth'
+import { deleteSession, insertSession } from '../utils/db'
 import { setUser } from '../features/auth/authSlice'
 import { signupSchema } from '../utils/validations/authSchema'
+import { useSignupMutation } from '../app/services/auth'
 import EventButton from '../components/EventButton'
 import InputForm from '../components/InputForm'
 import colors from '../utils/globals/colors'
@@ -41,6 +42,8 @@ const Signup = ({
         try {
             signupSchema.validateSync({ name, dni, address, phoneNumber, email, password })
             const { data } = await triggerSignup({ email, password })
+            deleteSession()
+            insertSession(data)
             dispatch(setUser({ email: data.email, idToken: data.idToken, localId: data.localId }))
             Keyboard.dismiss()
         } catch (error) {

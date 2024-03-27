@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
     Dimensions,
     Image,
@@ -8,6 +8,8 @@ import {
 } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
+import { clearUser } from '../features/auth/authSlice'
+import { deleteSession } from '../utils/db'
 import { useGetAvatarQuery } from '../app/services/avatar'
 import EventButton from '../components/EventButton'
 import IconButton from '../components/IconButton'
@@ -21,8 +23,14 @@ const Profile = ({
 
     const windowWidth = Dimensions.get('window').width
 
+    const dispatch = useDispatch()
     const localId = useSelector((state) => state.auth.localId)
     const { data } = useGetAvatarQuery(localId)
+
+    const onLogout = () => {
+        dispatch(clearUser())
+        deleteSession()
+    }
 
     return (
         <View style = {[ styles.profileContainer, { width: windowWidth - 20 } ]}>
@@ -53,7 +61,7 @@ const Profile = ({
                     title = 'Plan'
                 />
                 <EventButton
-                    // onPress={}
+                    onPress={ onLogout }
                     title = 'Cerrar Sesión'
                 />
             </View>

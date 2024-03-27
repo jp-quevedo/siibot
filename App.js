@@ -4,10 +4,13 @@ import {
 import { Provider } from 'react-redux'
 import { useFonts } from 'expo-font'
 
-import { store } from './src/app/store'
 import { fontCollection } from './src/utils/globals/fonts'
+import { init } from './src/utils/db'
+import { store } from './src/app/store'
 import Navigator from './src/navigation/Navigator'
 import colors from './src/utils/globals/colors'
+
+init()
 
 export default function App() {
 
@@ -28,6 +31,8 @@ export default function App() {
 
 // eventos y declaraciones
 // renderizar lista de items en tiempo real
+// alternativa a flatlist para items de una declaracion
+// agregar datos demograficos user a order
 
 // logica cart
 // segunda mitad clase 15 en adelante

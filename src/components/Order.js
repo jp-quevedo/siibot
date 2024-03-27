@@ -7,21 +7,20 @@ import {
     Text,
     View
 } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'
 
 import EventButton from './EventButton'
-import ItemList from '../components/ItemList'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
 const Order = ({
-    navigation,
     order
 }) => {
 
     const windowWidth = Dimensions.get('window').width
 
-    const [ orderSelected, setOrderSelected ] = useState({})
-    const [ modalVisible, setModalVisible ] = useState(false)
+    // const [ orderSelected, setOrderSelected ] = useState({})
+    // const [ modalVisible, setModalVisible ] = useState(false)
 
     // const onHandleModal = (order) => {
     //     setOrderSelected(order)
@@ -34,15 +33,15 @@ const Order = ({
             <Text style = { styles.orderText }>Total del Ejercicio :    { order.total }</Text>
             <Text style = { styles.orderText }>Resultado :    { order.taxes }</Text>
             <Text style = { styles.orderText }>Operaciones :</Text>
-            <View style = { styles.itemByCategory }>
+            <View style = {[ styles.container, { width: windowWidth - 60 } ]}>
                 <FlatList
                     data = { order.items }
-                    keyExtractor = { item => item.id }
-                    renderItem = {({ item }) =>
-                        <ItemList
-                            item = { item }
-                            navigation = { navigation }
-                        />
+                    horizontal = { true }
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem = {({ item, index }) =>
+                        <View style = {[ styles.itemByCategory, { width: windowWidth - 100 } ]}>
+                            <Text style = { styles.itemTitle }>{ item.name }</Text>
+                        </View>
                     }
                 />
             </View>
@@ -71,5 +70,22 @@ const styles = StyleSheet.create({
         fontFamily: fonts.regular,
         fontSize: 16,
         paddingHorizontal: 20
+    },
+    container: {
+        alignSelf: 'center'
+    },
+    itemByCategory: {
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        paddingVertical: 10,
+        width: 'auto'
+    },
+    itemTitle: {
+        color: colors.text,
+        fontFamily: fonts.regular,
+        fontSize: 16,
+        margin: 0,
+        padding: 0
     }
 })

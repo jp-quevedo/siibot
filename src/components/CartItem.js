@@ -13,9 +13,9 @@ const CartItem = ({
 }) => {
     return (
         <View style = { styles.cartItemCard }>
-            <Text style = { styles.cartItemText }>Suscripción: { item.title }</Text>
-            <Text style = { styles.cartItemText }>Descripción: { item.description }</Text>
-            <Text style = { styles.cartItemText }>Precio: $ { item.price }</Text>
+            <Text style = { styles.cartItemText }>Suscripción :    { item.title }</Text>
+            <Text style = { styles.cartItemText }>Descripción :    { item.description }</Text>
+            <Text style = { styles.cartItemText }>Precio :    $ { item.price }</Text>
             <MaterialIcons name = 'delete' size = { 40 } style = { styles.cartItemIcon } color = { colors.text } />
         </View>
     )
