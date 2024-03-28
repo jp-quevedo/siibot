@@ -29,6 +29,6 @@ export default function App() {
   )
 }
 
-// renderizar lista de items en tiempo real (eventos y declaraciones)
+// nan al crear o editar items
 // usar datos de user para declaraciones y visualizaciones en el perfil
 // logica cart suscripciones

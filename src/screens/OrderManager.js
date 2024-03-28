@@ -15,8 +15,7 @@ import EventButton from '../components/EventButton'
 import colors from '../utils/globals/colors'
 
 const OrderManager = ({
-    navigation,
-    route
+    navigation
 }) => {
 
     const windowWidth = Dimensions.get('window').width
@@ -52,7 +51,7 @@ const OrderManager = ({
         }
         fetchFilteredItems()
     }, [ items, selectedYear ])
-    
+
     const saveOrder = () => {
         const totalBalance = yearFilter.reduce((sum, item) => {
             return sum + item.amount

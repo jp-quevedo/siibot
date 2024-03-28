@@ -2,7 +2,7 @@
 
 Hey everyone! My name is Juan Pablo Quevedo and this is my final project for the React Native course in Coderhouse.
 
-This project works thanks to Node.js, NPM and Explo CLI.
+This project works thanks to Node.js, npm and Explo CLI.
 
 ## Inside SIIBot you will find:
 
@@ -42,4 +42,4 @@ $ npm start
 
 ## Preview screenshots:
 
-![Imgur](https://i.imgur.com/V8wvGHk.png)
+![Imgur](https://i.imgur.com/fzpP5C3.png)
