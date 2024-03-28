@@ -42,20 +42,4 @@ $ npm start
 
 ## Preview screenshots:
 
-![Imgur](https://i.imgur.com/1cxFS5b.png)
-
-
-
-
-
-![Imgur](https://i.imgur.com/zx2pymR.png)
-
-![Imgur](https://i.imgur.com/nZHSfXV.png)
-
-![Imgur](https://i.imgur.com/gwwrI07.png)
-
-![Imgur](https://i.imgur.com/QviwIjK.png)
-
-![Imgur](https://i.imgur.com/JqKLJiA.png)
-
-![Imgur](https://i.imgur.com/bbPwdfe.png)
+![Imgur](https://i.imgur.com/V8wvGHk.png)

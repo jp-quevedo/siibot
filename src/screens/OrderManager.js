@@ -31,8 +31,8 @@ const OrderManager = ({
         id: uuid.v4(),
         name: '',
         items: '',
-        total: '',
-        taxes: '',
+        total: 0,
+        taxes: 0,
         date: '',
     })
 

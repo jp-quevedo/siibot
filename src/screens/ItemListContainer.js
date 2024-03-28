@@ -23,19 +23,21 @@ const ItemListContainer = ({
     const windowHeight = Dimensions.get('window').height
     const windowWidth = Dimensions.get('window').width
 
-    const { categorySelected } = route.params
     const localId = useSelector((state) => state.auth.localId)
     const { data: items } = useGetItemsQuery(localId)
-    const [categoryFilter, setCategoryFilter] = useState([])
+    const { categorySelected } = route.params
+    const [ categoryFilter, setCategoryFilter ] = useState([])
+
     useEffect(() => {
-        const fetchFilteredItems = async () => {
+        const fetchFilteredItems = () => {
             if (items) {
-            const filter = items.filter(item => item.category === categorySelected)
-            setCategoryFilter(filter)
+                const filter = items.filter(item => item.category === categorySelected)
+                const sortedFilter = filter.sort((b, a) => b.date.localeCompare(a.date))
+                setCategoryFilter(sortedFilter)
             }
         }
         fetchFilteredItems()
-    }, [items, categorySelected])
+    }, [ items, categorySelected ])
     
     const [ itemFilter, setItemFilter ] = useState(categoryFilter)    
     const [ keyWord, setKeyWord ] = useState('')

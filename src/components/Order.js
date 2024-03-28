@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
     Dimensions,
     FlatList,
@@ -63,20 +62,25 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20
     },
     container: {
-        alignSelf: 'center'
+        alignSelf: 'center',
+        overflow: 'hidden',
+        paddingVertical: 20
     },
     itemByCategory: {
         alignItems: 'center',
+        backgroundColor: colors.input,
+        borderRadius: 36,
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        paddingVertical: 10,
-        width: 'auto'
+        marginRight: 20,
+        padding: 10,
+        width: 'min-content'
     },
     itemTitle: {
         color: colors.text,
         fontFamily: fonts.regular,
         fontSize: 16,
-        margin: 0,
-        padding: 0
+        margin: 10,
+        padding: 0,
     }
 })

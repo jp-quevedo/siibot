@@ -49,10 +49,11 @@ const ItemUpdateModal = ({
     }
     
     const onHandleUpdateAmount = (input) => {
+        const toNumber = parseInt(input)
         setItemSelected({
             ...itemSelected,
-            amount: input,
-            taxes: taxCalc(input, itemCat)
+            amount: toNumber,
+            taxes: taxCalc(toNumber, itemCat)
         })
     }
     
@@ -89,7 +90,7 @@ const ItemUpdateModal = ({
                     placeholder = 'Monto'
                     placeholderTextColor = { colors.text }
                     style = {[ styles.textInput, { width: windowWidth - 60 } ]}
-                    value = { itemSelected.amount }
+                    value = { `${ itemSelected.amount }` }
                 />
                 <EventButton
                     onPress = { () => saveItemUpdate(itemSelected) }

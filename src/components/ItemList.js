@@ -24,7 +24,7 @@ const ItemList = ({
         <Pressable
             onPress = {() => {
                 dispatch(setItemIdSelected(item))
-                navigation.navigate('ItemContainer', { itemId: item.id }, navigation = { navigation })
+                navigation.navigate('ItemContainer', { itemId: item.id })
             }}
             style = {[ styles.itemListContainer, { width: windowWidth - 20 } ]}
             title = 'Detalle'

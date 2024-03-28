@@ -29,8 +29,8 @@ const ItemManager = ({
         id: uuid.v4(),
         category: categorySelected,
         name: '',
-        amount: '',
-        taxes: '',
+        amount: 0,
+        taxes: 0,
         date: ''
     })
 
@@ -51,10 +51,11 @@ const ItemManager = ({
     }
 
     const onHandleAddAmount = (input) => {
+        const toNumber = parseInt(input)
         setNewItem({
             ...newItem,
-            amount: parseInt(input),
-            taxes: taxCalc(input, categorySelected)
+            amount: toNumber,
+            taxes: taxCalc(toNumber, categorySelected)
         })
     }
     
@@ -72,8 +73,8 @@ const ItemManager = ({
             id: '',
             category: '',
             name: '',
-            amount: '',
-            taxes: '',
+            amount: 0,
+            taxes: 0,
             date: ''
         })
         navigation.goBack()
@@ -95,7 +96,7 @@ const ItemManager = ({
                 placeholder = 'Monto'
                 placeholderTextColor = { colors.text }
                 style = {[ styles.textInput, { width: windowWidth - 60 } ]}
-                value = { newItem.amount }
+                value = { newItem.amount.toString() }
             />
             <EventButton
                 onPress = { saveItem }

@@ -5,7 +5,7 @@ import {
     Text
 } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialIcons } from '@expo/vector-icons'
 
 import { setOrderIdSelected } from '../features/order/orderSlice'
 import colors from '../utils/globals/colors'
@@ -24,12 +24,12 @@ const OrderList = ({
         <Pressable
             onPress = {() => {
                 dispatch(setOrderIdSelected(order))
-                navigation.navigate('OrderContainer', { orderId: order.id }, navigation = { navigation })
+                navigation.navigate('OrderContainer', { orderId: order.id })
             }}
             style = {[ styles.orderListContainer, { width: windowWidth - 20 } ]}
             title = 'Detalle'
         >
-            <MaterialCommunityIcons name = 'export' size = { 30 } color = 'white' style = { styles.orderIcon }/>
+            <MaterialIcons name = 'manage-search' size = { 30 } color = 'white' style = { styles.orderIcon }/>
             <Text style = { styles.orderTitle }>{ order.name }</Text>
         </Pressable>
     )
