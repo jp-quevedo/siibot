@@ -6,7 +6,7 @@ import {
     TextInput,
     View
 } from 'react-native'
-import { getDatabase, ref, update } from "firebase/database"
+import { getDatabase, ref, update } from 'firebase/database'
 import uuid from 'react-native-uuid'
 
 import { app } from '../utils/data/index'
@@ -22,8 +22,7 @@ const ItemManager = ({
 
     const { categorySelected } = route.params
     const localId = useSelector((state) => state.auth.localId)
-    const app = app
-    const db = getDatabase()
+    const db = getDatabase(app)
 
     const [ newItem, setNewItem ] = useState({
         id: uuid.v4(),
@@ -51,7 +50,7 @@ const ItemManager = ({
     }
 
     const onHandleAddAmount = (input) => {
-        const toNumber = parseInt(input)
+        const toNumber = isNaN(input) ? 0 : parseInt(input)
         setNewItem({
             ...newItem,
             amount: toNumber,

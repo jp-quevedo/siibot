@@ -8,9 +8,8 @@ import {
     Text,
     View
 } from 'react-native'
-import { getDatabase, ref, onValue } from 'firebase/database'
 
-import { app } from '../utils/data/index'
+import { useGetOrdersQuery } from '../app/services/orders'
 import OrderList from '../components/OrderList'
 import SearchBar from '../components/SearchBar'
 import colors from '../utils/globals/colors'
@@ -24,25 +23,17 @@ const OrderListContainer = ({
     const windowWidth = Dimensions.get('window').width
 
     const localId = useSelector((state) => state.auth.localId)
+    const { data: orders } = useGetOrdersQuery(localId)
+
     const [ orderFilter, setOrderFilter ] = useState([])
-
-    const fetchFilteredOrders = (newOrders) => {
-        if (newOrders) {
-            const sort = newOrders.sort((b, a) => b.date.localeCompare(a.date))
-            setOrderFilter(sort)
-        }
-    }
-
-    const database = getDatabase(app)
-
     useEffect(() => {
-        const ordersRef = ref(database, `/users/${ localId }/orders`)
-        const unsubscribe = onValue(ordersRef, (snapshot) => {
-            const newOrders = Object.values(snapshot.val())
-            fetchFilteredOrders(newOrders)
-        })
-        return () => unsubscribe()
-    }, [ orderFilter ])
+        const fetchFilteredOrders = async () => {
+            if (orders) {
+                setOrderFilter(orders)
+            }
+        }
+        fetchFilteredOrders()
+    }, [ orders ])
 
     const [ keyWord, setKeyWord ] = useState('')
     const keyWordHandler = (text) => { setKeyWord(text) }
@@ -59,19 +50,16 @@ const OrderListContainer = ({
                 keyWordHandler = { keyWordHandler }
             />
             <View style = { styles.ordersDisplay }>
-                { orderFilter.length === 0
-                    ? <Text>No hay Declaraciones</Text>
-                    : <FlatList
-                        data = { orderFilter }
-                        keyExtractor = { item => item.id }
-                        renderItem = {({ item }) =>
-                            <OrderList
-                                order = { item }
-                                navigation = { navigation }
-                            />
-                        }
-                    />
-                } 
+                <FlatList
+                    data = { orderFilter.length === 0 ? orders : orderFilter }
+                    keyExtractor = { item => item.id }
+                    renderItem = {({ item }) =>
+                        <OrderList
+                            order = { item }
+                            navigation = { navigation }
+                        />
+                    }
+                />
             </View>
             <Pressable
                 onPress = { () => navigation.navigate(

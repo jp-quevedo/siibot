@@ -44,7 +44,11 @@ const Signup = ({
             const { data } = await triggerSignup({ email, password })
             deleteSession()
             insertSession(data)
-            dispatch(setUser({ email: data.email, idToken: data.idToken, localId: data.localId }))
+            dispatch(setUser({
+                email: data.email,
+                idToken: data.idToken,
+                localId: data.localId
+            }))
             Keyboard.dismiss()
         } catch (error) {
             setNameError('')

@@ -8,9 +8,8 @@ import {
     Text,
     View
 } from 'react-native'
-import { getDatabase, ref, onValue } from 'firebase/database'
 
-import { app } from '../utils/data/index'
+import { useGetItemsQuery } from '../app/services/items'
 import ItemList from '../components/ItemList'
 import SearchBar from '../components/SearchBar'
 import colors from '../utils/globals/colors'
@@ -25,27 +24,20 @@ const ItemListContainer = ({
     const windowWidth = Dimensions.get('window').width
 
     const localId = useSelector((state) => state.auth.localId)
+    const { data: items } = useGetItemsQuery(localId)
     const { categorySelected } = route.params
     const [ categoryFilter, setCategoryFilter ] = useState([])
 
-    const fetchFilteredItems = (newItems) => {
-        if (newItems) {
-            const filter = newItems.filter(item => item.category === categorySelected)
-            const sort = filter.sort((b, a) => b.date.localeCompare(a.date))
-            setCategoryFilter(sort)
-        }
-    }
-
-    const database = getDatabase(app)
-
     useEffect(() => {
-        const itemsRef = ref(database, `/users/${ localId }/items`)
-        const unsubscribe = onValue(itemsRef, (snapshot) => {
-            const newItems = Object.values(snapshot.val())
-            fetchFilteredItems(newItems)
-        })
-        return () => unsubscribe()
-    }, [ categorySelected ])
+        const fetchFilteredItems = () => {
+            if (items) {
+                const filter = items.filter(item => item.category === categorySelected)
+                const sortedFilter = filter.sort((b, a) => b.date.localeCompare(a.date))
+                setCategoryFilter(sortedFilter)
+            }
+        }
+        fetchFilteredItems()
+    }, [ items, categorySelected ])
     
     const [ itemFilter, setItemFilter ] = useState(categoryFilter)    
     const [ keyWord, setKeyWord ] = useState('')

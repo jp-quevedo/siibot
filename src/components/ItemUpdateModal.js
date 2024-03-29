@@ -49,7 +49,7 @@ const ItemUpdateModal = ({
     }
     
     const onHandleUpdateAmount = (input) => {
-        const toNumber = parseInt(input)
+        const toNumber = isNaN(input) ? 0 : parseInt(input)
         setItemSelected({
             ...itemSelected,
             amount: toNumber,

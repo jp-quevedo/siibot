@@ -29,6 +29,6 @@ export default function App() {
   )
 }
 
-// nan al crear o editar items
+// renderizado en tiempo real arroja error en caso de no haber objs, revisar commit e750b50
 // usar datos de user para declaraciones y visualizaciones en el perfil
 // logica cart suscripciones
