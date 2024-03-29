@@ -10,6 +10,9 @@ import {
 } from 'react-native'
 
 import { useGetOrdersQuery } from '../app/services/orders'
+import EmptyList from '../components/EmptyList'
+import Error from '../components/Error'
+import Loading from '../components/Loading'
 import OrderList from '../components/OrderList'
 import SearchBar from '../components/SearchBar'
 import colors from '../utils/globals/colors'
@@ -23,9 +26,13 @@ const OrderListContainer = ({
     const windowWidth = Dimensions.get('window').width
 
     const localId = useSelector((state) => state.auth.localId)
-    const { data: orders } = useGetOrdersQuery(localId)
-
+    const { data: orders, isError, isLoading, isSuccess } = useGetOrdersQuery(localId)
     const [ orderFilter, setOrderFilter ] = useState([])
+
+    // if (isLoading) return <Loading/>
+    // if (isError) return <Error message = '¡Ups! Algo salió mal.' textButton = 'Volver' onRetry = { () => navigation.goBack() }/>
+    // if (isSuccess && orders.length === 0) return <EmptyList message = 'No hay Declaraciones'/>
+
     useEffect(() => {
         const fetchFilteredOrders = async () => {
             if (orders) {

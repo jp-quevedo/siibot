@@ -10,7 +10,10 @@ import {
 } from 'react-native'
 
 import { useGetItemsQuery } from '../app/services/items'
+import EmptyList from '../components/EmptyList'
+import Error from '../components/Error'
 import ItemList from '../components/ItemList'
+import Loading from '../components/Loading'
 import SearchBar from '../components/SearchBar'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
@@ -24,9 +27,13 @@ const ItemListContainer = ({
     const windowWidth = Dimensions.get('window').width
 
     const localId = useSelector((state) => state.auth.localId)
-    const { data: items } = useGetItemsQuery(localId)
+    const { data: items, isError, isLoading, isSuccess } = useGetItemsQuery(localId)
     const { categorySelected } = route.params
     const [ categoryFilter, setCategoryFilter ] = useState([])
+
+    // if (isLoading) return <Loading/>
+    // if (isError) return <Error message = '¡Ups! Algo salió mal.' textButton = 'Volver' onRetry = { () => navigation.goBack() }/>
+    // if (isSuccess && items.length === 0) return <EmptyList message = 'No hay ítems en esta categoría'/>
 
     useEffect(() => {
         const fetchFilteredItems = () => {
@@ -88,6 +95,7 @@ const styles = StyleSheet.create({
     },
     itemByCategory: {
         alignItems: 'center',
+        height: 400,
         paddingBottom: 20
     },
     createButton: {
