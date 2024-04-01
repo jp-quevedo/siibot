@@ -8,11 +8,9 @@ import {
     Text,
     View
 } from 'react-native'
+import { getDatabase, ref, onValue } from 'firebase/database'
 
-import { useGetOrdersQuery } from '../app/services/orders'
-import EmptyList from '../components/EmptyList'
-import Error from '../components/Error'
-import Loading from '../components/Loading'
+import { app } from '../utils/data/index'
 import OrderList from '../components/OrderList'
 import SearchBar from '../components/SearchBar'
 import colors from '../utils/globals/colors'
@@ -26,22 +24,30 @@ const OrderListContainer = ({
     const windowWidth = Dimensions.get('window').width
 
     const localId = useSelector((state) => state.auth.localId)
-    const { data: orders, isError, isLoading, isSuccess } = useGetOrdersQuery(localId)
     const [ orderFilter, setOrderFilter ] = useState([])
 
-    // if (isLoading) return <Loading/>
-    // if (isError) return <Error message = '¡Ups! Algo salió mal.' textButton = 'Volver' onRetry = { () => navigation.goBack() }/>
-    // if (isSuccess && orders.length === 0) return <EmptyList message = 'No hay Declaraciones'/>
+    const fetchFilteredOrders = (newOrders) => {
+        if (newOrders) {
+            const sort = newOrders.sort((b, a) => b.date.localeCompare(a.date))
+            setOrderFilter(sort)
+        }
+    }
+
+    const database = getDatabase(app)
 
     useEffect(() => {
-        const fetchFilteredOrders = async () => {
-            if (orders) {
-                setOrderFilter(orders)
+        const ordersRef = ref(database, `/users/${ localId }/orders`)
+        const unsubscribe = onValue(ordersRef, (snapshot) => {
+            if (snapshot.exists()) {
+                const orders = Object.values(snapshot.val())
+                fetchFilteredOrders(orders)
+            } else {
+                fetchFilteredOrders([])
             }
-        }
-        fetchFilteredOrders()
-    }, [ orders ])
-
+        })
+        return () => unsubscribe()
+    }, [ orderFilter ])
+    
     const [ keyWord, setKeyWord ] = useState('')
     const keyWordHandler = (text) => { setKeyWord(text) }
     useEffect(() => {
@@ -57,16 +63,19 @@ const OrderListContainer = ({
                 keyWordHandler = { keyWordHandler }
             />
             <View style = { styles.ordersDisplay }>
-                <FlatList
-                    data = { orderFilter.length === 0 ? orders : orderFilter }
-                    keyExtractor = { item => item.id }
-                    renderItem = {({ item }) =>
-                        <OrderList
-                            order = { item }
-                            navigation = { navigation }
-                        />
-                    }
-                />
+                { orderFilter.length === 0
+                    ? <Text style = { styles.altTitle }>No hay Declaraciones</Text>
+                    : <FlatList
+                        data = { orderFilter }
+                        keyExtractor = { item => item.id }
+                        renderItem = {({ item }) =>
+                            <OrderList
+                                order = { item }
+                                navigation = { navigation }
+                            />
+                        }
+                    />
+                }
             </View>
             <Pressable
                 onPress = { () => navigation.navigate(
@@ -90,6 +99,13 @@ const styles = StyleSheet.create({
     ordersDisplay: {
         alignItems: 'center',
         paddingBottom: 20
+    },
+    altTitle: {
+        color: colors.text,
+        fontFamily: fonts.regular,
+        fontSize: 16,
+        paddingTop: 20,
+        textAlign: 'center'
     },
     createButton: {
         alignSelf: 'center',

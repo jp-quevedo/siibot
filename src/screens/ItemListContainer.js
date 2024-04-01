@@ -8,12 +8,10 @@ import {
     Text,
     View
 } from 'react-native'
+import { getDatabase, ref, onValue } from 'firebase/database'
 
-import { useGetItemsQuery } from '../app/services/items'
-import EmptyList from '../components/EmptyList'
-import Error from '../components/Error'
+import { app } from '../utils/data/index'
 import ItemList from '../components/ItemList'
-import Loading from '../components/Loading'
 import SearchBar from '../components/SearchBar'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
@@ -27,24 +25,31 @@ const ItemListContainer = ({
     const windowWidth = Dimensions.get('window').width
 
     const localId = useSelector((state) => state.auth.localId)
-    const { data: items, isError, isLoading, isSuccess } = useGetItemsQuery(localId)
     const { categorySelected } = route.params
     const [ categoryFilter, setCategoryFilter ] = useState([])
 
-    // if (isLoading) return <Loading/>
-    // if (isError) return <Error message = '¡Ups! Algo salió mal.' textButton = 'Volver' onRetry = { () => navigation.goBack() }/>
-    // if (isSuccess && items.length === 0) return <EmptyList message = 'No hay ítems en esta categoría'/>
+    const fetchFilteredItems = (newItems) => {
+        if (newItems) {
+            const filter = newItems.filter(item => item.category === categorySelected)
+            const sort = filter.sort((b, a) => b.date.localeCompare(a.date))
+            setCategoryFilter(sort)
+        }
+    }
+
+    const database = getDatabase(app)
 
     useEffect(() => {
-        const fetchFilteredItems = () => {
-            if (items) {
-                const filter = items.filter(item => item.category === categorySelected)
-                const sortedFilter = filter.sort((b, a) => b.date.localeCompare(a.date))
-                setCategoryFilter(sortedFilter)
+        const itemsRef = ref(database, `/users/${ localId }/items`)
+        const unsubscribe = onValue(itemsRef, (snapshot) => {
+            if (snapshot.exists()) {
+                const newItems = Object.values(snapshot.val())
+                fetchFilteredItems(newItems)
+            } else {
+                fetchFilteredItems([])
             }
-        }
-        fetchFilteredItems()
-    }, [ items, categorySelected ])
+        })
+        return () => unsubscribe()
+    }, [ categorySelected ])
     
     const [ itemFilter, setItemFilter ] = useState(categoryFilter)    
     const [ keyWord, setKeyWord ] = useState('')
@@ -62,16 +67,19 @@ const ItemListContainer = ({
                 keyWordHandler = { keyWordHandler }
             />
             <View style = { styles.itemByCategory }>
-                <FlatList
-                    data = { itemFilter.length === 0 ? categoryFilter : itemFilter }
-                    keyExtractor = { item => item.id }
-                    renderItem = {({ item }) =>
-                        <ItemList
+                { itemFilter.length === 0
+                    ? <Text style = { styles.altTitle }>No hay Eventos</Text>
+                    : <FlatList
+                        data = { itemFilter }
+                        keyExtractor = { item => item.id }
+                        renderItem = {({ item }) =>
+                            <ItemList
                             item = { item }
-                            navigation = { navigation }
-                        />
-                    }
-                />
+                                navigation = { navigation }
+                            />
+                        }
+                    />
+                }
             </View>
             <Pressable
                 onPress = { () => navigation.navigate(
@@ -95,8 +103,14 @@ const styles = StyleSheet.create({
     },
     itemByCategory: {
         alignItems: 'center',
-        height: 400,
         paddingBottom: 20
+    },
+    altTitle: {
+        color: colors.text,
+        fontFamily: fonts.regular,
+        fontSize: 16,
+        paddingTop: 20,
+        textAlign: 'center'
     },
     createButton: {
         alignSelf: 'center',

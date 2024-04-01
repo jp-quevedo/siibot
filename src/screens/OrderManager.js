@@ -5,12 +5,11 @@ import {
     StyleSheet,
     View
 } from 'react-native'
-import { getDatabase, ref, update } from "firebase/database"
+import { getDatabase, ref, update, onValue } from "firebase/database"
 import { Picker } from '@react-native-picker/picker'
 import uuid from 'react-native-uuid'
 
 import { app } from '../utils/data/index'
-import { useGetItemsQuery } from '../app/services/items'
 import EventButton from '../components/EventButton'
 import colors from '../utils/globals/colors'
 
@@ -20,9 +19,7 @@ const OrderManager = ({
 
     const windowWidth = Dimensions.get('window').width
     const localId = useSelector((state) => state.auth.localId)
-    const { data: items } = useGetItemsQuery(localId)
-    const app = app
-    const db = getDatabase()
+    const database = getDatabase(app)
 
     const [ selectedYear, setSelectedYear ] = useState(new Date().getFullYear())
     const [ yearFilter, setYearFilter ] = useState([])
@@ -35,22 +32,32 @@ const OrderManager = ({
         date: '',
     })
 
-    const ordersRef = ref(db, `/users/${ localId }/orders/${ newOrder.id }`)
+    const ordersRef = ref(database, `/users/${ localId }/orders/${ newOrder.id }`)
     const startOfYear = new Date(`${selectedYear}-01-01T00:00:00`)
     const endOfYear = new Date(`${ selectedYear }-12-31T23:59:59`)
 
-    useEffect(() => {
-        const fetchFilteredItems = async () => {
-            if (items) {
-                const filter = items.filter(item => {
-                    const itemDate = new Date(item.date)
-                    return itemDate >= startOfYear && itemDate <= endOfYear
-                })
-                setYearFilter(filter)
-            }
+    const fetchFilteredItems = (items) => {
+        if (items) {
+            const filter = items.filter(item => {
+                const itemDate = new Date(item.date)
+                return itemDate >= startOfYear && itemDate <= endOfYear
+            })
+            setYearFilter(filter)
         }
-        fetchFilteredItems()
-    }, [ items, selectedYear ])
+    }
+
+    useEffect(() => {
+        const itemsRef = ref(database, `/users/${ localId }/items`)
+        const unsubscribe = onValue(itemsRef, (snapshot) => {
+            if (snapshot.exists()) {
+                const items = Object.values(snapshot.val())
+                fetchFilteredItems(items)
+            } else {
+                fetchFilteredItems([])
+            }
+        })
+        return () => unsubscribe()
+    }, [ selectedYear ])
 
     const saveOrder = () => {
         const totalBalance = yearFilter.reduce((sum, item) => {

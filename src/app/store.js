@@ -26,7 +26,7 @@ export const store = configureStore({
         [ ordersApi.reducerPath ]: ordersApi.reducer
     },
     middleware: (getDefaultMiddleware) => 
-        getDefaultMiddleware({ immutableCheck: false })
+        getDefaultMiddleware({ immutableCheck: false, serializableCheck: false })
             .concat(
                 authApi.middleware,
                 avatarApi.middleware,

@@ -29,6 +29,43 @@ export default function App() {
   )
 }
 
-// renderizado en tiempo real arroja error en caso de no haber objs, revisar commit e750b50
 // usar datos de user para declaraciones y visualizaciones en el perfil
 // logica cart suscripciones
+
+// {
+//   "cli": {
+//     "version": ">= 7.6.2"
+//   },
+//   "build": {
+//     "development": {
+//       "developmentClient": true,
+//       "distribution": "internal"
+//     },
+//     "preview": {
+//       "distribution": "internal"
+//     },
+//     "production": {}
+//   },
+//   "submit": {
+//     "production": {}
+//   }
+// }
+
+// {
+//   "build": {
+//     "preview": {
+//       "android": {
+//         "buildType": "apk"
+//       }
+//     },
+//     "preview2": {
+//       "android": {
+//         "gradleCommand": ":app:assembleRelease"
+//       }
+//     },
+//     "preview3": {
+//       "developmentClient": true
+//     },
+//     "production": {}
+//   }
+// }

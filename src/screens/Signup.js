@@ -7,7 +7,9 @@ import {
     StyleSheet,
     Text
 } from 'react-native'
+import { getDatabase, ref, update } from 'firebase/database'
 
+import { app } from '../utils/data/index'
 import { deleteSession, insertSession } from '../utils/db'
 import { setUser } from '../features/auth/authSlice'
 import { signupSchema } from '../utils/validations/authSchema'
@@ -36,12 +38,25 @@ const Signup = ({
     const [ emailError, setEmailError ] = useState('')
     const [ passwordError, setPasswordError ] = useState('')
 
+    const db = getDatabase(app)
+
     const [ triggerSignup ] = useSignupMutation()
     const dispatch = useDispatch()
     const onSubmit = async () => {
         try {
             signupSchema.validateSync({ name, dni, address, phoneNumber, email, password })
             const { data } = await triggerSignup({ email, password })
+            const usersRef = ref(db, `/users/${ data.localId }`)
+            update(
+                usersRef,
+                {
+                    name: data.name,
+                    dni: data.dni,
+                    address: data.address,
+                    phoneNumber: data.phoneNumber,
+                    email: data.email
+                }
+            )
             deleteSession()
             insertSession(data)
             dispatch(setUser({
