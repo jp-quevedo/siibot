@@ -7,6 +7,7 @@ import { shopApi } from './services/shop'
 import { itemsApi } from './services/items'
 import { locationApi } from './services/location'
 import { ordersApi } from './services/orders'
+import { userApi } from './services/user'
 import authReducer from '../features/auth/authSlice'
 import cartReducer from '../features/cart/cartSlice'
 import itemReducer from '../features/item/itemSlice'
@@ -23,7 +24,8 @@ export const store = configureStore({
         [ shopApi.reducerPath ]: shopApi.reducer,
         [ itemsApi.reducerPath ]: itemsApi.reducer,
         [ locationApi.reducerPath ]: locationApi.reducer,
-        [ ordersApi.reducerPath ]: ordersApi.reducer
+        [ ordersApi.reducerPath ]: ordersApi.reducer,
+        [ userApi.reducerPath ]: userApi.reducer
     },
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware({ immutableCheck: false, serializableCheck: false })
@@ -33,7 +35,8 @@ export const store = configureStore({
                 shopApi.middleware,
                 itemsApi.middleware,
                 locationApi.middleware,
-                ordersApi.middleware
+                ordersApi.middleware,
+                userApi.middleware
             )
 })
 

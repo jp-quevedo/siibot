@@ -24,7 +24,12 @@ const OrderListContainer = ({
     const windowWidth = Dimensions.get('window').width
 
     const localId = useSelector((state) => state.auth.localId)
+    const database = getDatabase(app)
+    const ordersRef = ref(database, `/users/${ localId }/orders`)
     const [ orderFilter, setOrderFilter ] = useState([])
+    const [ keyWord, setKeyWord ] = useState('')
+
+    const keyWordHandler = (text) => { setKeyWord(text) }
 
     const fetchFilteredOrders = (newOrders) => {
         if (newOrders) {
@@ -33,10 +38,7 @@ const OrderListContainer = ({
         }
     }
 
-    const database = getDatabase(app)
-
     useEffect(() => {
-        const ordersRef = ref(database, `/users/${ localId }/orders`)
         const unsubscribe = onValue(ordersRef, (snapshot) => {
             if (snapshot.exists()) {
                 const orders = Object.values(snapshot.val())
@@ -48,8 +50,6 @@ const OrderListContainer = ({
         return () => unsubscribe()
     }, [ orderFilter ])
     
-    const [ keyWord, setKeyWord ] = useState('')
-    const keyWordHandler = (text) => { setKeyWord(text) }
     useEffect(() => {
         const filter = orderFilter.filter((order) =>
             order.name.toLowerCase().includes(keyWord) || order.name.toUpperCase().includes(keyWord)
@@ -63,19 +63,16 @@ const OrderListContainer = ({
                 keyWordHandler = { keyWordHandler }
             />
             <View style = { styles.ordersDisplay }>
-                { orderFilter.length === 0
-                    ? <Text style = { styles.altTitle }>No hay Declaraciones</Text>
-                    : <FlatList
-                        data = { orderFilter }
-                        keyExtractor = { item => item.id }
-                        renderItem = {({ item }) =>
-                            <OrderList
-                                order = { item }
-                                navigation = { navigation }
-                            />
-                        }
-                    />
-                }
+                <FlatList
+                    data = { orderFilter.length === 0 ? null : orderFilter }
+                    keyExtractor = { item => item.id }
+                    renderItem = {({ item }) =>
+                        <OrderList
+                            order = { item }
+                            navigation = { navigation }
+                        />
+                    }
+                />
             </View>
             <Pressable
                 onPress = { () => navigation.navigate(

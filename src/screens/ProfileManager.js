@@ -31,7 +31,7 @@ const ProfileManager = ({
 
     return (
         <ScrollView style = {[ styles.profManContainer, { width: windowWidth - 20 } ]}>
-            <Text style = { styles.optionText }>Actualiza tus credenciales</Text>
+            <Text style = { styles.optionText }>Actualiza tus datos</Text>
             <InputForm
                 label = 'Nombre'
                 value = { name }

@@ -29,8 +29,11 @@ export default function App() {
   )
 }
 
-// usar datos de user para declaraciones y visualizaciones en el perfil
 // logica cart suscripciones
+// manejar tiempo de sesion
+// eliminar, exportar declaracion
+// actualizar datos de contacto
+// darle funcionalidad a historial y preferencias
 
 // {
 //   "cli": {

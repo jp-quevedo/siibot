@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import {
     Dimensions,
     FlatList,
@@ -7,6 +9,7 @@ import {
     View
 } from 'react-native'
 
+import { useGetUserQuery } from '../app/services/user'
 import EventButton from './EventButton'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
@@ -17,8 +20,24 @@ const Order = ({
 
     const windowWidth = Dimensions.get('window').width
 
+    const localId = useSelector((state) => state.auth.localId)
+    const { data: user } = useGetUserQuery(localId)
+    const [ userData, setUserData ] = useState('')
+
+    useEffect(() => {
+        const fetchUser = () => {
+            if (user) {
+                setUserData(user)
+            }
+        }
+        fetchUser()
+    }, [ user, userData ])
+
     return (
         <ScrollView style = {[ styles.orderCard, { width: windowWidth - 20 } ]}>
+            <Text style = { styles.orderText }>Nombre :    { userData.name }</Text>
+            <Text style = { styles.orderText }>Rut :    { userData.dni }</Text>
+            <Text style = { styles.orderText }>Dirección :    { userData.address }</Text>
             <Text style = { styles.orderText }>Año :    { order.name }</Text>
             <Text style = { styles.orderText }>Total del Ejercicio :    { order.total }</Text>
             <Text style = { styles.orderText }>Resultado :    { order.taxes }</Text>

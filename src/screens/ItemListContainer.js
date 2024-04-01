@@ -24,9 +24,15 @@ const ItemListContainer = ({
     const windowHeight = Dimensions.get('window').height
     const windowWidth = Dimensions.get('window').width
 
+    const database = getDatabase(app)
     const localId = useSelector((state) => state.auth.localId)
+    const itemsRef = ref(database, `/users/${ localId }/items`)
     const { categorySelected } = route.params
     const [ categoryFilter, setCategoryFilter ] = useState([])
+    const [ itemFilter, setItemFilter ] = useState(categoryFilter)    
+    const [ keyWord, setKeyWord ] = useState('')
+
+    const keyWordHandler = (text) => { setKeyWord(text) }
 
     const fetchFilteredItems = (newItems) => {
         if (newItems) {
@@ -36,10 +42,7 @@ const ItemListContainer = ({
         }
     }
 
-    const database = getDatabase(app)
-
     useEffect(() => {
-        const itemsRef = ref(database, `/users/${ localId }/items`)
         const unsubscribe = onValue(itemsRef, (snapshot) => {
             if (snapshot.exists()) {
                 const newItems = Object.values(snapshot.val())
@@ -49,11 +52,8 @@ const ItemListContainer = ({
             }
         })
         return () => unsubscribe()
-    }, [ categorySelected ])
+    }, [ itemsRef ])
     
-    const [ itemFilter, setItemFilter ] = useState(categoryFilter)    
-    const [ keyWord, setKeyWord ] = useState('')
-    const keyWordHandler = (text) => { setKeyWord(text) }
     useEffect(() => {
         const itemsFilter = categoryFilter.filter((item) =>
             item.name.toLowerCase().includes(keyWord) || item.name.toUpperCase().includes(keyWord)
@@ -67,19 +67,16 @@ const ItemListContainer = ({
                 keyWordHandler = { keyWordHandler }
             />
             <View style = { styles.itemByCategory }>
-                { itemFilter.length === 0
-                    ? <Text style = { styles.altTitle }>No hay Eventos</Text>
-                    : <FlatList
-                        data = { itemFilter }
-                        keyExtractor = { item => item.id }
-                        renderItem = {({ item }) =>
-                            <ItemList
-                            item = { item }
-                                navigation = { navigation }
-                            />
-                        }
-                    />
-                }
+                <FlatList
+                    data = { itemFilter.length === 0 ? categoryFilter : itemFilter }
+                    keyExtractor = { item => item.id }
+                    renderItem = {({ item }) =>
+                        <ItemList
+                        item = { item }
+                            navigation = { navigation }
+                        />
+                    }
+                />
             </View>
             <Pressable
                 onPress = { () => navigation.navigate(

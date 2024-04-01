@@ -54,7 +54,7 @@ const Login = ({
 
     return (
         <ScrollView style = {[ styles.loginContainer, { width: windowWidth - 20 } ]}>
-            <Text style = { styles.optionText }>Ingresa tus credenciales</Text>
+            <Text style = { styles.optionText }>Ingresa tus datos</Text>
             <InputForm
                 label = 'Email'
                 value = { email }

@@ -38,25 +38,22 @@ const Signup = ({
     const [ emailError, setEmailError ] = useState('')
     const [ passwordError, setPasswordError ] = useState('')
 
-    const db = getDatabase(app)
-
     const [ triggerSignup ] = useSignupMutation()
     const dispatch = useDispatch()
     const onSubmit = async () => {
         try {
             signupSchema.validateSync({ name, dni, address, phoneNumber, email, password })
             const { data } = await triggerSignup({ email, password })
-            const usersRef = ref(db, `/users/${ data.localId }`)
-            update(
-                usersRef,
-                {
-                    name: data.name,
-                    dni: data.dni,
-                    address: data.address,
-                    phoneNumber: data.phoneNumber,
-                    email: data.email
-                }
-            )
+            const newUser = {
+                name: name,
+                dni: dni,
+                address: address,
+                phoneNumber: phoneNumber,
+                email: email
+            }
+            const db = getDatabase(app)
+            const userRef = ref(db, `/users/${ data.localId }`)
+            update(userRef, { ...newUser })
             deleteSession()
             insertSession(data)
             dispatch(setUser({
@@ -99,7 +96,7 @@ const Signup = ({
 
     return (
         <ScrollView style = {[ styles.signupContainer, { width: windowWidth - 20 } ]}>
-            <Text style = { styles.optionText }>Registra tus credenciales</Text>
+            <Text style = { styles.optionText }>Registra tus datos</Text>
             <InputForm
                 label = 'Nombre'
                 value = { name }

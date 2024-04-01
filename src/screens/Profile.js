@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
     Dimensions,
@@ -10,10 +11,9 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 import { clearUser } from '../features/auth/authSlice'
 import { deleteSession } from '../utils/db'
-import { useGetAvatarQuery } from '../app/services/avatar'
+import { useGetUserQuery } from '../app/services/user'
 import EventButton from '../components/EventButton'
 import IconButton from '../components/IconButton'
-import user from '../utils/data/user.json'
 import colors from '../utils/globals/colors'
 import fonts from '../utils/globals/fonts'
 
@@ -25,7 +25,17 @@ const Profile = ({
 
     const dispatch = useDispatch()
     const localId = useSelector((state) => state.auth.localId)
-    const { data } = useGetAvatarQuery(localId)
+    const { data: user } = useGetUserQuery(localId)
+    const [ userData, setUserData ] = useState('')
+
+    useEffect(() => {
+        const fetchUser = () => {
+            if (user) {
+                setUserData(user)
+            }
+        }
+        fetchUser()
+    }, [ user, userData ])
 
     const onLogout = () => {
         dispatch(clearUser())
@@ -34,20 +44,23 @@ const Profile = ({
 
     return (
         <View style = {[ styles.profileContainer, { width: windowWidth - 20 } ]}>
-            { data
-                ? ( <Image
-                    source = {{ uri: data.picture }}
+            { userData === ''
+                ? ( <MaterialIcons name = 'account-circle' size = { 200 } style = { styles.userIcon } color = { colors.text } /> )
+                : ( <Image
+                    source = {{ uri: userData.avatar.picture }}
                     style = { styles.picture }
                     resizeMode = 'cover'
                     /> )
-                : ( <MaterialIcons name = 'account-circle' size = { 200 } style = { styles.userIcon } color = { colors.text } /> )
             }
             <IconButton
                     onPress = { () => navigation.navigate('AvatarManager') }
                     title = 'add-a-photo'
                 />
             <View style = { styles.userDataContainer }>
-                <Text style = { styles.userName }>{ user.name }</Text>
+                { userData === ''
+                    ? null
+                    : <Text style = { styles.userName }>{ userData.name }</Text>
+                }
                 <EventButton
                     onPress = { () => navigation.navigate('ProfileManager') }
                     title = 'Datos Personales'
