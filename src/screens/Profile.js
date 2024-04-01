@@ -44,7 +44,7 @@ const Profile = ({
 
     return (
         <View style = {[ styles.profileContainer, { width: windowWidth - 20 } ]}>
-            { userData === ''
+            { userData.avatar === undefined
                 ? ( <MaterialIcons name = 'account-circle' size = { 200 } style = { styles.userIcon } color = { colors.text } /> )
                 : ( <Image
                     source = {{ uri: userData.avatar.picture }}

@@ -30,7 +30,6 @@ export default function App() {
 }
 
 // logica cart suscripciones
-// manejar tiempo de sesion
 // eliminar, exportar declaracion
 // actualizar datos de contacto
 // darle funcionalidad a historial y preferencias

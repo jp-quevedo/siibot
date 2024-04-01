@@ -75,9 +75,7 @@ const OrderListContainer = ({
                 />
             </View>
             <Pressable
-                onPress = { () => navigation.navigate(
-                    'OrderManager'
-                )}
+                onPress = { () => navigation.navigate('OrderManager') }
                 style = {[ styles.createButton, { width: windowWidth - 60 } ]}
             >
                 <Text style = { styles.buttonTitle }>Generar</Text>

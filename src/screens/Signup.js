@@ -47,7 +47,7 @@ const Signup = ({
             const newUser = {
                 name: name,
                 dni: dni,
-                address: address,
+                location: { address: address },
                 phoneNumber: phoneNumber,
                 email: email
             }
